@@ -36,12 +36,15 @@ export class AuthService {
   GoogleSignIn() {
     return this.afAuth
       .signInWithPopup(new GoogleAuthProvider())
-      .then(result => console.log(result.user))
+      .then(result => {
+        this.SetUserData(result.user);
+        console.log(result.user);
+      })
       .catch(err => console.log(err.message));
   }
 
   SignOut() {
-    return this.afAuth.signOut().then(result => console.log(result));
+    return this.afAuth.signOut().then(() => console.log('Sign Out Succesfully'));
   }
 
   SetUserData(user: any) {

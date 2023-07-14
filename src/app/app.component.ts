@@ -21,7 +21,7 @@ export class AppComponent {
   }
 
   addData(f: any) {
-    const testCollection = collection(this.firestore, 'Users');
+    const testCollection = collection(this.firestore, 'Test');
     addDoc(testCollection, f.value)
       .then(() => {
         console.log('Data saved');
@@ -76,6 +76,6 @@ export class AppComponent {
   }
 
   signOut() {
-    return this.authService.SignOut().then(result => console.log('Sign Out Succesfully'));
+    return this.authService.SignOut();
   }
 }
