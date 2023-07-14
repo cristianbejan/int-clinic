@@ -21,3 +21,17 @@
     <button (click)="deleteData(data.id)">Delete</button>
   </li>
 </ul>
+
+<hr />
+
+<button type="button" (click)="logWithGoogle()">Login with Google</button>
+<hr />
+<form>
+  <p>Login with email:</p>
+  <input type="email" name="email" id="email" placeholder="Email adress" #email required />
+  <input type="password" name="password" id="password" placeholder="Password" #password required />
+  <button type="button" (click)="signUp(email.value, password.value)">Sign Up</button>
+  <button type="button" (click)="signIn(email.value, password.value)">Sign in</button>
+</form>
+<hr />
+<button type="button" (click)="signOut()">Sign Out</button>

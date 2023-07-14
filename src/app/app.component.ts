@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Firestore, collectionData, collection, addDoc, doc, updateDoc, deleteDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { AuthService } from './core/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,10 @@ export class AppComponent {
 
   userData!: Observable<any>;
 
-  constructor(private firestore: Firestore) {
+  constructor(
+    private firestore: Firestore,
+    private authService: AuthService
+  ) {
     this.getData();
   }
 
@@ -57,5 +61,21 @@ export class AppComponent {
     deleteDoc(docInstance).then(() => {
       console.log('Data deleted');
     });
+  }
+
+  logWithGoogle() {
+    return this.authService.GoogleSignIn();
+  }
+
+  signUp(email: string, pass: string) {
+    return this.authService.SignUp(email, pass);
+  }
+
+  signIn(email: string, pass: string) {
+    return this.authService.SignIn(email, pass);
+  }
+
+  signOut() {
+    return this.authService.SignOut().then(result => console.log('Sign Out Succesfully'));
   }
 }
