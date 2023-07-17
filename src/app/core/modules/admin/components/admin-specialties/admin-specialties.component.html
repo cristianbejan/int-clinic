@@ -1,0 +1,11 @@
+<p>admin-specialties works!</p>
+<!-- TODO: HTML elements for viewing all specialties -->
+<!-- Delete button on each row -->
+<!-- Create link to /admin/specialties/create : AdminSpecialtiesFormComponent -->
+<!-- Create link to /admin/specialties/:id/edit : AdminSpecialtiesFormComponent -->
+<a routerLink="create">Add new specialty</a>
+
+<div *ngFor="let specialty of specialties">
+  <span>{{ specialty.name }}</span
+  ><a [routerLink]="specialty.id + '/edit'">Edit</a>
+</div>
