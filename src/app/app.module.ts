@@ -13,6 +13,7 @@ import { AuthService } from './core/services/auth.service';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { AdminComponent } from './core/components/admin/admin.component';
 import { AddDoctorComponent } from './core/components/admin/add-doctor/add-doctor.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent, AdminComponent, AddDoctorComponent],
@@ -24,6 +25,7 @@ import { AddDoctorComponent } from './core/components/admin/add-doctor/add-docto
     provideFirestore(() => getFirestore()),
     FormsModule,
     AngularFireAuthModule,
+    BrowserAnimationsModule,
   ],
   providers: [AuthService, { provide: FIREBASE_OPTIONS, useValue: environment.firebase }],
   bootstrap: [AppComponent],
