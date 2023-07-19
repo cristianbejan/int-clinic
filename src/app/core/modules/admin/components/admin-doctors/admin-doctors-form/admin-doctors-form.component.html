@@ -1,0 +1,46 @@
+<h2>Doctor details:</h2>
+
+<form [formGroup]="doctorForm" (ngSubmit)="onFormSubmit()">
+  <mat-form-field>
+    <mat-label>First name:</mat-label>
+    <input matInput id="fName" formControlName="firstName" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Last Name:</mat-label>
+    <input matInput id="lName" formControlName="lastName" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Phone:</mat-label>
+    <input matInput id="phone" formControlName="phone" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Adress:</mat-label>
+    <input matInput id="adress" formControlName="adress" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Email:</mat-label>
+    <input matInput type="email" id="email" formControlName="email" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Password:</mat-label>
+    <input matInput type="password" id="password" formControlName="password" minlength="6" />
+  </mat-form-field>
+  <mat-form-field>
+    <!-- <mat-label>Specialty:</mat-label> -->
+    <mat-select
+      id="specialty"
+      name="specialty"
+      formControlName="specialtyIds"
+      placeholder="Specialty: (select one or more)"
+      multiple
+      [required]="true">
+      <mat-option *ngFor="let specialty of specialities" [value]="specialty.id">{{ specialty.name }} </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div class="actions">
+    <button mat-raised-button color="primary" type="submit" id="submitBtn" [disabled]="!doctorForm.valid">
+      Add doctor
+    </button>
+    <button mat-raised-button color="warn" type="reset" id="resetBtn">Reset form</button>
+  </div>
+</form>

@@ -1,1 +1,10 @@
-<p>admin-doctors works!</p>
+<a mat-raised-button color="primary" routerLink="create" class="addBtn">Add new doctor</a>
+
+<h3>Doctors list</h3>
+<mat-list>
+  <mat-list-item *ngFor="let doctor of doctors">
+    <span matListItem>{{ doctor.firstName + ' ' + doctor.lastName }}</span>
+    <a [routerLink]="doctor.id + '/edit'" mat-stroked-button color="primary">Edit</a>
+    <button mat-stroked-button color="warn">Delete</button>
+  </mat-list-item>
+</mat-list>

@@ -5,6 +5,7 @@ import { AdminDoctorsComponent } from './components/admin-doctors/admin-doctors.
 import { AdminPatientsComponent } from './components/admin-patients/admin-patients.component';
 import { AdminSpecialtiesComponent } from './components/admin-specialties/admin-specialties.component';
 import { AdminSpecialtiesFormComponent } from './components/admin-specialties/admin-specialties-form/admin-specialties-form.component';
+import { AdminDoctorsFormComponent } from './components/admin-doctors/admin-doctors-form/admin-doctors-form.component';
 
 const ROUTES: Routes = [
   {
@@ -30,6 +31,14 @@ const ROUTES: Routes = [
       {
         path: 'specialties/:id/edit',
         component: AdminSpecialtiesFormComponent,
+      },
+      {
+        path: 'doctors/create',
+        component: AdminDoctorsFormComponent,
+      },
+      {
+        path: 'doctors/:id/edit',
+        component: AdminDoctorsFormComponent,
       },
     ],
   },
