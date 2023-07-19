@@ -6,7 +6,7 @@ import { AdminDoctorsComponent } from './components/admin-doctors/admin-doctors.
 import { AdminClinicsComponent } from './components/admin-clinics/admin-clinics.component';
 import { AdminSpecialtiesComponent } from './components/admin-specialties/admin-specialties.component';
 import { AdminSpecialtiesFormComponent } from './components/admin-specialties/admin-specialties-form/admin-specialties-form.component';
-
+import { MatTabsModule } from '@angular/material/tabs';
 const COMPONENTS = [AdminComponent];
 
 @NgModule({
@@ -17,6 +17,6 @@ const COMPONENTS = [AdminComponent];
     AdminSpecialtiesComponent,
     AdminSpecialtiesFormComponent,
   ],
-  imports: [CommonModule, AdminRoutingModule],
+  imports: [CommonModule, AdminRoutingModule, MatTabsModule],
 })
 export class AdminModule {}
