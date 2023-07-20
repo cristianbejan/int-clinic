@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { tap, map } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { tap } from 'rxjs';
 import { Doctor } from 'src/app/core/interfaces/doctor.interface';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { DoctorService } from 'src/app/core/services/doctor.service';
@@ -53,11 +53,12 @@ export class AdminDoctorsFormComponent implements OnInit {
   doctorForm = new FormGroup({
     firstName: new FormControl('', { nonNullable: true, validators: Validators.required }),
     lastName: new FormControl('', { nonNullable: true, validators: Validators.required }),
-    phone: new FormControl(null, { nonNullable: true, validators: Validators.required }),
+    phone: new FormControl('', { nonNullable: true, validators: Validators.required }),
     adress: new FormControl('', { nonNullable: true, validators: Validators.required }),
     email: new FormControl('', { nonNullable: true, validators: Validators.required }),
     password: new FormControl('', { nonNullable: true, validators: Validators.required }),
-    specialtyIds: new FormControl([], { nonNullable: true, validators: Validators.required }),
+    specialtyIds: new FormControl([''], { nonNullable: true, validators: Validators.required }),
+    description: new FormControl('', { nonNullable: true, validators: Validators.required }),
   });
 
   ngOnInit(): void {
@@ -67,7 +68,7 @@ export class AdminDoctorsFormComponent implements OnInit {
       .pipe(
         tap(result => {
           this.buttonText = FormSubmitState.EDIT;
-          const doctor = result['data']();
+          const doctor = result['data']() as Doctor;
 
           this.doctorForm.patchValue({
             firstName: doctor.firstName,
@@ -77,6 +78,7 @@ export class AdminDoctorsFormComponent implements OnInit {
             email: doctor.email,
             password: doctor.password,
             specialtyIds: doctor.specialtyIds,
+            description: doctor.description,
           });
         })
       )

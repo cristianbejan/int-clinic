@@ -15,7 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
-
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTabsModule } from '@angular/material/tabs';
 const COMPONENTS = [AdminComponent];
 
@@ -41,6 +41,7 @@ const COMPONENTS = [AdminComponent];
     MatTabsModule,
     MatIconModule,
     MatTableModule,
+    MatPaginatorModule,
   ],
 })
 export class AdminModule {}
