@@ -1,4 +1,4 @@
-<h2>Doctor details:</h2>
+<h2>Informatii doctor:</h2>
 
 <form [formGroup]="doctorForm" (ngSubmit)="onFormSubmit()">
   <mat-form-field>
@@ -26,7 +26,6 @@
     <input matInput type="password" id="password" formControlName="password" minlength="6" />
   </mat-form-field>
   <mat-form-field>
-    <!-- <mat-label>Specialty:</mat-label> -->
     <mat-select
       id="specialty"
       name="specialty"
@@ -38,9 +37,12 @@
     </mat-select>
   </mat-form-field>
   <div class="actions">
-    <button mat-raised-button color="primary" type="submit" id="submitBtn" [disabled]="!doctorForm.valid">
-      Add doctor
+    <button mat-raised-button color="basic" type="button" id="closeBtn" (click)="onCloseForm()">
+      Inchide formular
     </button>
-    <button mat-raised-button color="warn" type="reset" id="resetBtn">Reset form</button>
+    <button mat-raised-button color="warn" type="reset" id="resetBtn">Reseteaza formular</button>
+    <button mat-raised-button color="primary" type="submit" id="submitBtn" [disabled]="!doctorForm.valid">
+      {{ buttonText }}
+    </button>
   </div>
 </form>

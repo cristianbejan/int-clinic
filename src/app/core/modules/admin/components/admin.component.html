@@ -1,8 +1,8 @@
-<nav mat-tab-nav-bar>
+<nav mat-tab-nav-bar [tabPanel]="tabPanel">
   <a mat-tab-link routerLink="clinics"> Administrare Clinici </a>
   <a mat-tab-link routerLink="doctors"> Administrare Doctori </a>
   <a mat-tab-link routerLink="specialties"> Administrare Specializari </a>
-  <a mat-tab-link routerLink="services"> Administrare Servicii </a>
+  <!-- <a mat-tab-link routerLink="services"> Administrare Servicii </a> -->
 </nav>
-
+<mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
 <router-outlet></router-outlet>

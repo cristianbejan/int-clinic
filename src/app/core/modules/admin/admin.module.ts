@@ -13,6 +13,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
 
 import { MatTabsModule } from '@angular/material/tabs';
 const COMPONENTS = [AdminComponent];
@@ -37,6 +39,8 @@ const COMPONENTS = [AdminComponent];
     MatButtonModule,
     MatListModule,
     MatTabsModule,
+    MatIconModule,
+    MatTableModule,
   ],
 })
 export class AdminModule {}
