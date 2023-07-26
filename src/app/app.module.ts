@@ -15,9 +15,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { DoctorService } from './core/services/doctor.service';
+import { ConfirmationDialogComponent } from './core/components/confirmation-dialog/confirmation-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ConfirmationDialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -30,6 +33,8 @@ import { DoctorService } from './core/services/doctor.service';
     MatFormFieldModule,
     BrowserAnimationsModule,
     AngularFireAuthModule,
+    MatDialogModule,
+    MatButtonModule,
   ],
   providers: [AuthService, DoctorService, { provide: FIREBASE_OPTIONS, useValue: environment.firebase }],
   bootstrap: [AppComponent],

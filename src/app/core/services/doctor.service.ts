@@ -11,8 +11,10 @@ import {
   DocumentData,
   getDoc,
 } from '@angular/fire/firestore';
+
 import { Doctor } from '../interfaces/doctor.interface';
-import { Observable, from } from 'rxjs';
+import { Observable, from, of } from 'rxjs';
+// import { map, switchMap, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',

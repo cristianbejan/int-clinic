@@ -49,18 +49,25 @@ export class AdminDoctorsFormComponent implements OnInit {
     private router: Router,
     private authService: AuthService
   ) {}
-
   doctorForm = new FormGroup({
     firstName: new FormControl('', { nonNullable: true, validators: Validators.required }),
     lastName: new FormControl('', { nonNullable: true, validators: Validators.required }),
     phone: new FormControl('', { nonNullable: true, validators: Validators.required }),
     adress: new FormControl('', { nonNullable: true, validators: Validators.required }),
-    email: new FormControl('', { nonNullable: true, validators: Validators.required }),
+    email: new FormControl('', {
+      nonNullable: true,
+      validators: [
+        Validators.required,
+        Validators.email,
+        Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
+      ],
+    }),
     password: new FormControl('', { nonNullable: true, validators: Validators.required }),
     specialtyIds: new FormControl([''], { nonNullable: true, validators: Validators.required }),
     description: new FormControl('', { nonNullable: true, validators: Validators.required }),
   });
 
+  email = this.doctorForm.controls.email;
   ngOnInit(): void {
     this.doctorId = this.route.snapshot.params['id'];
     this.doctorService
@@ -98,5 +105,9 @@ export class AdminDoctorsFormComponent implements OnInit {
 
   onCloseForm() {
     this.router.navigate(['admin/doctors']);
+  }
+
+  getErrorMessage() {
+    return this.email.hasError('pattern') ? 'Va rog sa introduceti un email valid' : '';
   }
 }
