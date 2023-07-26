@@ -8,7 +8,7 @@ import { Services } from '../interfaces/services.interface';
 })
 export class AlphabeticalOrderPipe implements PipeTransform {
   transform(specialties: (Specialty | Doctor | Services)[]): (Specialty | Doctor | Services)[] {
-    specialties.sort((a, b) => (a['name'] < b['name'] ? -1 : 1));
+    //specialties.sort((a, b) => (a['name'] < b['name'] ? -1 : 1));
 
     return specialties;
   }
