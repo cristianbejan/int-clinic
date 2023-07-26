@@ -1,5 +1,5 @@
 export interface Speciality {
-  id: string;
+  id?: string;
   name: string;
   doctor_ids: string[];
 }

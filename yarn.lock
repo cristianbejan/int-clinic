@@ -6029,6 +6029,11 @@ istanbul-lib-instrument@^5.0.4:
     istanbul-lib-coverage "^3.2.0"
     semver "^6.3.0"
 
+ivy.angular.material.file-uploader@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/ivy.angular.material.file-uploader/-/ivy.angular.material.file-uploader-2.0.0.tgz#4788d5936bcf00e68dae2f517e89e71ad618a6e8"
+  integrity sha512-lnLyIIy1VZ9T1QT8Ds1QAJD6lXNm19RaCNG7x4sNJB5KCVGYYIGuTbpvqLJ7uMRij7l//QIRDdvdm+9/AoGj6A==
+
 jackspeak@^2.0.3:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/jackspeak/-/jackspeak-2.2.1.tgz#655e8cf025d872c9c03d3eb63e8f0c024fef16a6"

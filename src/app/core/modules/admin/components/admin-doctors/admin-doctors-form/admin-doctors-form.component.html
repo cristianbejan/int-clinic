@@ -1,0 +1,52 @@
+<section class="container">
+  <h2>Informatii doctor:</h2>
+  <form [formGroup]="doctorForm" (ngSubmit)="onFormSubmit()">
+    <mat-form-field>
+      <mat-label>Nume:</mat-label>
+      <input matInput id="lName" formControlName="lastName" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Prenume:</mat-label>
+      <input matInput id="fName" formControlName="firstName" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Telefon:</mat-label>
+      <input matInput type="tel" id="phone" formControlName="phone" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Adresa:</mat-label>
+      <input matInput id="adress" formControlName="adress" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Email:</mat-label>
+      <input matInput type="email" id="email" formControlName="email" />
+      <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Parola:</mat-label>
+      <input matInput type="password" id="password" formControlName="password" minlength="6" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select
+        id="specialty"
+        name="specialty"
+        formControlName="specialtyIds"
+        placeholder="Specializare: (alege una sau mai multe)"
+        multiple
+        [required]="true">
+        <mat-option *ngFor="let specialty of specialities" [value]="specialty.id">{{ specialty.name }} </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Descriere:</mat-label>
+      <textarea matInput id="description" formControlName="description"></textarea>
+    </mat-form-field>
+    <div class="actions">
+      <button mat-raised-button color="basic" type="button" id="closeBtn" (click)="onCloseForm()">Inchide</button>
+      <button mat-raised-button color="warn" type="reset" id="resetBtn">Reseteaza</button>
+      <button mat-raised-button color="primary" type="submit" id="submitBtn" [disabled]="!doctorForm.valid">
+        {{ buttonText }}
+      </button>
+    </div>
+  </form>
+</section>

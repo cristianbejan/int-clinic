@@ -8,10 +8,13 @@ import { environment } from '../environments/environment';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './core/services/auth.service';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { DoctorService } from './core/services/doctor.service';
 import { ConfirmationDialogComponent } from './core/components/confirmation-dialog/confirmation-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
@@ -25,12 +28,15 @@ import { MatButtonModule } from '@angular/material/button';
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     FormsModule,
-    AngularFireAuthModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatFormFieldModule,
     BrowserAnimationsModule,
+    AngularFireAuthModule,
     MatDialogModule,
     MatButtonModule,
   ],
-  providers: [AuthService, { provide: FIREBASE_OPTIONS, useValue: environment.firebase }],
+  providers: [AuthService, DoctorService, { provide: FIREBASE_OPTIONS, useValue: environment.firebase }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

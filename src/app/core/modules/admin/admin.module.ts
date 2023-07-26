@@ -1,11 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { AdminComponent } from './components/admin.component';
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminDoctorsComponent } from './components/admin-doctors/admin-doctors.component';
 import { AdminClinicsComponent } from './components/admin-clinics/admin-clinics.component';
 import { AdminSpecialtiesComponent } from './components/admin-specialties/admin-specialties.component';
 import { AdminSpecialtiesFormComponent } from './components/admin-specialties/admin-specialties-form/admin-specialties-form.component';
+import { AdminDoctorsFormComponent } from './components/admin-doctors/admin-doctors-form/admin-doctors-form.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatListModule } from '@angular/material/list';
+import { MatSortModule } from '@angular/material/sort';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AdminClinicsFormComponent } from './components/admin-clinics/admin-clinics-form/admin-clinics-form.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -23,6 +29,7 @@ const COMPONENTS = [AdminComponent];
   declarations: [
     ...COMPONENTS,
     AdminDoctorsComponent,
+    AdminDoctorsFormComponent,
     AdminClinicsComponent,
     AdminSpecialtiesComponent,
     AdminSpecialtiesFormComponent,
@@ -40,6 +47,11 @@ const COMPONENTS = [AdminComponent];
     MatTabsModule,
     MatTableModule,
     MatPaginatorModule,
+    FormsModule,
+    MatSelectModule,
+    MatListModule,
+    MatSortModule,
+    MatProgressSpinnerModule,
   ],
 })
 export class AdminModule {}
