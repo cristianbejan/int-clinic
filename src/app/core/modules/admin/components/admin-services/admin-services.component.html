@@ -1,13 +1,13 @@
 <div class="add-button-and-search-input">
   <div>
-    <button class="add-specialty-button" mat-button color="primary" routerLink="create">Adauga specialitate</button>
+    <button class="add-specialty-button" mat-button color="primary" routerLink="create">Adauga serviciu</button>
     <mat-form-field subscriptSizing="dynamic">
       <mat-label>Cauta:</mat-label>
-      <input matInput [(ngModel)]="searchInput" placeholder="Ex: Cardiologie" />
+      <input matInput [(ngModel)]="searchInput" placeholder="Ex: EKG" />
     </mat-form-field>
   </div>
   <div class="table">
-    <table mat-table [dataSource]="specialties | alphabeticalOrder | filterBy: searchInput" multiTemplateDataRows>
+    <table mat-table [dataSource]="services | alphabeticalOrder | filterBy: searchInput" multiTemplateDataRows>
       <ng-container matColumnDef="{{ column }}" *ngFor="let column of columnsToDisplay">
         <th mat-header-cell *matHeaderCellDef>{{ column }}</th>
         <td mat-cell *matCellDef="let element">{{ element[column] }}</td>
@@ -35,7 +35,7 @@
             </div>
             <div class="table__expanded__element__edit-delete">
               <a [routerLink]="element['id'] + '/edit'" mat-button color="primary">Editeaza</a>
-              <button mat-button color="primary" (click)="deleteSpecialty(element['id'])">Sterge</button>
+              <button mat-button color="primary" (click)="deleteService(element['id'])">Sterge</button>
             </div>
           </div>
         </td>

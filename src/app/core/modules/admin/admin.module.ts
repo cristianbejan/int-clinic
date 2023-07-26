@@ -7,6 +7,12 @@ import { AdminDoctorsComponent } from './components/admin-doctors/admin-doctors.
 import { AdminClinicsComponent } from './components/admin-clinics/admin-clinics.component';
 import { AdminSpecialtiesComponent } from './components/admin-specialties/admin-specialties.component';
 import { AdminSpecialtiesFormComponent } from './components/admin-specialties/admin-specialties-form/admin-specialties-form.component';
+import { SpecialtiesService } from '../../services/specialties.service';
+import { AdminServicesComponent } from './components/admin-services/admin-services.component';
+import { AdminServicesFormComponent } from './components/admin-services/admin-services-form/admin-services-form/admin-services-form.component';
+import { ServicesService } from '../../services/services.service';
+import { AlphabeticalOrderPipe } from '../../services/alphabetical-sort.pipe';
+import { FilterByPipe } from '../../services/filter-by.pipe';
 import { AdminDoctorsFormComponent } from './components/admin-doctors/admin-doctors-form/admin-doctors-form.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatListModule } from '@angular/material/list';
@@ -29,29 +35,34 @@ const COMPONENTS = [AdminComponent];
   declarations: [
     ...COMPONENTS,
     AdminDoctorsComponent,
-    AdminDoctorsFormComponent,
-    AdminClinicsComponent,
     AdminSpecialtiesComponent,
     AdminSpecialtiesFormComponent,
+    AdminServicesComponent,
+    AdminServicesFormComponent,
+    AlphabeticalOrderPipe,
+    FilterByPipe,
+    AdminDoctorsFormComponent,
+    AdminClinicsComponent,
     AdminClinicsFormComponent,
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
-    MatFormFieldModule,
+    ReactiveFormsModule,
     MatButtonModule,
     MatIconModule,
+    MatFormFieldModule,
     MatInputModule,
-    ReactiveFormsModule,
+    MatSelectModule,
+    FormsModule,
     MatCardModule,
     MatTabsModule,
     MatTableModule,
     MatPaginatorModule,
-    FormsModule,
-    MatSelectModule,
     MatListModule,
     MatSortModule,
     MatProgressSpinnerModule,
   ],
+  providers: [SpecialtiesService, ServicesService],
 })
 export class AdminModule {}

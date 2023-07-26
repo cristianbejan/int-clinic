@@ -1,0 +1,17 @@
+<form class="form_group" [formGroup]="reactiveFormGroup">
+  <mat-form-field>
+    <mat-label>Nume</mat-label>
+    <input matInput id="name" type="text" formControlName="name" required />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Pret</mat-label>
+    <input type="number" matInput formControlName="price" required />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Descriere</mat-label>
+    <textarea matInput formControlName="description" required></textarea>
+  </mat-form-field>
+  <button mat-button color="primary" *ngIf="editRoute" (click)="updateService()">Salveaza</button>
+  <button mat-button color="primary" *ngIf="!editRoute" (click)="addService()">Adauga Serviciu</button>
+  <button mat-button color="primary" (click)="back()">Inapoi</button>
+</form>
