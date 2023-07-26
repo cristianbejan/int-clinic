@@ -5,6 +5,7 @@ import { AdminDoctorsComponent } from './components/admin-doctors/admin-doctors.
 import { AdminClinicsComponent } from './components/admin-clinics/admin-clinics.component';
 import { AdminSpecialtiesComponent } from './components/admin-specialties/admin-specialties.component';
 import { AdminSpecialtiesFormComponent } from './components/admin-specialties/admin-specialties-form/admin-specialties-form.component';
+import { AdminClinicsFormComponent } from './components/admin-clinics/admin-clinics-form/admin-clinics-form.component';
 
 const ROUTES: Routes = [
   {
@@ -18,6 +19,14 @@ const ROUTES: Routes = [
       {
         path: 'clinics',
         component: AdminClinicsComponent,
+      },
+      {
+        path: 'clinics/create',
+        component: AdminClinicsFormComponent,
+      },
+      {
+        path: 'clinics/:id/edit',
+        component: AdminClinicsFormComponent,
       },
       {
         path: 'specialties',

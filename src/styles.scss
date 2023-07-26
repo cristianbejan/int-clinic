@@ -1,4 +1,141 @@
 /* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+// Form Style
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+  
+    .imageContainer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 20px;
+  
+      img{
+        margin-bottom: 10px;
+      }
+  
+      input[type="file"] {
+        display: none;
+      }
+      
+      .fileLabel {
+        border: 1px solid #ccc;
+        display: inline-block;
+        padding: 6px 12px;
+        cursor: pointer;
+        font-weight: 500;
+        border-radius: 5px;
+        letter-spacing: 1px;
+      }
+    }
+  
+    .example-form {
+      min-width: 150px;
+      max-width: 500px;
+      width: 100%;
+  
+      .example-full-width {
+        width: 100%;
+        margin-bottom: 5px;
+      }
+  
+      .actions {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+      }
+    }
+}
+
+// Admin Component Style
+.main-container{
+    .addBtnContainer{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        margin-right: 30px;
+
+        #addBtn{
+        color: white;
+        background-color: rgb(28, 176, 28);
+        margin-top: 30px;
+    }
+    }
+
+    mat-form-field {
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    }
+
+    table {
+    width: 100%;
+    margin-top: 30px;
+
+    #thColumn, .example-element-row td{
+        text-align: center;
+    }
+    
+    .example-element-row td {
+        border-bottom-width: 0;
+    }
+        
+    .example-element-detail {
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+            
+        .example-element-diagram {
+            border: 2px dashed black;
+            padding: 8px;
+            margin: 8px 0 8px 50px;
+            height: 104px;
+        }
+
+        .example-element-description {
+            padding: 16px;
+            max-width: 50%;
+            text-align: justify;
+        }
+
+        #deleteBtn {
+        margin-left: 10px;
+        }
+    }
+
+    .example-detail-row {
+        height: 0;
+    }
+    
+    tr.example-element-row:not(.example-expanded-row):hover {
+        background: whitesmoke;
+    }
+
+    tr.example-element-row:not(.example-expanded-row):active {
+        background: #efefef;
+    }
+
+    .no-data {
+        text-align: center;
+        font-size: 24px;
+        padding: 20px 0;
+    }
+}
+
+    mat-paginator{
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        position: sticky;
+        bottom: 0;
+    }
+}
