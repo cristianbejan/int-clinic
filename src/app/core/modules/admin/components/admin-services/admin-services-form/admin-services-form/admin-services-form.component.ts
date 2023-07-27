@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ServicesService } from 'src/app/core/services/services.service';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Services } from 'src/app/core/interfaces/services.interface';
 import { Location } from '@angular/common';
@@ -11,10 +11,13 @@ import { Location } from '@angular/common';
   styleUrls: ['./admin-services-form.component.scss'],
 })
 export class AdminServicesFormComponent {
-  reactiveFormGroup = new FormGroup({
-    name: new FormControl(),
-    price: new FormControl(),
-    description: new FormControl(),
+  servicesForm = new FormGroup({
+    name: new FormControl('', { nonNullable: true, validators: [Validators.required, Validators.minLength(3)] }),
+    price: new FormControl('', { nonNullable: true, validators: Validators.required }),
+    description: new FormControl('', {
+      nonNullable: true,
+      validators: [Validators.required, Validators.minLength(10)],
+    }),
   });
   serviceRef!: Services;
   editRoute = false;
@@ -28,9 +31,9 @@ export class AdminServicesFormComponent {
 
   addService() {
     const newService = {
-      name: this.reactiveFormGroup.controls.name.value,
-      price: this.reactiveFormGroup.controls.price.value,
-      description: this.reactiveFormGroup.controls.description.value,
+      name: this.servicesForm.controls.name.value,
+      price: Number(this.servicesForm.controls.price.value),
+      description: this.servicesForm.controls.description.value,
       specialtyIds: [],
     };
     this.databBase.addService(newService);
@@ -40,9 +43,9 @@ export class AdminServicesFormComponent {
   updateService() {
     const editedService = {
       id: this.id,
-      name: this.reactiveFormGroup.controls.name.value,
-      price: this.reactiveFormGroup.controls.price.value,
-      description: this.reactiveFormGroup.controls.description.value,
+      name: this.servicesForm.controls.name.value,
+      price: Number(this.servicesForm.controls.price.value),
+      description: this.servicesForm.controls.description.value,
       specialtyIds: this.serviceRef.specialtyIds ?? [],
     };
     this.databBase.updateService(editedService);
@@ -55,9 +58,9 @@ export class AdminServicesFormComponent {
 
     this.databBase.getService(this.id).subscribe(service => {
       this.serviceRef = service['data']();
-      this.reactiveFormGroup.patchValue({
+      this.servicesForm.patchValue({
         name: this.serviceRef.name,
-        price: this.serviceRef.price,
+        price: this.serviceRef.price.toString(),
         description: this.serviceRef.description,
       });
     });

@@ -71,12 +71,12 @@ export class SpecialtiesService {
       });
   }
 
-  search(searchedInput: string, route: string, options: string) {
-    const ref = collection(this.dataBase, route);
-    const refq = query(ref, where(options, '==', searchedInput));
+  // search(searchedInput: string, route: string, options: string) {
+  //   const ref = collection(this.dataBase, route);
+  //   const refq = query(ref, where(options, '==', searchedInput));
 
-    return collectionData(refq) as Observable<Specialty[]>;
-  }
+  //   return collectionData(refq) as Observable<Specialty[]>;
+  // }
 
   deleteSpecialty(id: string) {
     const specialtyInstance = doc(this.dataBase, 'Specialities', id);

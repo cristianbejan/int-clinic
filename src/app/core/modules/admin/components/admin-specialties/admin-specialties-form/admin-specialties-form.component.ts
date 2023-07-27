@@ -11,9 +11,12 @@ import { Location } from '@angular/common';
   styleUrls: ['./admin-specialties-form.component.scss'],
 })
 export class AdminSpecialtiesFormComponent {
-  reactiveFormGroup = new FormGroup({
-    name: new FormControl(),
-    description: new FormControl(),
+  specialtyForm = new FormGroup({
+    name: new FormControl('', { nonNullable: true, validators: [Validators.required, Validators.minLength(3)] }),
+    description: new FormControl('', {
+      nonNullable: true,
+      validators: [Validators.required, Validators.minLength(10)],
+    }),
   });
   specialtyRef!: Specialty;
   editRoute = false;
@@ -27,9 +30,9 @@ export class AdminSpecialtiesFormComponent {
 
   addSpecialty() {
     const newSpecialty = {
-      name: this.reactiveFormGroup.controls.name.value,
+      name: this.specialtyForm.controls.name.value,
       doctorIds: [],
-      description: this.reactiveFormGroup.controls.description.value,
+      description: this.specialtyForm.controls.description.value,
       serviceIds: [],
     };
     this.databBase.addSpecialty(newSpecialty);
@@ -39,9 +42,9 @@ export class AdminSpecialtiesFormComponent {
   updateSpecialty() {
     const editedSpecialty = {
       id: this.id,
-      name: this.reactiveFormGroup.controls.name.value,
+      name: this.specialtyForm.controls.name.value,
       doctorIds: this.specialtyRef.doctorIds ?? [],
-      description: this.reactiveFormGroup.controls.description.value,
+      description: this.specialtyForm.controls.description.value,
       serviceIds: this.specialtyRef.serviceIds ?? [],
     };
     this.databBase.updateSpecialty(editedSpecialty);
@@ -54,7 +57,7 @@ export class AdminSpecialtiesFormComponent {
 
     this.databBase.getSpecialty(this.id).subscribe(dbResponse => {
       this.specialtyRef = dbResponse['data']();
-      this.reactiveFormGroup.patchValue({
+      this.specialtyForm.patchValue({
         name: this.specialtyRef.name,
         description: this.specialtyRef.description,
       });
