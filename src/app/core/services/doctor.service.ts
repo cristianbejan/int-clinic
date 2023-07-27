@@ -13,7 +13,7 @@ import {
 } from '@angular/fire/firestore';
 
 import { Doctor } from '../interfaces/doctor.interface';
-import { Observable, from, of } from 'rxjs';
+import { Observable, from } from 'rxjs';
 // import { map, switchMap, tap } from 'rxjs/operators';
 
 @Injectable({
@@ -46,5 +46,18 @@ export class DoctorService {
   deleteDoctor(id: string): Observable<void> {
     const selectedDoctor = doc(this.firestore, 'doctors', id);
     return from(deleteDoc(selectedDoctor));
+  }
+
+  updateImage(id: string, imageUrl: string) {
+    const docInstance = doc(this.firestore, 'doctors', id);
+    updateDoc(docInstance, {
+      imageUrl: imageUrl,
+    })
+      .then(() => {
+        console.log('Image Changed');
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 }

@@ -105,6 +105,7 @@ export class AdminDoctorsFormComponent implements OnInit {
   onFormSubmit() {
     if (this.doctorId) {
       this.doctorService.updateDoctor(this.doctorId, this.doctorForm.value);
+      this.doctorService.updateImage(this.doctorId, this.imageUrl);
     } else {
       const formData = { ...this.doctorForm.value, imageUrl: this.imageUrl };
       const formDataGroup: FormGroup = this.formBuilder.group(formData);
