@@ -42,6 +42,7 @@ export class ClinicService {
 
   updateData(id: string, formData: FormGroup) {
     const docInstance = doc(this.firestore, 'clinics', id);
+
     updateDoc(docInstance, formData.value)
       .then(() => {
         console.log('Data Changed');
@@ -52,6 +53,11 @@ export class ClinicService {
   }
 
   updateImage(id: string, imageUrl: string) {
+    if (!imageUrl) {
+      console.error('Image URL is undefined or empty');
+      return;
+    }
+
     const docInstance = doc(this.firestore, 'clinics', id);
     updateDoc(docInstance, {
       imageUrl: imageUrl,

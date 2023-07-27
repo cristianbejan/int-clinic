@@ -107,7 +107,7 @@ export class AdminDoctorsFormComponent implements OnInit {
   onFormSubmit() {
     if (this.doctorId) {
       const options = {
-        title: 'Salveaza modificarile',
+        title: 'Salveaza Modificarile',
         message: `Doriti sa modificati informatiile acestui doctor ?`,
         cancelText: 'Nu',
         confirmText: 'Da',
@@ -115,23 +115,19 @@ export class AdminDoctorsFormComponent implements OnInit {
       this.dialogService.open(options);
 
       this.dialogService.confirmed().subscribe(confirmed => {
-        if (confirmed) {
-          this.doctorService.updateDoctor(this.doctorId, this.doctorForm.value);
-          this.router.navigate(['admin/doctors']);
+        if (!confirmed) {
+          return;
         }
+        this.doctorService.updateDoctor(this.doctorId, this.doctorForm.value);
+        this.doctorService.updateImage(this.doctorId, this.imageUrl);
+        this.router.navigate(['admin/doctors']);
       });
-      this.doctorService.updateDoctor(this.doctorId, this.doctorForm.value);
-      this.doctorService.updateImage(this.doctorId, this.imageUrl);
     } else {
-      const formData = { ...this.doctorForm.value, imageUrl: this.imageUrl };
-      const formDataGroup: FormGroup = this.formBuilder.group(formData);
-
-      this.doctorService.addDoctor(formDataGroup.getRawValue());
+      this.doctorService.addDoctor(this.doctorForm.getRawValue());
       this.authService.SignUp(this.doctorForm.controls.email.value, this.doctorForm.controls.password.value);
+      this.doctorForm.reset();
       this.router.navigate(['admin/doctors']);
     }
-    this.doctorForm.reset();
-    this.router.navigate(['admin/doctors']);
 
     if (event) {
       this.uploadImage(event);
@@ -154,6 +150,7 @@ export class AdminDoctorsFormComponent implements OnInit {
 
     this.imageUploadService.uploadImage(file, 'doctors').subscribe(downloadURL => {
       this.imageUrl = downloadURL;
+      this.doctorForm.get('imageUrl')?.setValue(downloadURL);
     });
   }
 

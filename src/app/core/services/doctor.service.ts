@@ -14,7 +14,6 @@ import {
 
 import { Doctor } from '../interfaces/doctor.interface';
 import { Observable, from } from 'rxjs';
-// import { map, switchMap, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -40,6 +39,10 @@ export class DoctorService {
   updateDoctor(id: string, updatedData: DocumentData): Observable<void> {
     const selectedDoctor = doc(this.firestore, 'doctors', id);
 
+    if (!updatedData['imageUrl']) {
+      delete updatedData['imageUrl'];
+    }
+
     return from(updateDoc(selectedDoctor, updatedData));
   }
 
@@ -49,6 +52,11 @@ export class DoctorService {
   }
 
   updateImage(id: string, imageUrl: string) {
+    if (!imageUrl) {
+      console.error('Image URL is undefined or empty');
+      return;
+    }
+
     const docInstance = doc(this.firestore, 'doctors', id);
     updateDoc(docInstance, {
       imageUrl: imageUrl,

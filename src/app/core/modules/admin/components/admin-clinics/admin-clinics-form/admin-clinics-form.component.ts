@@ -53,34 +53,24 @@ export class AdminClinicsFormComponent implements OnInit {
 
   onSubmit() {
     if (this.clinicId) {
-      const isFormUnchanged = JSON.stringify(this.clinicForm.value) === JSON.stringify(this.defaultFormValues);
+      const options = {
+        title: 'Salveaza Modificarile',
+        message: `Doriti sa modificati informatiile acestei clinici ?`,
+        cancelText: 'Nu',
+        confirmText: 'Da',
+      };
+      this.dialogService.open(options);
 
-      if (isFormUnchanged) {
-        const options = {
-          title: 'Informatii nemodificate',
-          message: `Doriti sa modificati informatiile acestei clinici ?`,
-          cancelText: 'Nu',
-          confirmText: 'Da',
-        };
-        this.dialogService.open(options);
-
-        this.dialogService.confirmed().subscribe(confirmed => {
-          if (confirmed) {
-            return;
-          }
-          this.router.navigate(['admin/clinics']);
-        });
-      } else {
+      this.dialogService.confirmed().subscribe(confirmed => {
+        if (!confirmed) {
+          return;
+        }
         this.clinicService.updateData(this.clinicId, this.clinicForm);
         this.clinicService.updateImage(this.clinicId, this.imageUrl);
         this.router.navigate(['admin/clinics']);
-      }
-    } else if (this.clinicForm.valid) {
-      const formData = { ...this.clinicForm.value, imageUrl: this.imageUrl };
-
-      const formDataGroup: FormGroup = this.formBuilder.group(formData);
-
-      this.clinicService.addData(formDataGroup);
+      });
+    } else {
+      this.clinicService.addData(this.clinicForm);
       this.clinicForm.reset();
       this.router.navigate(['admin/clinics']);
     }
