@@ -1,7 +1,7 @@
 <div class="form-container">
   <form class="example-form" [formGroup]="clinicForm" (ngSubmit)="onSubmit()">
     <div class="imageContainer">
-      <img *ngIf="imageUrl" [src]="imageUrl" alt="Clinic Image" />
+      <img *ngIf="imageUrl" [src]="imageUrl" alt="Clinic Image" width="50%" height="50%" />
       <label for="fileInput" class="fileLabel"> Choose Image </label>
       <input type="file" (change)="uploadImage($event)" accept=".png,.jpg" formControlName="imageUrl" id="fileInput" />
     </div>
@@ -9,6 +9,7 @@
     <mat-form-field class="example-full-width">
       <mat-label>Nume</mat-label>
       <input matInput formControlName="name" placeholder="Will Smith" />
+      <mat-icon matSuffix>person</mat-icon>
     </mat-form-field>
 
     <div class="filter">
@@ -23,17 +24,20 @@
     <mat-form-field class="example-full-width">
       <mat-label>Introduceti Emailul</mat-label>
       <input type="email" matInput placeholder="nume@mail.com" required formControlName="email" />
+      <mat-icon matSuffix>alternate_email</mat-icon>
       <mat-error *ngIf="clinicForm.get('email')?.hasError('pattern')">Email Invalid</mat-error>
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
       <mat-label>Adresa</mat-label>
       <textarea matInput placeholder="Ex. 100 Main St" formControlName="address"></textarea>
+      <mat-icon matSuffix>roofing</mat-icon>
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
       <mat-label>Descriere Clinica</mat-label>
-      <textarea matInput placeholder="Clinic Description" formControlName="description" rows="3" cols="50"></textarea>
+      <textarea matInput placeholder="Descriere Clinica" formControlName="description" rows="3" cols="50"></textarea>
+      <mat-icon matSuffix>notes</mat-icon>
     </mat-form-field>
 
     <div class="actions">

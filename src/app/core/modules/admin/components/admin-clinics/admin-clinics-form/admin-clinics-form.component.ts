@@ -105,7 +105,7 @@ export class AdminClinicsFormComponent implements OnInit {
             email: clinic.email,
             address: clinic.address,
             description: clinic.description,
-            imageUrl: this.imageUrl,
+            imageUrl: clinic.imageUrl,
           });
 
           this.defaultFormValues = JSON.parse(JSON.stringify(this.clinicForm.value));

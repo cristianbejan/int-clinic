@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { tap } from 'rxjs';
 import { Doctor } from 'src/app/core/interfaces/doctor.interface';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { DoctorService } from 'src/app/core/services/doctor.service';
+import { ImageUploadService } from 'src/app/core/services/image-upload.service';
 
 enum FormSubmitState {
   ADD = 'Adauga doctor',
@@ -42,17 +43,23 @@ export class AdminDoctorsFormComponent implements OnInit {
 
   doctorId!: string;
   buttonText: string = FormSubmitState.ADD;
+  imageUrl!: string;
 
   constructor(
     private doctorService: DoctorService,
     private route: ActivatedRoute,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private formBuilder: FormBuilder,
+    private imageUploadService: ImageUploadService
   ) {}
   doctorForm = new FormGroup({
     firstName: new FormControl('', { nonNullable: true, validators: Validators.required }),
     lastName: new FormControl('', { nonNullable: true, validators: Validators.required }),
-    phone: new FormControl('', { nonNullable: true, validators: Validators.required }),
+    phone: new FormControl('', {
+      nonNullable: true,
+      validators: [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{3}( ?)[0-9]{3}( ?)[0-9]{4}$')],
+    }),
     adress: new FormControl('', { nonNullable: true, validators: Validators.required }),
     email: new FormControl('', {
       nonNullable: true,
@@ -65,6 +72,7 @@ export class AdminDoctorsFormComponent implements OnInit {
     password: new FormControl('', { nonNullable: true, validators: Validators.required }),
     specialtyIds: new FormControl([''], { nonNullable: true, validators: Validators.required }),
     description: new FormControl('', { nonNullable: true, validators: Validators.required }),
+    imageUrl: new FormControl('', { nonNullable: true }),
   });
 
   email = this.doctorForm.controls.email;
@@ -76,6 +84,7 @@ export class AdminDoctorsFormComponent implements OnInit {
         tap(result => {
           this.buttonText = FormSubmitState.EDIT;
           const doctor = result['data']() as Doctor;
+          this.imageUrl = doctor.imageUrl;
 
           this.doctorForm.patchValue({
             firstName: doctor.firstName,
@@ -86,6 +95,7 @@ export class AdminDoctorsFormComponent implements OnInit {
             password: doctor.password,
             specialtyIds: doctor.specialtyIds,
             description: doctor.description,
+            imageUrl: doctor.imageUrl,
           });
         })
       )
@@ -96,11 +106,18 @@ export class AdminDoctorsFormComponent implements OnInit {
     if (this.doctorId) {
       this.doctorService.updateDoctor(this.doctorId, this.doctorForm.value);
     } else {
-      this.doctorService.addDoctor(this.doctorForm.getRawValue());
+      const formData = { ...this.doctorForm.value, imageUrl: this.imageUrl };
+      const formDataGroup: FormGroup = this.formBuilder.group(formData);
+
+      this.doctorService.addDoctor(formDataGroup.getRawValue());
       this.authService.SignUp(this.doctorForm.controls.email.value, this.doctorForm.controls.password.value);
     }
     this.doctorForm.reset();
     this.router.navigate(['admin/doctors']);
+
+    if (event) {
+      this.uploadImage(event);
+    }
   }
 
   onCloseForm() {
@@ -108,6 +125,17 @@ export class AdminDoctorsFormComponent implements OnInit {
   }
 
   getErrorMessage() {
-    return this.email.hasError('pattern') ? 'Va rog sa introduceti un email valid' : '';
+    return this.email.hasError('pattern') ? 'Email Invalid' : '';
+  }
+
+  uploadImage(event: Event) {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (!file) {
+      return;
+    }
+
+    this.imageUploadService.uploadImage(file, 'doctors').subscribe(downloadURL => {
+      this.imageUrl = downloadURL;
+    });
   }
 }

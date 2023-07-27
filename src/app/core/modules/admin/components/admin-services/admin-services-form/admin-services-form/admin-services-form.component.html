@@ -1,17 +1,36 @@
-<form class="form_group" [formGroup]="reactiveFormGroup">
-  <mat-form-field>
-    <mat-label>Nume</mat-label>
-    <input matInput id="name" type="text" formControlName="name" required />
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Pret</mat-label>
-    <input type="number" matInput formControlName="price" required />
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Descriere</mat-label>
-    <textarea matInput formControlName="description" required></textarea>
-  </mat-form-field>
-  <button mat-button color="primary" *ngIf="editRoute" (click)="updateService()">Salveaza</button>
-  <button mat-button color="primary" *ngIf="!editRoute" (click)="addService()">Adauga Serviciu</button>
-  <button mat-button color="primary" (click)="back()">Inapoi</button>
-</form>
+<div class="form-container">
+  <form class="example-form" [formGroup]="reactiveFormGroup">
+    <mat-form-field class="example-full-width">
+      <mat-label>Nume</mat-label>
+      <input matInput type="text" formControlName="name" required placeholder="Specializare" />
+      <mat-icon matSuffix>person</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Pret</mat-label>
+      <input type="number" matInput formControlName="price" required />
+      <mat-icon matSuffix>sell</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Descriere</mat-label>
+      <textarea
+        matInput
+        formControlName="description"
+        required
+        rows="3"
+        cols="50"
+        placeholder="Descriere Specializare"></textarea>
+      <mat-icon matSuffix>notes</mat-icon>
+    </mat-form-field>
+
+    <div class="actions">
+      <button mat-stroked-button color="warn" type="button" (click)="back()">Inchide</button>
+      <button mat-stroked-button color="basic" type="reset">Reseteaza</button>
+      <button mat-stroked-button color="primary" *ngIf="editRoute" (click)="updateService()">
+        Actualizeaza Specialitate
+      </button>
+      <button mat-stroked-button color="primary" *ngIf="!editRoute" (click)="addService()">Adauga Specialitate</button>
+    </div>
+  </form>
+</div>

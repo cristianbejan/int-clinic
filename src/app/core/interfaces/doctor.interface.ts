@@ -6,6 +6,7 @@ export interface Doctor {
   adress: string;
   email: string;
   password: string;
+  imageUrl: string;
   specialtyIds: string[];
   description: string;
 }

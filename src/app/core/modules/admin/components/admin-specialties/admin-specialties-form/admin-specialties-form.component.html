@@ -1,15 +1,32 @@
 <div class="form-container">
-  <form class="form-container__form" [formGroup]="reactiveFormGroup">
-    <mat-form-field>
+  <form class="example-form" [formGroup]="reactiveFormGroup">
+    <mat-form-field class="example-full-width">
       <mat-label>Nume</mat-label>
-      <input matInput id="name" type="text" formControlName="name" required />
+      <input matInput type="text" formControlName="name" required placeholder="Specializare" />
+      <mat-icon matSuffix>person</mat-icon>
     </mat-form-field>
-    <mat-form-field>
+
+    <mat-form-field class="example-full-width">
       <mat-label>Descriere</mat-label>
-      <textarea matInput formControlName="description" required></textarea>
+      <textarea
+        matInput
+        formControlName="description"
+        required
+        rows="3"
+        cols="50"
+        placeholder="Descriere Specializare"></textarea>
+      <mat-icon matSuffix>notes</mat-icon>
     </mat-form-field>
-    <button mat-button color="primary" *ngIf="editRoute" (click)="updateSpecialty()">Salveaza</button>
-    <button mat-button color="primary" *ngIf="!editRoute" (click)="addSpecialty()">Adauga Specialitate</button>
-    <button mat-button color="primary" (click)="back()">Inapoi</button>
+
+    <div class="actions">
+      <button mat-stroked-button color="warn" type="button" (click)="back()">Inchide</button>
+      <button mat-stroked-button color="basic" type="reset">Reseteaza</button>
+      <button mat-stroked-button color="primary" *ngIf="editRoute" (click)="updateSpecialty()">
+        Actualizeaza Specialitate
+      </button>
+      <button mat-stroked-button color="primary" *ngIf="!editRoute" (click)="addSpecialty()">
+        Adauga Specialitate
+      </button>
+    </div>
   </form>
 </div>

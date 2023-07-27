@@ -1,34 +1,51 @@
-<section class="container">
-  <h2>Informatii doctor:</h2>
-  <form [formGroup]="doctorForm" (ngSubmit)="onFormSubmit()">
-    <mat-form-field>
-      <mat-label>Nume:</mat-label>
-      <input matInput id="lName" formControlName="lastName" />
+<div class="form-container">
+  <form class="example-form" [formGroup]="doctorForm" (ngSubmit)="onFormSubmit()">
+    <div class="imageContainer">
+      <img *ngIf="imageUrl" [src]="imageUrl" alt="Doctor Image" width="50%" height="50%" />
+      <label for="fileInput" class="fileLabel"> Choose Image </label>
+      <input type="file" (change)="uploadImage($event)" accept=".png,.jpg" formControlName="imageUrl" id="fileInput" />
+    </div>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Nume</mat-label>
+      <input matInput formControlName="lastName" placeholder="Smith" />
+      <mat-icon matSuffix>person</mat-icon>
     </mat-form-field>
-    <mat-form-field>
-      <mat-label>Prenume:</mat-label>
-      <input matInput id="fName" formControlName="firstName" />
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Prenume</mat-label>
+      <input matInput formControlName="firstName" placeholder="Will" />
+      <mat-icon matSuffix>person</mat-icon>
     </mat-form-field>
-    <mat-form-field>
-      <mat-label>Telefon:</mat-label>
-      <input matInput type="tel" id="phone" formControlName="phone" />
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Telefon</mat-label>
+      <input matInput type="tel" placeholder="0712 345 678" formControlName="phone" />
+      <mat-icon matSuffix>mode_edit</mat-icon>
+      <mat-error *ngIf="doctorForm.get('phone')?.hasError('pattern')">Telefon Invalid</mat-error>
     </mat-form-field>
-    <mat-form-field>
-      <mat-label>Adresa:</mat-label>
-      <input matInput id="adress" formControlName="adress" />
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Adresa</mat-label>
+      <input matInput formControlName="adress" placeholder="Ex. 100 Main St" />
+      <mat-icon matSuffix>roofing</mat-icon>
     </mat-form-field>
-    <mat-form-field>
-      <mat-label>Email:</mat-label>
-      <input matInput type="email" id="email" formControlName="email" />
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" formControlName="email" placeholder="nume@mail.com" />
+      <mat-icon matSuffix>alternate_email</mat-icon>
       <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error>
     </mat-form-field>
-    <mat-form-field>
-      <mat-label>Parola:</mat-label>
-      <input matInput type="password" id="password" formControlName="password" minlength="6" />
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Parola</mat-label>
+      <input matInput type="password" formControlName="password" minlength="6" />
+      <mat-icon matSuffix>lock</mat-icon>
     </mat-form-field>
-    <mat-form-field>
+
+    <mat-form-field class="example-full-width">
       <mat-select
-        id="specialty"
         name="specialty"
         formControlName="specialtyIds"
         placeholder="Specializare: (alege una sau mai multe)"
@@ -37,16 +54,19 @@
         <mat-option *ngFor="let specialty of specialities" [value]="specialty.id">{{ specialty.name }} </mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-form-field>
-      <mat-label>Descriere:</mat-label>
-      <textarea matInput id="description" formControlName="description"></textarea>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Descriere</mat-label>
+      <textarea matInput placeholder="Descriere Doctor" formControlName="description" rows="3" cols="50"></textarea>
+      <mat-icon matSuffix>notes</mat-icon>
     </mat-form-field>
+
     <div class="actions">
-      <button mat-raised-button color="basic" type="button" id="closeBtn" (click)="onCloseForm()">Inchide</button>
-      <button mat-raised-button color="warn" type="reset" id="resetBtn">Reseteaza</button>
-      <button mat-raised-button color="primary" type="submit" id="submitBtn" [disabled]="!doctorForm.valid">
+      <button mat-stroked-button color="warn" type="button" (click)="onCloseForm()">Inchide</button>
+      <button mat-stroked-button color="basic" type="reset">Reseteaza</button>
+      <button mat-stroked-button color="primary" type="submit" [disabled]="!doctorForm.valid">
         {{ buttonText }}
       </button>
     </div>
   </form>
-</section>
+</div>
