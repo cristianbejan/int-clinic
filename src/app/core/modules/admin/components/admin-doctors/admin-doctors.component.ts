@@ -7,6 +7,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort, Sort } from '@angular/material/sort';
 import { tap } from 'rxjs';
 import { ThemePalette } from '@angular/material/core';
+import { ConfirmationDialogService } from 'src/app/core/services/confirmation-dialog.service';
+import { Specialty } from 'src/app/core/interfaces/specialty.interface';
+import { Clinic } from 'src/app/core/interfaces/clinic.interface';
+import { Services } from 'src/app/core/interfaces/services.interface';
 
 @Component({
   selector: 'app-admin-doctors',
@@ -22,6 +26,7 @@ import { ThemePalette } from '@angular/material/core';
 })
 export class AdminDoctorsComponent implements OnInit {
   doctors: Doctor[] = [];
+  searchInput = '';
 
   dataSource!: MatTableDataSource<Doctor>;
   columnsToDisplay = ['lastName', 'firstName', 'phone', 'email', 'specialtyIds'];
@@ -41,7 +46,10 @@ export class AdminDoctorsComponent implements OnInit {
   color: ThemePalette = 'primary';
   diameter = 50;
 
-  constructor(private doctorService: DoctorService) {}
+  constructor(
+    private doctorService: DoctorService,
+    private dialogService: ConfirmationDialogService
+  ) {}
 
   ngOnInit(): void {
     this.getDoctors();
@@ -58,15 +66,45 @@ export class AdminDoctorsComponent implements OnInit {
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
           this.loading = false;
+          this.dataSource.filterPredicate = (data: Doctor, filter: string): boolean => {
+            const dataStr = Object.keys(data)
+              .reduce((currentTerm: string, key: string) => {
+                return currentTerm + (data as { [key: string]: any })[key] + '◬';
+              }, '')
+              .normalize('NFD')
+              .replace(/[\u0300-\u036f]/g, '')
+              .toLowerCase();
+
+            const transformedFilter = filter
+              .trim()
+              .normalize('NFD')
+              .replace(/[\u0300-\u036f]/g, '')
+              .toLowerCase();
+
+            return dataStr.indexOf(transformedFilter) != -1;
+          };
         })
       )
       .subscribe();
   }
 
-  onDelete(id: string) {
-    if (window.confirm('Esti sigur?')) {
-      this.doctorService.deleteDoctor(id);
-    }
+  confirmDeleteDialog(id: string, name: string) {
+    const options = {
+      title: 'Stergere doctor',
+      message: `Esti sigur ca vrei sa stergi doctorul ${name} ?`,
+      cancelText: 'Nu',
+      confirmText: 'Da',
+    };
+
+    this.dialogService.open(options);
+
+    this.dialogService.confirmed().subscribe(confirmed => {
+      if (confirmed) {
+        if (id) {
+          this.doctorService.deleteDoctor(id);
+        }
+      }
+    });
   }
 
   onSortChange(sortEvent: Sort): void {

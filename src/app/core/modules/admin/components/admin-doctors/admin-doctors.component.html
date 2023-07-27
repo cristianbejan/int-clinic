@@ -55,7 +55,12 @@
               <div class="example-element-description">{{ doctor?.description }}</div>
               <div class="actions">
                 <a [routerLink]="doctor?.id + '/edit'" mat-button color="primary">Editeaza informatii</a>
-                <button mat-button color="warn" (click)="onDelete(doctor?.id)">Sterge doctor</button>
+                <button
+                  mat-button
+                  color="warn"
+                  (click)="confirmDeleteDialog(doctor?.id, doctor.lastName + ' ' + doctor.firstName)">
+                  Sterge doctor
+                </button>
               </div>
             </div>
           </div>

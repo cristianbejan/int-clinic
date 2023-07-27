@@ -3,16 +3,15 @@ import { Specialty } from '../interfaces/specialty.interface';
 import { Doctor } from '../interfaces/doctor.interface';
 import { Services } from '../interfaces/services.interface';
 import { SpecialtiesService } from './specialties.service';
+import { Clinic } from '../interfaces/clinic.interface';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Pipe({
   name: 'filterBy',
 })
 export class FilterByPipe implements PipeTransform {
-  transform(
-    unsortedArray: (Specialty | Doctor | Services)[],
-    searchedInput: string
-  ): (Specialty | Doctor | Services)[] {
-    const sortedArray = unsortedArray.filter((clinicEntity: Specialty | Doctor | Services) =>
+  transform(unsortedArray: MatTableDataSource<Doctor>, searchedInput: string): MatTableDataSource<Doctor> {
+    const sortedArray = unsortedArray.filteredData.filter((clinicEntity: Specialty | Doctor | Services | Clinic) =>
       Object.values(clinicEntity).find((attributesInEntities: any) => {
         if (typeof attributesInEntities == 'number') {
           const searchedInputToNumber = Number(searchedInput);
@@ -33,6 +32,8 @@ export class FilterByPipe implements PipeTransform {
         return attributesInEntities.includes(searchedInput);
       })
     );
-    return sortedArray.length ? sortedArray : unsortedArray;
+    const matTable = new MatTableDataSource(sortedArray);
+    console.log(matTable);
+    return matTable;
   }
 }

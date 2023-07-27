@@ -62,8 +62,8 @@
     </mat-form-field>
 
     <div class="actions">
-      <button mat-stroked-button color="warn" type="button" (click)="onCloseForm()">Inchide</button>
-      <button mat-stroked-button color="basic" type="reset">Reseteaza</button>
+      <button mat-stroked-button color="warn" type="button" (click)="confirmCancelDialog()">Inchide</button>
+      <button mat-stroked-button color="basic" type="button" (click)="confirmResetDialog()">Reseteaza</button>
       <button mat-stroked-button color="primary" type="submit" [disabled]="!doctorForm.valid">
         {{ buttonText }}
       </button>

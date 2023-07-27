@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { tap } from 'rxjs';
 import { Doctor } from 'src/app/core/interfaces/doctor.interface';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { ConfirmationDialogService } from 'src/app/core/services/confirmation-dialog.service';
 import { DoctorService } from 'src/app/core/services/doctor.service';
 import { ImageUploadService } from 'src/app/core/services/image-upload.service';
 
@@ -50,6 +51,7 @@ export class AdminDoctorsFormComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
+    private dialogService: ConfirmationDialogService,
     private formBuilder: FormBuilder,
     private imageUploadService: ImageUploadService
   ) {}
@@ -104,6 +106,20 @@ export class AdminDoctorsFormComponent implements OnInit {
 
   onFormSubmit() {
     if (this.doctorId) {
+      const options = {
+        title: 'Salveaza modificarile',
+        message: `Doriti sa modificati informatiile acestui doctor ?`,
+        cancelText: 'Nu',
+        confirmText: 'Da',
+      };
+      this.dialogService.open(options);
+
+      this.dialogService.confirmed().subscribe(confirmed => {
+        if (confirmed) {
+          this.doctorService.updateDoctor(this.doctorId, this.doctorForm.value);
+          this.router.navigate(['admin/doctors']);
+        }
+      });
       this.doctorService.updateDoctor(this.doctorId, this.doctorForm.value);
       this.doctorService.updateImage(this.doctorId, this.imageUrl);
     } else {
@@ -112,6 +128,7 @@ export class AdminDoctorsFormComponent implements OnInit {
 
       this.doctorService.addDoctor(formDataGroup.getRawValue());
       this.authService.SignUp(this.doctorForm.controls.email.value, this.doctorForm.controls.password.value);
+      this.router.navigate(['admin/doctors']);
     }
     this.doctorForm.reset();
     this.router.navigate(['admin/doctors']);
@@ -137,6 +154,40 @@ export class AdminDoctorsFormComponent implements OnInit {
 
     this.imageUploadService.uploadImage(file, 'doctors').subscribe(downloadURL => {
       this.imageUrl = downloadURL;
+    });
+  }
+
+  confirmCancelDialog() {
+    const options = {
+      title: 'Inchidere Formular',
+      message: `Esti sigur ca vrei sa inchizi formularul ?`,
+      cancelText: 'Nu',
+      confirmText: 'Da',
+    };
+
+    this.dialogService.open(options);
+
+    this.dialogService.confirmed().subscribe(confirmed => {
+      if (confirmed) {
+        this.router.navigate(['admin/doctors']);
+      }
+    });
+  }
+
+  confirmResetDialog() {
+    const options = {
+      title: 'Resetare Formular',
+      message: `Esti sigur ca vrei sa resetezi formularul ?`,
+      cancelText: 'Nu',
+      confirmText: 'Da',
+    };
+
+    this.dialogService.open(options);
+
+    this.dialogService.confirmed().subscribe(confirmed => {
+      if (confirmed) {
+        this.doctorForm.reset();
+      }
     });
   }
 }
