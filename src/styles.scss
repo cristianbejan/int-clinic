@@ -49,18 +49,17 @@ body {
 
     .example-full-width {
       width: 100%;
-      margin-bottom: 40px;
+      margin-bottom: 0px;
 
       .example-full-width {
         width: 100%;
         margin-bottom: 5px;
       }
-
-      .actions {
-        display: flex;
-        width: 100%;
-        justify-content: space-between;
-      }
+    }
+    .actions {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
     }
   }
 }
@@ -92,11 +91,17 @@ body {
 
     #thColumn,
     &__element-row td {
-      text-align: center;
+      text-align: left;
+    }
+
+    .mat-sort-header-container {
+      padding-left: 10px;
     }
 
     &__element-row td {
+      padding-left: 26px;
       border-bottom-width: 0;
+      text-align: left;
     }
 
     &__expanded__element {
@@ -106,7 +111,7 @@ body {
       justify-content: space-between;
 
       &__image {
-        border: 2px dashed black;
+        border: 2px solid rgb(225, 223, 223);
         padding: 8px;
         margin: 8px 0 8px 50px;
         height: 104px;
@@ -125,7 +130,7 @@ body {
       }
     }
 
-    &__expanded {
+    &__detail-row {
       height: 0;
     }
 

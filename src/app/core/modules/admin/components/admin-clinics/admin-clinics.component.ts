@@ -5,6 +5,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { ConfirmationDialogService } from 'src/app/core/services/confirmation-dialog.service';
+import { MatSort, Sort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-admin-clinics',
@@ -24,8 +25,12 @@ export class AdminClinicsComponent {
   columnsToDisplay = ['name', 'phone', 'email', 'address'];
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
   expandedElement!: Clinic;
+  sortField = 'lastName';
+  sortDirection: 'asc' | 'desc' = 'asc';
+  showFirstLastButtons = true;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort!: MatSort;
   dataSource!: MatTableDataSource<Clinic>;
   constructor(
     private clinicService: ClinicService,
@@ -44,6 +49,7 @@ export class AdminClinicsComponent {
       this.clinics = clinics;
       this.dataSource = new MatTableDataSource(clinics);
       this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
       this.dataSource.filterPredicate = (data: Clinic, filter: string): boolean => {
         const dataStr = Object.keys(data)
           .reduce((currentTerm: string, key: string) => {
@@ -81,5 +87,12 @@ export class AdminClinicsComponent {
         }
       }
     });
+  }
+
+  onSortChange(sortEvent: Sort): void {
+    this.sortField = sortEvent.active;
+    this.sortDirection = sortEvent.direction as 'asc' | 'desc';
+    this.paginator.firstPage();
+    this.paginator.pageIndex = 0;
   }
 }
