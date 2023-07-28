@@ -107,19 +107,21 @@ body {
     &__expanded__element {
       overflow: hidden;
       display: flex;
-      align-items: flex-start;
+      align-items: center;
+      justify-content: space-between;
 
       &__image {
         border: 2px solid rgb(225, 223, 223);
         padding: 8px;
         margin: 8px 0 8px 50px;
+        min-width: 80px;
         height: 104px;
       }
 
       &__description {
         padding: 16px;
         max-width: 50%;
-        text-align: left;
+        text-align: justify;
       }
 
       &__edit-delete {

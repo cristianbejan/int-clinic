@@ -1,10 +1,10 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, Output } from '@angular/core';
 import { ServicesService } from 'src/app/core/services/services.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Services } from 'src/app/core/interfaces/services.interface';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort, Sort } from '@angular/material/sort';
+import { MatSort } from '@angular/material/sort';
 import { ThemePalette } from '@angular/material/core';
 import { tap } from 'rxjs';
 import { ConfirmationDialogService } from 'src/app/core/services/confirmation-dialog.service';
@@ -24,7 +24,6 @@ import { ConfirmationDialogService } from 'src/app/core/services/confirmation-di
 export class AdminServicesComponent {
   searchInput = '';
 
-  dataSource!: MatTableDataSource<Services>;
   columnsToDisplay = ['name', 'price', 'id'];
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
   expandedElement!: Services;
@@ -36,6 +35,7 @@ export class AdminServicesComponent {
   sortDirection: 'asc' | 'desc' = 'asc';
   showFirstLastButtons = true;
 
+  @Output() dataSource!: MatTableDataSource<Services>;
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
 
@@ -56,23 +56,6 @@ export class AdminServicesComponent {
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
           this.loading = false;
-          this.dataSource.filterPredicate = (data: Services, filter: string): boolean => {
-            const dataStr = Object.keys(data)
-              .reduce((currentTerm: string, key: string) => {
-                return currentTerm + (data as { [key: string]: any })[key] + '◬';
-              }, '')
-              .normalize('NFD')
-              .replace(/[\u0300-\u036f]/g, '')
-              .toLowerCase();
-
-            const transformedFilter = filter
-              .trim()
-              .normalize('NFD')
-              .replace(/[\u0300-\u036f]/g, '')
-              .toLowerCase();
-
-            return dataStr.indexOf(transformedFilter) != -1;
-          };
         })
       )
       .subscribe();
@@ -95,17 +78,5 @@ export class AdminServicesComponent {
         }
       }
     });
-  }
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
-    this.dataSource.filter = filterValue;
-  }
-
-  onSortChange(sortEvent: Sort): void {
-    this.sortField = sortEvent.active;
-    this.sortDirection = sortEvent.direction as 'asc' | 'desc';
-    this.paginator.firstPage();
-    this.paginator.pageIndex = 0;
   }
 }

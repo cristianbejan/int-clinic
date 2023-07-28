@@ -51,15 +51,13 @@
               {{ element.description }}
             </div>
             <div class="table__expanded__element__edit-delete">
-              <button mat-stroked-button color="primary" [routerLink]="element.id + '/edit'">
-                Editeaza informatii
-              </button>
+              <button mat-stroked-button color="primary" [routerLink]="element.id + '/edit'">Editeaza</button>
               <button
                 mat-stroked-button
                 color="warn"
                 id="delete-button"
                 (click)="confirmDeleteDialog(element.id, element.name)">
-                Sterge Clinica
+                Sterge
               </button>
             </div>
           </div>

@@ -5,7 +5,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { ConfirmationDialogService } from 'src/app/core/services/confirmation-dialog.service';
-import { MatSort, Sort } from '@angular/material/sort';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-admin-clinics',
@@ -30,19 +30,14 @@ export class AdminClinicsComponent {
   showFirstLastButtons = true;
 
   @Output() dataSource!: MatTableDataSource<Clinic>;
-
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+
   constructor(
     private clinicService: ClinicService,
     private dialogService: ConfirmationDialogService
   ) {
     this.getClinics();
-  }
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   getClinics() {
@@ -51,23 +46,6 @@ export class AdminClinicsComponent {
       this.dataSource = new MatTableDataSource(clinics);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-      this.dataSource.filterPredicate = (data: Clinic, filter: string): boolean => {
-        const dataStr = Object.keys(data)
-          .reduce((currentTerm: string, key: string) => {
-            return currentTerm + (data as { [key: string]: any })[key] + '◬';
-          }, '')
-          .normalize('NFD')
-          .replace(/[\u0300-\u036f]/g, '')
-          .toLowerCase();
-
-        const transformedFilter = filter
-          .trim()
-          .normalize('NFD')
-          .replace(/[\u0300-\u036f]/g, '')
-          .toLowerCase();
-
-        return dataStr.indexOf(transformedFilter) != -1;
-      };
     });
   }
 
@@ -88,12 +66,5 @@ export class AdminClinicsComponent {
         }
       }
     });
-  }
-
-  onSortChange(sortEvent: Sort): void {
-    this.sortField = sortEvent.active;
-    this.sortDirection = sortEvent.direction as 'asc' | 'desc';
-    this.paginator.firstPage();
-    this.paginator.pageIndex = 0;
   }
 }
