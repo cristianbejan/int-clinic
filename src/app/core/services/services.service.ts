@@ -1,5 +1,4 @@
 import {
-  DocumentReference,
   Firestore,
   addDoc,
   collection,
@@ -25,7 +24,7 @@ export class ServicesService {
   }
 
   addService(newService: Omit<Services, 'id'>) {
-    const serviceCollection = collection(this.dataBase, 'Services');
+    const serviceCollection = collection(this.dataBase, 'services');
 
     addDoc(serviceCollection, newService)
       .then(() => {
@@ -37,18 +36,18 @@ export class ServicesService {
   }
 
   getServices() {
-    const servicesCollection = collection(this.dataBase, 'Services');
+    const servicesCollection = collection(this.dataBase, 'services');
 
     return collectionData(servicesCollection, { idField: 'id' });
   }
 
   getService(id: string): Observable<DocumentData> {
-    const serviceReference = doc(this.dataBase, 'Services', id);
+    const serviceReference = doc(this.dataBase, 'services', id);
     return from(getDoc(serviceReference));
   }
 
   updateService(editedService: Services) {
-    const serviceReference = doc(this.dataBase, 'Services', editedService.id);
+    const serviceReference = doc(this.dataBase, 'services', editedService.id);
     const updatedService = {
       name: editedService.name,
       price: editedService.price,
@@ -66,7 +65,7 @@ export class ServicesService {
   }
 
   deleteService(id: string) {
-    const serviceReference = doc(this.dataBase, 'Services', id);
+    const serviceReference = doc(this.dataBase, 'services', id);
 
     deleteDoc(serviceReference).then(() => {
       console.log('Serviciul a fost sters cu succes');

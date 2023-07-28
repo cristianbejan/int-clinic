@@ -11,8 +11,6 @@ import { SpecialtiesService } from '../../services/specialties.service';
 import { AdminServicesComponent } from './components/admin-services/admin-services.component';
 import { AdminServicesFormComponent } from './components/admin-services/admin-services-form/admin-services-form/admin-services-form.component';
 import { ServicesService } from '../../services/services.service';
-import { AlphabeticalOrderPipe } from '../../services/alphabetical-sort.pipe';
-import { FilterByPipe } from '../../services/filter-by.pipe';
 import { AdminDoctorsFormComponent } from './components/admin-doctors/admin-doctors-form/admin-doctors-form.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatListModule } from '@angular/material/list';
@@ -28,6 +26,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { AdminFilterComponent } from './components/admin-filter/admin-filter.component';
 
 const COMPONENTS = [AdminComponent];
 
@@ -39,11 +38,10 @@ const COMPONENTS = [AdminComponent];
     AdminSpecialtiesFormComponent,
     AdminServicesComponent,
     AdminServicesFormComponent,
-    AlphabeticalOrderPipe,
-    FilterByPipe,
     AdminDoctorsFormComponent,
     AdminClinicsComponent,
     AdminClinicsFormComponent,
+    AdminFilterComponent,
   ],
   imports: [
     CommonModule,

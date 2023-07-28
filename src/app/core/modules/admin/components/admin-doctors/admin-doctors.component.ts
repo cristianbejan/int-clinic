@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, ViewChild } from '@angular/core';
 import { Doctor } from 'src/app/core/interfaces/doctor.interface';
 import { DoctorService } from 'src/app/core/services/doctor.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
@@ -25,7 +25,7 @@ export class AdminDoctorsComponent implements OnInit {
   doctors: Doctor[] = [];
   searchInput = '';
 
-  dataSource!: MatTableDataSource<Doctor>;
+  @Output() dataSource!: MatTableDataSource<Doctor>;
   columnsToDisplay = ['lastName', 'firstName', 'phone', 'email', 'specialtyIds'];
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
   expandedElement!: Doctor;
@@ -63,23 +63,6 @@ export class AdminDoctorsComponent implements OnInit {
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
           this.loading = false;
-          this.dataSource.filterPredicate = (data: Doctor, filter: string): boolean => {
-            const dataStr = Object.keys(data)
-              .reduce((currentTerm: string, key: string) => {
-                return currentTerm + (data as { [key: string]: any })[key] + '◬';
-              }, '')
-              .normalize('NFD')
-              .replace(/[\u0300-\u036f]/g, '')
-              .toLowerCase();
-
-            const transformedFilter = filter
-              .trim()
-              .normalize('NFD')
-              .replace(/[\u0300-\u036f]/g, '')
-              .toLowerCase();
-
-            return dataStr.indexOf(transformedFilter) != -1;
-          };
         })
       )
       .subscribe();
@@ -104,15 +87,10 @@ export class AdminDoctorsComponent implements OnInit {
     });
   }
 
-  onSortChange(sortEvent: Sort): void {
-    this.sortField = sortEvent.active;
-    this.sortDirection = sortEvent.direction as 'asc' | 'desc';
-    this.paginator.firstPage();
-    this.paginator.pageIndex = 0;
-  }
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
-    this.dataSource.filter = filterValue;
-  }
+  // onSortChange(sortEvent: Sort): void {
+  //   this.sortField = sortEvent.active;
+  //   this.sortDirection = sortEvent.direction as 'asc' | 'desc';
+  //   this.paginator.firstPage();
+  //   this.paginator.pageIndex = 0;
+  // }
 }

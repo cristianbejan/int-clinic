@@ -1,6 +1,4 @@
 import {
-  CollectionReference,
-  DocumentReference,
   Firestore,
   addDoc,
   collection,
@@ -10,8 +8,6 @@ import {
   doc,
   getDoc,
   updateDoc,
-  query,
-  where,
 } from '@angular/fire/firestore';
 import { Specialty } from '../interfaces/specialty.interface';
 import { Injectable } from '@angular/core';
@@ -23,14 +19,12 @@ import { Observable, from } from 'rxjs';
 export class SpecialtiesService {
   specialities!: DocumentData[];
 
-  constructor(
-    private dataBase: Firestore // @Inject(Object) specilitiesObj: Speciality
-  ) {
+  constructor(private dataBase: Firestore) {
     this.getSpecialties();
   }
 
   addSpecialty(newSpecialtyObj: Omit<Specialty, 'id'>) {
-    const specialtyCollection = collection(this.dataBase, 'Specialities');
+    const specialtyCollection = collection(this.dataBase, 'specialties');
 
     addDoc(specialtyCollection, newSpecialtyObj)
       .then(() => {
@@ -42,18 +36,18 @@ export class SpecialtiesService {
   }
 
   getSpecialties() {
-    const specialtyCollection = collection(this.dataBase, 'Specialities');
+    const specialtyCollection = collection(this.dataBase, 'specialties');
 
     return collectionData(specialtyCollection, { idField: 'id' });
   }
 
   getSpecialty(id: string): Observable<DocumentData> {
-    const docReference = doc(this.dataBase, 'Specialities', id);
+    const docReference = doc(this.dataBase, 'specialties', id);
     return from(getDoc(docReference));
   }
 
   updateSpecialty(specialtyObject: Specialty) {
-    const specialtyInstance = doc(this.dataBase, 'Specialities', specialtyObject.id);
+    const specialtyInstance = doc(this.dataBase, 'specialties', specialtyObject.id);
     const updatedSpecialty = {
       id: specialtyObject.id,
       name: specialtyObject.name,
@@ -71,15 +65,8 @@ export class SpecialtiesService {
       });
   }
 
-  // search(searchedInput: string, route: string, options: string) {
-  //   const ref = collection(this.dataBase, route);
-  //   const refq = query(ref, where(options, '==', searchedInput));
-
-  //   return collectionData(refq) as Observable<Specialty[]>;
-  // }
-
   deleteSpecialty(id: string) {
-    const specialtyInstance = doc(this.dataBase, 'Specialities', id);
+    const specialtyInstance = doc(this.dataBase, 'specialties', id);
 
     deleteDoc(specialtyInstance).then(() => {
       console.log('Specialty deleted');

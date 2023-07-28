@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, Output, ViewChild } from '@angular/core';
 import { ClinicService } from 'src/app/core/services/clinic.service';
 import { Clinic } from 'src/app/core/interfaces/clinic.interface';
 import { animate, state, style, transition, trigger } from '@angular/animations';
@@ -29,9 +29,10 @@ export class AdminClinicsComponent {
   sortDirection: 'asc' | 'desc' = 'asc';
   showFirstLastButtons = true;
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @Output() dataSource!: MatTableDataSource<Clinic>;
+
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
-  dataSource!: MatTableDataSource<Clinic>;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
   constructor(
     private clinicService: ClinicService,
     private dialogService: ConfirmationDialogService
