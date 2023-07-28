@@ -67,7 +67,7 @@ export class AdminClinicsComponent {
   confirmDeleteDialog(id: string, name: string) {
     const options = {
       title: 'Stergere Clinica',
-      message: `Esti sigur ca vrei sa stergi clinica ${name} ?`,
+      message: `Esti sigur ca vrei sa stergi clinica ${name}?`,
       cancelText: 'Nu',
       confirmText: 'Da',
     };

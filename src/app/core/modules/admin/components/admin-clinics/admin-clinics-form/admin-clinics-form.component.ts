@@ -108,7 +108,7 @@ export class AdminClinicsFormComponent implements OnInit {
   confirmCancelDialog() {
     const options = {
       title: 'Inchidere Formular',
-      message: `Esti sigur ca vrei sa inchizi formularul ?`,
+      message: `Esti sigur ca vrei sa inchizi formularul?`,
       cancelText: 'Nu',
       confirmText: 'Da',
     };
@@ -125,7 +125,7 @@ export class AdminClinicsFormComponent implements OnInit {
   confirmResetDialog() {
     const options = {
       title: 'Resetare Formular',
-      message: `Esti sigur ca vrei sa resetezi formularul ?`,
+      message: `Esti sigur ca vrei sa resetezi formularul?`,
       cancelText: 'Nu',
       confirmText: 'Da',
     };

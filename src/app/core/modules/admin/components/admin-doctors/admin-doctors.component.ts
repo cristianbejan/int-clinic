@@ -8,9 +8,6 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { tap } from 'rxjs';
 import { ThemePalette } from '@angular/material/core';
 import { ConfirmationDialogService } from 'src/app/core/services/confirmation-dialog.service';
-import { Specialty } from 'src/app/core/interfaces/specialty.interface';
-import { Clinic } from 'src/app/core/interfaces/clinic.interface';
-import { Services } from 'src/app/core/interfaces/services.interface';
 
 @Component({
   selector: 'app-admin-doctors',
@@ -91,7 +88,7 @@ export class AdminDoctorsComponent implements OnInit {
   confirmDeleteDialog(id: string, name: string) {
     const options = {
       title: 'Stergere doctor',
-      message: `Esti sigur ca vrei sa stergi doctorul ${name} ?`,
+      message: `Esti sigur ca vrei sa stergi doctorul ${name}?`,
       cancelText: 'Nu',
       confirmText: 'Da',
     };

@@ -25,12 +25,19 @@
     </mat-form-field>
 
     <div class="actions">
-      <button mat-stroked-button color="warn" type="button" (click)="back()">Inchide</button>
-      <button mat-stroked-button color="basic" type="reset">Reseteaza</button>
+      <button mat-stroked-button color="warn" type="button" (click)="confirmCancelDialog()">Inchide</button>
+      <button mat-stroked-button color="basic" type="button" (click)="confirmResetDialog()">Reseteaza</button>
       <button mat-stroked-button color="primary" *ngIf="editRoute" (click)="updateService()">
-        Actualizeaza Specialitate
+        Actualizeaza serviciu
       </button>
-      <button mat-stroked-button color="primary" *ngIf="!editRoute" (click)="addService()">Adauga Specialitate</button>
+      <button
+        mat-stroked-button
+        color="primary"
+        *ngIf="!editRoute"
+        (click)="addService()"
+        [disabled]="!servicesForm.valid">
+        Adauga serviciu
+      </button>
     </div>
   </form>
 </div>

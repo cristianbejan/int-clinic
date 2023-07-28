@@ -4,13 +4,14 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Services } from 'src/app/core/interfaces/services.interface';
 import { Location } from '@angular/common';
+import { ConfirmationDialogService } from 'src/app/core/services/confirmation-dialog.service';
 
 @Component({
   selector: 'app-admin-services-form',
   templateUrl: './admin-services-form.component.html',
   styleUrls: ['./admin-services-form.component.scss'],
 })
-export class AdminServicesFormComponent {
+export class AdminServicesFormComponent implements OnInit {
   servicesForm = new FormGroup({
     name: new FormControl('', { nonNullable: true, validators: [Validators.required, Validators.minLength(3)] }),
     price: new FormControl('', { nonNullable: true, validators: Validators.required }),
@@ -26,8 +27,17 @@ export class AdminServicesFormComponent {
   constructor(
     private _activatedRoute: ActivatedRoute,
     private databBase: ServicesService,
-    private location: Location
+    private location: Location,
+    private dialogService: ConfirmationDialogService
   ) {}
+
+  ngOnInit() {
+    this._activatedRoute.paramMap.subscribe(route => {
+      if (route.has('id')) {
+        this.editState(route);
+      }
+    });
+  }
 
   addService() {
     const newService = {
@@ -48,8 +58,21 @@ export class AdminServicesFormComponent {
       description: this.servicesForm.controls.description.value,
       specialtyIds: this.serviceRef.specialtyIds ?? [],
     };
-    this.databBase.updateService(editedService);
-    this.location.back();
+
+    const options = {
+      title: 'Salveaza modificarile',
+      message: `Doriti sa modificati informatiile acestui serviciu?`,
+      cancelText: 'Nu',
+      confirmText: 'Da',
+    };
+    this.dialogService.open(options);
+
+    this.dialogService.confirmed().subscribe(confirmed => {
+      if (confirmed) {
+        this.databBase.updateService(editedService);
+        this.location.back();
+      }
+    });
   }
 
   editState(result: ParamMap) {
@@ -70,10 +93,36 @@ export class AdminServicesFormComponent {
     this.location.back();
   }
 
-  ngOnInit() {
-    this._activatedRoute.paramMap.subscribe(route => {
-      if (route.has('id')) {
-        this.editState(route);
+  confirmCancelDialog() {
+    const options = {
+      title: 'Inchidere Formular',
+      message: `Esti sigur ca vrei sa inchizi formularul?`,
+      cancelText: 'Nu',
+      confirmText: 'Da',
+    };
+
+    this.dialogService.open(options);
+
+    this.dialogService.confirmed().subscribe(confirmed => {
+      if (confirmed) {
+        this.location.back();
+      }
+    });
+  }
+
+  confirmResetDialog() {
+    const options = {
+      title: 'Resetare Formular',
+      message: `Esti sigur ca vrei sa resetezi formularul?`,
+      cancelText: 'Nu',
+      confirmText: 'Da',
+    };
+
+    this.dialogService.open(options);
+
+    this.dialogService.confirmed().subscribe(confirmed => {
+      if (confirmed) {
+        this.servicesForm.reset();
       }
     });
   }
