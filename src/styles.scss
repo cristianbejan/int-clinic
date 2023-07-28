@@ -107,8 +107,7 @@ body {
     &__expanded__element {
       overflow: hidden;
       display: flex;
-      align-items: center;
-      justify-content: space-between;
+      align-items: flex-start;
 
       &__image {
         border: 2px solid rgb(225, 223, 223);
@@ -120,7 +119,7 @@ body {
       &__description {
         padding: 16px;
         max-width: 50%;
-        text-align: justify;
+        text-align: left;
       }
 
       &__edit-delete {
