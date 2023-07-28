@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { tap } from 'rxjs';
+import { Doctor } from 'src/app/core/interfaces/doctor.interface';
 import { ClinicService } from 'src/app/core/services/clinic.service';
 import { ConfirmationDialogService } from 'src/app/core/services/confirmation-dialog.service';
+import { DoctorService } from 'src/app/core/services/doctor.service';
 import { ImageUploadService } from 'src/app/core/services/image-upload.service';
 
 enum FormSubmitState {
@@ -20,15 +22,18 @@ export class AdminClinicsFormComponent implements OnInit {
   buttonText: string = FormSubmitState.ADD;
   defaultFormValues!: object;
   imageUrl!: string;
+  doctors: Doctor[] = [];
 
   constructor(
     private clinicService: ClinicService,
     private router: Router,
     private route: ActivatedRoute,
     private dialogService: ConfirmationDialogService,
-    private formBuilder: FormBuilder,
-    private imageUploadService: ImageUploadService
-  ) {}
+    private imageUploadService: ImageUploadService,
+    private doctorService: DoctorService
+  ) {
+    this.getDoctors();
+  }
 
   clinicForm = new FormGroup({
     name: new FormControl(null, Validators.required),
@@ -40,15 +45,15 @@ export class AdminClinicsFormComponent implements OnInit {
       Validators.required,
       Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
     ]),
+    doctorIds: new FormControl([''], Validators.required),
     address: new FormControl(null, Validators.required),
     description: new FormControl(null, Validators.required),
-    imageUrl: new FormControl(''),
+    imageUrl: new FormControl('', { nonNullable: true }),
   });
 
   ngOnInit(): void {
     this.clinicId = this.route.snapshot.params['id'];
     this.autocompleteClinic(this.clinicId);
-    console.log('On init', this.defaultFormValues);
   }
 
   onSubmit() {
@@ -81,28 +86,31 @@ export class AdminClinicsFormComponent implements OnInit {
   }
 
   autocompleteClinic(id: string) {
-    this.clinicService
-      .getClinic(id)
-      .pipe(
-        tap(result => {
-          this.buttonText = FormSubmitState.EDIT;
-          const clinic = result['data']();
-          this.imageUrl = clinic.imageUrl;
+    if (id) {
+      this.clinicService
+        .getClinic(id)
+        .pipe(
+          tap(result => {
+            this.buttonText = FormSubmitState.EDIT;
+            const clinic = result['data']();
+            this.imageUrl = clinic.imageUrl;
 
-          this.clinicForm.patchValue({
-            name: clinic.name,
-            phone: clinic.phone,
-            email: clinic.email,
-            address: clinic.address,
-            description: clinic.description,
-            imageUrl: clinic.imageUrl,
-          });
+            this.clinicForm.patchValue({
+              name: clinic.name,
+              phone: clinic.phone,
+              email: clinic.email,
+              doctorIds: clinic.doctorIds,
+              address: clinic.address,
+              description: clinic.description,
+              imageUrl: clinic.imageUrl,
+            });
 
-          this.defaultFormValues = JSON.parse(JSON.stringify(this.clinicForm.value));
-          console.log('autocomplete', this.defaultFormValues);
-        })
-      )
-      .subscribe();
+            this.defaultFormValues = JSON.parse(JSON.stringify(this.clinicForm.value));
+            console.log('autocomplete', this.defaultFormValues);
+          })
+        )
+        .subscribe();
+    }
   }
 
   confirmCancelDialog() {
@@ -150,6 +158,19 @@ export class AdminClinicsFormComponent implements OnInit {
 
     this.imageUploadService.uploadImage(file, 'clinics').subscribe(downloadURL => {
       this.imageUrl = downloadURL;
+      this.clinicForm.get('imageUrl')?.setValue(downloadURL);
     });
+  }
+
+  getDoctors() {
+    return this.doctorService
+      .getDoctors()
+      .pipe(
+        tap(data => {
+          this.doctors = data as Doctor[];
+          console.log('doctors', this.doctors);
+        })
+      )
+      .subscribe();
   }
 }

@@ -13,14 +13,17 @@
         <th id="thColumn" mat-header-cell mat-sort-header *matHeaderCellDef>Nume</th>
         <td mat-cell *matCellDef="let clinic">{{ clinic?.name }}</td>
       </ng-container>
+
       <ng-container matColumnDef="phone">
         <th id="thColumn" mat-header-cell mat-sort-header *matHeaderCellDef>Telefon</th>
         <td mat-cell *matCellDef="let clinic">{{ clinic?.phone }}</td>
       </ng-container>
+
       <ng-container matColumnDef="email">
         <th id="thColumn" mat-header-cell mat-sort-header *matHeaderCellDef>Email</th>
         <td mat-cell *matCellDef="let clinic">{{ clinic?.email }}</td>
       </ng-container>
+
       <ng-container matColumnDef="address">
         <th id="thColumn" mat-header-cell mat-sort-header *matHeaderCellDef>Adresa</th>
         <td mat-cell *matCellDef="let clinic">{{ clinic?.address }}</td>
@@ -48,7 +51,10 @@
               <img *ngIf="element.imageUrl" [src]="element.imageUrl" alt="Uploaded Image" width="100%" height="100%" />
             </div>
             <div class="table__expanded__element__description">
+              <h4>Descriere</h4>
               {{ element.description }}
+              <h4>Doctori</h4>
+              {{ getDoctorNames(element?.doctorIds) }}
             </div>
             <div class="table__expanded__element__edit-delete">
               <button mat-stroked-button color="primary" [routerLink]="element.id + '/edit'">Editeaza</button>

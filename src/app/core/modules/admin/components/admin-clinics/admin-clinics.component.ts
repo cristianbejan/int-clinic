@@ -1,4 +1,4 @@
-import { Component, Output, ViewChild } from '@angular/core';
+import { Component, Output, ViewChild, OnInit } from '@angular/core';
 import { ClinicService } from 'src/app/core/services/clinic.service';
 import { Clinic } from 'src/app/core/interfaces/clinic.interface';
 import { animate, state, style, transition, trigger } from '@angular/animations';
@@ -6,6 +6,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { ConfirmationDialogService } from 'src/app/core/services/confirmation-dialog.service';
 import { MatSort } from '@angular/material/sort';
+import { Doctor } from 'src/app/core/interfaces/doctor.interface';
+import { DoctorService } from 'src/app/core/services/doctor.service';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-admin-clinics',
@@ -19,8 +22,9 @@ import { MatSort } from '@angular/material/sort';
     ]),
   ],
 })
-export class AdminClinicsComponent {
+export class AdminClinicsComponent implements OnInit {
   clinics!: Clinic[];
+  doctors: Doctor[] = [];
 
   columnsToDisplay = ['name', 'phone', 'email', 'address'];
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
@@ -35,8 +39,13 @@ export class AdminClinicsComponent {
 
   constructor(
     private clinicService: ClinicService,
-    private dialogService: ConfirmationDialogService
+    private dialogService: ConfirmationDialogService,
+    private doctorService: DoctorService
   ) {
+    this.getDoctors();
+  }
+
+  ngOnInit(): void {
     this.getClinics();
   }
 
@@ -66,5 +75,29 @@ export class AdminClinicsComponent {
         }
       }
     });
+  }
+
+  getDoctors() {
+    return this.doctorService
+      .getDoctors()
+      .pipe(
+        tap(data => {
+          this.doctors = data as Doctor[];
+        })
+      )
+      .subscribe();
+  }
+
+  getDoctorNames(doctorIds: string[] | undefined): string {
+    if (!doctorIds || doctorIds.length === 0) {
+      return '';
+    }
+
+    const doctorNames = doctorIds.map(doctorId => {
+      const doctor = this.doctors.find(doctor => doctor.id === doctorId);
+      return doctor ? doctor.firstName + ' ' + doctor.lastName : '';
+    });
+
+    return doctorNames.join(', ');
   }
 }

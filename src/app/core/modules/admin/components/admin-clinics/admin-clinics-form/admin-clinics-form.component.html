@@ -29,6 +29,19 @@
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
+      <mat-select
+        name="doctors"
+        formControlName="doctorIds"
+        placeholder="Doctori: (alege unul sau mai multi)"
+        multiple
+        [required]="true">
+        <mat-option *ngFor="let doctor of doctors" [value]="doctor.id"
+          >{{ doctor.firstName + ' ' + doctor.lastName }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
       <mat-label>Adresa</mat-label>
       <textarea matInput placeholder="Ex. 100 Main St" formControlName="address"></textarea>
       <mat-icon matSuffix>roofing</mat-icon>
