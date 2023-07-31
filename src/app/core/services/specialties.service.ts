@@ -46,12 +46,14 @@ export class SpecialtiesService {
     return from(getDoc(docReference));
   }
 
-  updateSpecialty(specialtyObject: Specialty) {
-    const specialtyInstance = doc(this.dataBase, 'specialties', specialtyObject.id);
+  updateSpecialty(specialtyObject: Omit<Specialty, 'id'>, id: string) {
+    console.log(specialtyObject);
+
+    const specialtyInstance = doc(this.dataBase, 'specialties', id);
     const updatedSpecialty = {
-      id: specialtyObject.id,
+      id: id,
       name: specialtyObject.name,
-      doctorIds: specialtyObject.doctorIds,
+      serviceIds: specialtyObject.serviceIds,
       description: specialtyObject.description,
     };
 

@@ -33,6 +33,7 @@ export class DoctorService {
 
   getDoctor(id: string): Observable<DocumentData> {
     const selectedDoctor = doc(this.firestore, 'doctors', id);
+
     return from(getDoc(selectedDoctor));
   }
 

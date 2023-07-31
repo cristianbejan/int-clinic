@@ -11,7 +11,11 @@ import { Specialty } from 'src/app/core/interfaces/specialty.interface';
   styleUrls: ['./admin-filter.component.scss'],
 })
 export class AdminFilterComponent {
-  @Input() dataSource!: MatTableDataSource<any>;
+  @Input() dataSource!:
+    | MatTableDataSource<Doctor>
+    | MatTableDataSource<Specialty>
+    | MatTableDataSource<Services>
+    | MatTableDataSource<Clinic>;
 
   applyFilter(event: Event) {
     this.dataSource.filterPredicate = (data: Doctor | Services | Specialty | Clinic, filter: string): boolean => {

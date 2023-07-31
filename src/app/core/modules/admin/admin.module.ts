@@ -27,6 +27,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { AdminFilterComponent } from './components/admin-filter/admin-filter.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 const COMPONENTS = [AdminComponent];
 
@@ -60,6 +61,7 @@ const COMPONENTS = [AdminComponent];
     MatListModule,
     MatSortModule,
     MatProgressSpinnerModule,
+    MatTooltipModule,
   ],
   providers: [SpecialtiesService, ServicesService],
 })

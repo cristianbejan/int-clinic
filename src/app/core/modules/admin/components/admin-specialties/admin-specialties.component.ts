@@ -1,4 +1,4 @@
-import { Component, ViewChild, Output } from '@angular/core';
+import { Component, ViewChild, Output, OnInit } from '@angular/core';
 import { SpecialtiesService } from 'src/app/core/services/specialties.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Specialty } from 'src/app/core/interfaces/specialty.interface';
@@ -8,6 +8,8 @@ import { MatSort } from '@angular/material/sort';
 import { ThemePalette } from '@angular/material/core';
 import { tap } from 'rxjs';
 import { ConfirmationDialogService } from 'src/app/core/services/confirmation-dialog.service';
+import { Doctor } from 'src/app/core/interfaces/doctor.interface';
+import { DoctorService } from 'src/app/core/services/doctor.service';
 
 @Component({
   selector: 'app-admin-specialties',
@@ -22,7 +24,8 @@ import { ConfirmationDialogService } from 'src/app/core/services/confirmation-di
   ],
 })
 export class AdminSpecialtiesComponent {
-  specialties!: Specialty[];
+  specialties: Specialty[] = [];
+  doctors: Doctor[] = [];
   searchInput = '';
 
   columnsToDisplay = ['name', 'doctorIds', 'id'];
@@ -44,14 +47,24 @@ export class AdminSpecialtiesComponent {
   diameter = 50;
 
   constructor(
-    private dataBase: SpecialtiesService,
-    private dialogService: ConfirmationDialogService
+    private specialtyService: SpecialtiesService,
+    private dialogService: ConfirmationDialogService,
+    private doctorService: DoctorService
   ) {
-    this.dataBase
+    this.doctorService
+      .getDoctors()
+      .pipe(
+        tap(data => {
+          this.doctors = data as Doctor[];
+        })
+      )
+      .subscribe();
+    this.specialtyService
       .getSpecialties()
       .pipe(
         tap(data => {
           this.specialties = data as Specialty[];
+          this.specialties.forEach(specialty => (specialty.assignedDoctors = this.getDoctors(specialty.id)));
           this.dataSource = new MatTableDataSource(this.specialties);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
@@ -74,9 +87,17 @@ export class AdminSpecialtiesComponent {
     this.dialogService.confirmed().subscribe(confirmed => {
       if (confirmed) {
         if (id) {
-          this.dataBase.deleteSpecialty(id);
+          this.specialtyService.deleteSpecialty(id);
         }
       }
     });
+  }
+
+  getDoctors(specialtyId: string) {
+    const assignedDoctors = this.doctors.filter(doctors => doctors.specialtyIds.includes(specialtyId));
+    const assignedDoctorsNames: string[] = [];
+    assignedDoctors.forEach(doctor => assignedDoctorsNames.push(doctor.firstName + ' ' + doctor.lastName));
+
+    return assignedDoctorsNames;
   }
 }

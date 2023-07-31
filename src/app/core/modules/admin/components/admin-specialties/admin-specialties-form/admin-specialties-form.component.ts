@@ -5,6 +5,11 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Specialty } from 'src/app/core/interfaces/specialty.interface';
 import { Location } from '@angular/common';
 import { ConfirmationDialogService } from 'src/app/core/services/confirmation-dialog.service';
+import { DoctorService } from 'src/app/core/services/doctor.service';
+import { Doctor } from 'src/app/core/interfaces/doctor.interface';
+import { ServicesService } from 'src/app/core/services/services.service';
+import { Services } from 'src/app/core/interfaces/services.interface';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-admin-specialties-form',
@@ -18,16 +23,21 @@ export class AdminSpecialtiesFormComponent implements OnInit {
       nonNullable: true,
       validators: [Validators.required, Validators.minLength(10)],
     }),
+    serviceIds: new FormControl([''], { nonNullable: true, validators: Validators.required }),
   });
   specialtyRef!: Specialty;
   editRoute = false;
   id!: string;
+  services!: Services[];
+  doctors!: Doctor[];
 
   constructor(
     private _activatedRoute: ActivatedRoute,
     private databBase: SpecialtiesService,
     private location: Location,
-    private dialogService: ConfirmationDialogService
+    private dialogService: ConfirmationDialogService,
+    private serviceService: ServicesService,
+    private doctorService: DoctorService
   ) {}
 
   ngOnInit() {
@@ -36,27 +46,36 @@ export class AdminSpecialtiesFormComponent implements OnInit {
         return this.editState(route);
       }
     });
+    this.serviceService.getServices().subscribe(result => (this.services = result as Services[]));
+    this.doctorService
+      .getDoctors()
+      .pipe(
+        tap(data => {
+          this.doctors = data as Doctor[];
+        })
+      )
+      .subscribe();
   }
 
   addSpecialty() {
     const newSpecialty = {
       name: this.specialtyForm.controls.name.value,
-      doctorIds: [],
       description: this.specialtyForm.controls.description.value,
-      serviceIds: [],
+      serviceIds: this.specialtyForm.controls.serviceIds.value,
     };
     this.databBase.addSpecialty(newSpecialty);
     this.location.back();
   }
-
   updateSpecialty() {
-    const editedSpecialty = {
-      id: this.id,
-      name: this.specialtyForm.controls.name.value,
-      doctorIds: this.specialtyRef.doctorIds ?? [],
-      description: this.specialtyForm.controls.description.value,
-      serviceIds: this.specialtyRef.serviceIds ?? [],
-    };
+    const idforFilter = this.specialtyRef.id as string;
+    const doctorIdsFilter = this.doctors.filter(res => {
+      return res.specialtyIds.includes(idforFilter);
+    });
+
+    const doctorIds: any[] = [];
+    doctorIdsFilter.forEach(res => {
+      doctorIds.push(res.id);
+    });
 
     const options = {
       title: 'Salveaza modificarile',
@@ -65,10 +84,10 @@ export class AdminSpecialtiesFormComponent implements OnInit {
       confirmText: 'Da',
     };
     this.dialogService.open(options);
-
     this.dialogService.confirmed().subscribe(confirmed => {
       if (confirmed) {
-        this.databBase.updateSpecialty(editedSpecialty);
+        this.databBase.updateSpecialty(this.specialtyForm.getRawValue(), this.id);
+
         this.location.back();
       }
     });
@@ -77,12 +96,12 @@ export class AdminSpecialtiesFormComponent implements OnInit {
   editState(route: ParamMap) {
     this.editRoute = true;
     this.id = route.get('id') as string;
-
     this.databBase.getSpecialty(this.id).subscribe(dbResponse => {
       this.specialtyRef = dbResponse['data']();
       this.specialtyForm.patchValue({
         name: this.specialtyRef.name,
         description: this.specialtyRef.description,
+        serviceIds: this.specialtyRef.serviceIds,
       });
     });
   }
@@ -98,9 +117,7 @@ export class AdminSpecialtiesFormComponent implements OnInit {
       cancelText: 'Nu',
       confirmText: 'Da',
     };
-
     this.dialogService.open(options);
-
     this.dialogService.confirmed().subscribe(confirmed => {
       if (confirmed) {
         this.location.back();
@@ -115,9 +132,7 @@ export class AdminSpecialtiesFormComponent implements OnInit {
       cancelText: 'Nu',
       confirmText: 'Da',
     };
-
     this.dialogService.open(options);
-
     this.dialogService.confirmed().subscribe(confirmed => {
       if (confirmed) {
         this.specialtyForm.reset();
