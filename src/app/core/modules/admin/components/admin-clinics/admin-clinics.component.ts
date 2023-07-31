@@ -1,4 +1,4 @@
-import { Component, Output, ViewChild } from '@angular/core';
+import { Component, Output, ViewChild, OnInit } from '@angular/core';
 import { ClinicService } from 'src/app/core/services/clinic.service';
 import { Clinic } from 'src/app/core/interfaces/clinic.interface';
 import { animate, state, style, transition, trigger } from '@angular/animations';
@@ -6,6 +6,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { ConfirmationDialogService } from 'src/app/core/services/confirmation-dialog.service';
 import { MatSort } from '@angular/material/sort';
+import { Doctor } from 'src/app/core/interfaces/doctor.interface';
+import { DoctorService } from 'src/app/core/services/doctor.service';
+import { Specialty } from 'src/app/core/interfaces/specialty.interface';
+import { SpecialtiesService } from 'src/app/core/services/specialties.service';
 
 @Component({
   selector: 'app-admin-clinics',
@@ -19,8 +23,10 @@ import { MatSort } from '@angular/material/sort';
     ]),
   ],
 })
-export class AdminClinicsComponent {
+export class AdminClinicsComponent implements OnInit {
   clinics!: Clinic[];
+  doctors: Doctor[] = [];
+  specialties: Specialty[] = [];
 
   columnsToDisplay = ['name', 'phone', 'email', 'address'];
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
@@ -35,8 +41,14 @@ export class AdminClinicsComponent {
 
   constructor(
     private clinicService: ClinicService,
-    private dialogService: ConfirmationDialogService
+    private dialogService: ConfirmationDialogService,
+    private doctorService: DoctorService,
+    private specialtyService: SpecialtiesService
   ) {
+    this.fetchDoctorsAndSpecialties();
+  }
+
+  ngOnInit(): void {
     this.getClinics();
   }
 
@@ -66,5 +78,41 @@ export class AdminClinicsComponent {
         }
       }
     });
+  }
+
+  fetchDoctorsAndSpecialties() {
+    this.doctorService.getDoctors().subscribe(doctors => {
+      this.doctors = doctors as Doctor[];
+    });
+
+    this.specialtyService.getSpecialties().subscribe(specialties => {
+      this.specialties = specialties as Specialty[];
+    });
+  }
+
+  getDoctorNames(doctorIds: string[] | undefined): string {
+    if (!doctorIds || doctorIds.length === 0) {
+      return '';
+    }
+
+    const doctorNames = doctorIds.map(doctorId => {
+      const doctor = this.doctors.find(doctor => doctor.id === doctorId);
+      return doctor ? doctor.firstName + ' ' + doctor.lastName : '';
+    });
+
+    return doctorNames.join(', ');
+  }
+
+  getSpecialtyNames(specialtyIds: string[] | undefined): string {
+    if (!specialtyIds || specialtyIds.length === 0) {
+      return '';
+    }
+
+    const specialtyNames = specialtyIds.map(specialtyId => {
+      const specialty = this.specialties.find(specialty => specialty.id === specialtyId);
+      return specialty ? specialty.name : '';
+    });
+
+    return specialtyNames.join(', ');
   }
 }

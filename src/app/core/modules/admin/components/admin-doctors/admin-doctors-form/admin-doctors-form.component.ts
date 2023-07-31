@@ -74,7 +74,7 @@ export class AdminDoctorsFormComponent implements OnInit {
     password: new FormControl('', { nonNullable: true, validators: Validators.required }),
     specialtyIds: new FormControl([''], { nonNullable: true, validators: Validators.required }),
     description: new FormControl('', { nonNullable: true, validators: Validators.required }),
-    imageUrl: new FormControl('', { nonNullable: true }),
+    imageUrl: new FormControl(`${this.imageUrl}`, { nonNullable: true }),
   });
 
   email = this.doctorForm.controls.email;

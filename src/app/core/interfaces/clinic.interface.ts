@@ -7,6 +7,6 @@ export interface Clinic {
   description: string;
   imageUrl: string;
   doctorIds?: string[];
-  specialitiyIds?: string[];
+  specialtyIds?: string[];
   patientIds?: string[];
 }

@@ -43,12 +43,16 @@
         </td>
       </ng-container>
 
-      <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
       <ng-container matColumnDef="expandedDetail">
         <td mat-cell *matCellDef="let doctor" [attr.colspan]="columnsToDisplayWithExpand.length">
           <div class="table__expanded__element" [@detailExpand]="doctor === expandedElement ? 'expanded' : 'collapsed'">
             <div class="table__expanded__element__image">
-              <img *ngIf="doctor.imageUrl" [src]="doctor.imageUrl" alt="Uploaded Image" width="100%" height="100%" />
+              <img
+                *ngIf="doctor.imageUrl"
+                [src]="doctor.imageUrl"
+                alt="Imagine neîncărcată"
+                width="100%"
+                height="100%" />
             </div>
             <div class="table__expanded__element__description">Adresa: {{ doctor?.adress }}</div>
             <div class="table__expanded__element__description">{{ doctor?.description }}</div>
