@@ -48,7 +48,7 @@ export class AdminClinicsFormComponent implements OnInit {
     doctorIds: new FormControl([''], Validators.required),
     address: new FormControl(null, Validators.required),
     description: new FormControl(null, Validators.required),
-    imageUrl: new FormControl('', { nonNullable: true }),
+    imageUrl: new FormControl(`${this.imageUrl}`),
   });
 
   ngOnInit(): void {
