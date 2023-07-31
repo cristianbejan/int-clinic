@@ -48,7 +48,12 @@
             class="table__expanded__element"
             [@detailExpand]="element === expandedElement ? 'expanded' : 'collapsed'">
             <div class="table__expanded__element__image">
-              <img *ngIf="element.imageUrl" [src]="element.imageUrl" alt="Uploaded Image" width="100%" height="100%" />
+              <img
+                *ngIf="element.imageUrl"
+                [src]="element.imageUrl"
+                alt="Imagine neîncărcată"
+                width="100%"
+                height="100%" />
             </div>
             <div class="table__expanded__element__description">
               <h4>Descriere</h4>

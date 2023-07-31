@@ -1,8 +1,8 @@
 <div class="form-container">
   <form class="example-form" [formGroup]="clinicForm" (ngSubmit)="onSubmit()">
     <div class="imageContainer">
-      <img *ngIf="imageUrl" [src]="imageUrl" alt="Clinic Image" width="50%" height="50%" />
-      <label for="fileInput" class="fileLabel"> Choose Image </label>
+      <img *ngIf="imageUrl" [src]="imageUrl" alt="Imagine Clinica Neincarcata" width="50%" height="50%" />
+      <label for="fileInput" class="fileLabel"> Incarca o imagine </label>
       <input type="file" (change)="uploadImage($event)" accept=".png,.jpg" formControlName="imageUrl" id="fileInput" />
     </div>
 
@@ -56,7 +56,7 @@
     <div class="actions">
       <button mat-stroked-button color="warn" type="button" (click)="confirmCancelDialog()">Inchide</button>
       <button mat-stroked-button color="basic" type="button" (click)="confirmResetDialog()">Reseteaza</button>
-      <button mat-stroked-button color="primary" type="submit" [disabled]="!clinicForm.valid">
+      <button mat-stroked-button color="primary" type="submit" [disabled]="!clinicForm.valid && imageUrl !== null">
         {{ buttonText }}
       </button>
     </div>
