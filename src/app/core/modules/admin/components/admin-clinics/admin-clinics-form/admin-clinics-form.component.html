@@ -49,7 +49,7 @@
         placeholder="Doctori: (alege unul sau mai multi)"
         multiple
         [required]="true">
-        <mat-option *ngFor="let doctor of clinicDoctors" [value]="doctor.id">
+        <mat-option *ngFor="let doctor of clinicDoctors" [value]="doctor.id" [disabled]="!isSpecialtiesCompleted">
           {{ doctor.firstName + ' ' + doctor.lastName }}
         </mat-option>
       </mat-select>
@@ -70,7 +70,7 @@
     <div class="actions">
       <button mat-stroked-button color="warn" type="button" (click)="confirmCancelDialog()">Inchide</button>
       <button mat-stroked-button color="basic" type="button" (click)="confirmResetDialog()">Reseteaza</button>
-      <button mat-stroked-button color="primary" type="submit" [disabled]="!clinicForm.valid && imageUrl !== null">
+      <button mat-stroked-button color="primary" type="submit" [disabled]="!clinicForm.valid">
         {{ buttonText }}
       </button>
     </div>
