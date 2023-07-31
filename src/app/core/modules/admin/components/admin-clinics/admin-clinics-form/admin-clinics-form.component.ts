@@ -3,10 +3,12 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { tap } from 'rxjs';
 import { Doctor } from 'src/app/core/interfaces/doctor.interface';
+import { Specialty } from 'src/app/core/interfaces/specialty.interface';
 import { ClinicService } from 'src/app/core/services/clinic.service';
 import { ConfirmationDialogService } from 'src/app/core/services/confirmation-dialog.service';
 import { DoctorService } from 'src/app/core/services/doctor.service';
 import { ImageUploadService } from 'src/app/core/services/image-upload.service';
+import { SpecialtiesService } from 'src/app/core/services/specialties.service';
 
 enum FormSubmitState {
   ADD = 'Adauga Clinica',
@@ -23,6 +25,8 @@ export class AdminClinicsFormComponent implements OnInit {
   defaultFormValues!: object;
   imageUrl!: string;
   doctors: Doctor[] = [];
+  clinicDoctors: Doctor[] = [];
+  specialties!: Specialty[];
 
   constructor(
     private clinicService: ClinicService,
@@ -30,10 +34,9 @@ export class AdminClinicsFormComponent implements OnInit {
     private route: ActivatedRoute,
     private dialogService: ConfirmationDialogService,
     private imageUploadService: ImageUploadService,
-    private doctorService: DoctorService
-  ) {
-    this.getDoctors();
-  }
+    private doctorService: DoctorService,
+    private specialtyService: SpecialtiesService
+  ) {}
 
   clinicForm = new FormGroup({
     name: new FormControl(null, Validators.required),
@@ -45,6 +48,7 @@ export class AdminClinicsFormComponent implements OnInit {
       Validators.required,
       Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
     ]),
+    specialtyIds: new FormControl([''], Validators.required),
     doctorIds: new FormControl([''], Validators.required),
     address: new FormControl(null, Validators.required),
     description: new FormControl(null, Validators.required),
@@ -54,6 +58,7 @@ export class AdminClinicsFormComponent implements OnInit {
   ngOnInit(): void {
     this.clinicId = this.route.snapshot.params['id'];
     this.autocompleteClinic(this.clinicId);
+    this.fetchDoctorsAndSpecialties();
   }
 
   onSubmit() {
@@ -99,6 +104,7 @@ export class AdminClinicsFormComponent implements OnInit {
               name: clinic.name,
               phone: clinic.phone,
               email: clinic.email,
+              specialtyIds: clinic.specialtyIds,
               doctorIds: clinic.doctorIds,
               address: clinic.address,
               description: clinic.description,
@@ -106,7 +112,6 @@ export class AdminClinicsFormComponent implements OnInit {
             });
 
             this.defaultFormValues = JSON.parse(JSON.stringify(this.clinicForm.value));
-            console.log('autocomplete', this.defaultFormValues);
           })
         )
         .subscribe();
@@ -162,15 +167,24 @@ export class AdminClinicsFormComponent implements OnInit {
     });
   }
 
-  getDoctors() {
-    return this.doctorService
-      .getDoctors()
-      .pipe(
-        tap(data => {
-          this.doctors = data as Doctor[];
-          console.log('doctors', this.doctors);
-        })
-      )
-      .subscribe();
+  onSpecialtiesSelectionChange(selectedSpecialtyIds: string[]) {
+    if (!selectedSpecialtyIds) {
+      this.clinicDoctors = this.doctors;
+    } else {
+      this.clinicDoctors = this.doctors.filter(doctor => {
+        return doctor.specialtyIds?.some(id => selectedSpecialtyIds.includes(id));
+      });
+    }
+  }
+
+  fetchDoctorsAndSpecialties() {
+    this.doctorService.getDoctors().subscribe(doctors => {
+      this.doctors = doctors as Doctor[];
+      this.clinicDoctors = doctors as Doctor[];
+    });
+
+    this.specialtyService.getSpecialties().subscribe(specialties => {
+      this.specialties = specialties as Specialty[];
+    });
   }
 }

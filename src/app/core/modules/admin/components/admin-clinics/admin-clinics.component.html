@@ -60,6 +60,8 @@
               {{ element.description }}
               <h4>Doctori</h4>
               {{ getDoctorNames(element?.doctorIds) }}
+              <h4>Specializari</h4>
+              {{ getSpecialtyNames(element?.specialtyIds) }}
             </div>
             <div class="table__expanded__element__edit-delete">
               <button mat-stroked-button color="primary" [routerLink]="element.id + '/edit'">Editeaza</button>

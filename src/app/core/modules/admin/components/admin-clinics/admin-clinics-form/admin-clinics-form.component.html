@@ -8,7 +8,7 @@
 
     <mat-form-field class="example-full-width">
       <mat-label>Nume</mat-label>
-      <input matInput formControlName="name" placeholder="Will Smith" />
+      <input matInput formControlName="name" placeholder="Nume Clinica" />
       <mat-icon matSuffix>person</mat-icon>
     </mat-form-field>
 
@@ -29,14 +29,28 @@
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
+      <mat-label>Specializare</mat-label>
+      <mat-select
+        name="specialty"
+        formControlName="specialtyIds"
+        placeholder="Specializare: (alege una sau mai multe)"
+        multiple
+        [required]="true"
+        (selectionChange)="onSpecialtiesSelectionChange($event.value)">
+        <mat-option *ngFor="let specialty of specialties" [value]="specialty.id">{{ specialty.name }} </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Doctori</mat-label>
       <mat-select
         name="doctors"
         formControlName="doctorIds"
         placeholder="Doctori: (alege unul sau mai multi)"
         multiple
         [required]="true">
-        <mat-option *ngFor="let doctor of doctors" [value]="doctor.id"
-          >{{ doctor.firstName + ' ' + doctor.lastName }}
+        <mat-option *ngFor="let doctor of clinicDoctors" [value]="doctor.id">
+          {{ doctor.firstName + ' ' + doctor.lastName }}
         </mat-option>
       </mat-select>
     </mat-form-field>

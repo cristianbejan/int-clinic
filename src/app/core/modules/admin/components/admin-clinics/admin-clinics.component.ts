@@ -8,7 +8,8 @@ import { ConfirmationDialogService } from 'src/app/core/services/confirmation-di
 import { MatSort } from '@angular/material/sort';
 import { Doctor } from 'src/app/core/interfaces/doctor.interface';
 import { DoctorService } from 'src/app/core/services/doctor.service';
-import { tap } from 'rxjs';
+import { Specialty } from 'src/app/core/interfaces/specialty.interface';
+import { SpecialtiesService } from 'src/app/core/services/specialties.service';
 
 @Component({
   selector: 'app-admin-clinics',
@@ -25,6 +26,7 @@ import { tap } from 'rxjs';
 export class AdminClinicsComponent implements OnInit {
   clinics!: Clinic[];
   doctors: Doctor[] = [];
+  specialties: Specialty[] = [];
 
   columnsToDisplay = ['name', 'phone', 'email', 'address'];
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
@@ -40,9 +42,10 @@ export class AdminClinicsComponent implements OnInit {
   constructor(
     private clinicService: ClinicService,
     private dialogService: ConfirmationDialogService,
-    private doctorService: DoctorService
+    private doctorService: DoctorService,
+    private specialtyService: SpecialtiesService
   ) {
-    this.getDoctors();
+    this.fetchDoctorsAndSpecialties();
   }
 
   ngOnInit(): void {
@@ -77,15 +80,14 @@ export class AdminClinicsComponent implements OnInit {
     });
   }
 
-  getDoctors() {
-    return this.doctorService
-      .getDoctors()
-      .pipe(
-        tap(data => {
-          this.doctors = data as Doctor[];
-        })
-      )
-      .subscribe();
+  fetchDoctorsAndSpecialties() {
+    this.doctorService.getDoctors().subscribe(doctors => {
+      this.doctors = doctors as Doctor[];
+    });
+
+    this.specialtyService.getSpecialties().subscribe(specialties => {
+      this.specialties = specialties as Specialty[];
+    });
   }
 
   getDoctorNames(doctorIds: string[] | undefined): string {
@@ -99,5 +101,18 @@ export class AdminClinicsComponent implements OnInit {
     });
 
     return doctorNames.join(', ');
+  }
+
+  getSpecialtyNames(specialtyIds: string[] | undefined): string {
+    if (!specialtyIds || specialtyIds.length === 0) {
+      return '';
+    }
+
+    const specialtyNames = specialtyIds.map(specialtyId => {
+      const specialty = this.specialties.find(specialty => specialty.id === specialtyId);
+      return specialty ? specialty.name : '';
+    });
+
+    return specialtyNames.join(', ');
   }
 }
