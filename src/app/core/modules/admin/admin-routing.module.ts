@@ -6,7 +6,7 @@ import { AdminClinicsComponent } from './components/admin-clinics/admin-clinics.
 import { AdminSpecialtiesComponent } from './components/admin-specialties/admin-specialties.component';
 import { AdminSpecialtiesFormComponent } from './components/admin-specialties/admin-specialties-form/admin-specialties-form.component';
 import { AdminServicesComponent } from './components/admin-services/admin-services.component';
-import { AdminServicesFormComponent } from './components/admin-services/admin-services-form/admin-services-form/admin-services-form.component';
+import { AdminServicesFormComponent } from './components/admin-services/admin-services-form/admin-services-form.component';
 import { AdminDoctorsFormComponent } from './components/admin-doctors/admin-doctors-form/admin-doctors-form.component';
 import { AdminClinicsFormComponent } from './components/admin-clinics/admin-clinics-form/admin-clinics-form.component';
 
