@@ -9,7 +9,7 @@ import { AdminSpecialtiesComponent } from './components/admin-specialties/admin-
 import { AdminSpecialtiesFormComponent } from './components/admin-specialties/admin-specialties-form/admin-specialties-form.component';
 import { SpecialtiesService } from '../../services/specialties.service';
 import { AdminServicesComponent } from './components/admin-services/admin-services.component';
-import { AdminServicesFormComponent } from './components/admin-services/admin-services-form/admin-services-form/admin-services-form.component';
+import { AdminServicesFormComponent } from './components/admin-services/admin-services-form/admin-services-form.component';
 import { ServicesService } from '../../services/services.service';
 import { AdminDoctorsFormComponent } from './components/admin-doctors/admin-doctors-form/admin-doctors-form.component';
 import { MatSelectModule } from '@angular/material/select';
