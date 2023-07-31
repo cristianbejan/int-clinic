@@ -25,6 +25,10 @@ export class AdminDoctorsComponent implements OnInit {
   doctors: Doctor[] = [];
   searchInput = '';
 
+<<<<<<< HEAD
+  @Output() dataSource!: MatTableDataSource<Doctor>;
+=======
+>>>>>>> 6fcfe51b377e8df8375f906948daa5df884b568d
   columnsToDisplay = ['lastName', 'firstName', 'phone', 'email', 'specialtyIds'];
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
   expandedElement!: Doctor;
@@ -86,4 +90,14 @@ export class AdminDoctorsComponent implements OnInit {
       }
     });
   }
+<<<<<<< HEAD
+
+  // onSortChange(sortEvent: Sort): void {
+  //   this.sortField = sortEvent.active;
+  //   this.sortDirection = sortEvent.direction as 'asc' | 'desc';
+  //   this.paginator.firstPage();
+  //   this.paginator.pageIndex = 0;
+  // }
+=======
+>>>>>>> 6fcfe51b377e8df8375f906948daa5df884b568d
 }
