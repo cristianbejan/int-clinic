@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { ConfirmationDialogService } from 'src/app/core/services/confirmation-dialog.service';
 import { MatSort } from '@angular/material/sort';
+import { ThemePalette } from '@angular/material/core';
 import { Doctor } from 'src/app/core/interfaces/doctor.interface';
 import { DoctorService } from 'src/app/core/services/doctor.service';
 import { Specialty } from 'src/app/core/interfaces/specialty.interface';
@@ -39,6 +40,10 @@ export class AdminClinicsComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
+  loading = true;
+  color: ThemePalette = 'primary';
+  diameter = 50;
+
   constructor(
     private clinicService: ClinicService,
     private dialogService: ConfirmationDialogService,
@@ -58,6 +63,7 @@ export class AdminClinicsComponent implements OnInit {
       this.dataSource = new MatTableDataSource(clinics);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      this.loading = false;
     });
   }
 

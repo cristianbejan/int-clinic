@@ -8,6 +8,8 @@ import { MatSort } from '@angular/material/sort';
 import { ThemePalette } from '@angular/material/core';
 import { tap } from 'rxjs';
 import { ConfirmationDialogService } from 'src/app/core/services/confirmation-dialog.service';
+import { Specialty } from 'src/app/core/interfaces/specialty.interface';
+import { SpecialtiesService } from 'src/app/core/services/specialties.service';
 
 @Component({
   selector: 'app-admin-services',
@@ -22,12 +24,13 @@ import { ConfirmationDialogService } from 'src/app/core/services/confirmation-di
   ],
 })
 export class AdminServicesComponent {
+  services: Services[] = [];
+  specialties: Specialty[] = [];
   searchInput = '';
 
   columnsToDisplay = ['name', 'price', 'id'];
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
   expandedElement!: Services;
-  services: Services[] = [];
 
   pageSize = 5;
   pageSizeOptions: number[] = [5, 7, 10, 15, 20, 30];
@@ -45,7 +48,8 @@ export class AdminServicesComponent {
 
   constructor(
     private dataBase: ServicesService,
-    private dialogService: ConfirmationDialogService
+    private dialogService: ConfirmationDialogService,
+    private specialtyService: SpecialtiesService
   ) {
     this.dataBase
       .getServices()
@@ -59,6 +63,33 @@ export class AdminServicesComponent {
         })
       )
       .subscribe();
+    this.getSpecialties();
+  }
+
+  getSpecialties() {
+    return this.specialtyService
+      .getSpecialties()
+      .pipe(
+        tap(data => {
+          this.specialties = data as Specialty[];
+        })
+      )
+      .subscribe();
+  }
+
+  getSpecialtyNames(serviceId: string) {
+    const specialtiesNameArr: string[] = [];
+    this.specialties.forEach(specialty => {
+      if (!specialty.serviceIds) {
+        return;
+      }
+      const isSpecialty = specialty.serviceIds.includes(serviceId);
+
+      if (isSpecialty) {
+        specialtiesNameArr.push(specialty.name);
+      }
+    });
+    return specialtiesNameArr.join(', ');
   }
 
   confirmDeleteDialog(id: string, name: string) {

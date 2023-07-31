@@ -38,8 +38,10 @@
             class="table__expanded__element"
             [@detailExpand]="element === expandedElement ? 'expanded' : 'collapsed'">
             <div class="table__expanded__element__description">
-              <span class="table__expanded__element__description__attribute">Descriere: </span>
+              <h4>Descriere:</h4>
               {{ element.description }}
+              <h4>Specializari:</h4>
+              {{ getSpecialtyNames(element.id) }}
             </div>
             <div class="table__expanded__element__edit-delete">
               <a mat-stroked-button color="primary" [routerLink]="element['id'] + '/edit'">Editeaza</a>
@@ -66,6 +68,9 @@
         <td id="no-data" colspan="3">Niciun rezultat gasit</td>
       </tr>
     </table>
+    <div class="spinner-container" *ngIf="loading">
+      <mat-progress-spinner mode="indeterminate" [color]="color" [diameter]="diameter"></mat-progress-spinner>
+    </div>
     <mat-paginator
       #paginator
       [pageSizeOptions]="pageSizeOptions"

@@ -20,6 +20,7 @@ export class AdminServicesFormComponent implements OnInit {
       validators: [Validators.required, Validators.minLength(10)],
     }),
   });
+
   serviceRef!: Services;
   editRoute = false;
   id!: string;
@@ -44,7 +45,6 @@ export class AdminServicesFormComponent implements OnInit {
       name: this.servicesForm.controls.name.value,
       price: Number(this.servicesForm.controls.price.value),
       description: this.servicesForm.controls.description.value,
-      specialtyIds: [],
     };
     this.databBase.addService(newService);
     this.location.back();
@@ -56,7 +56,6 @@ export class AdminServicesFormComponent implements OnInit {
       name: this.servicesForm.controls.name.value,
       price: Number(this.servicesForm.controls.price.value),
       description: this.servicesForm.controls.description.value,
-      specialtyIds: this.serviceRef.specialtyIds ?? [],
     };
 
     const options = {

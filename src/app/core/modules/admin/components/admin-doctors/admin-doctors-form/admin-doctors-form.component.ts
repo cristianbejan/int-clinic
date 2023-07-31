@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { tap } from 'rxjs';
 import { Doctor } from 'src/app/core/interfaces/doctor.interface';
+import { Specialty } from 'src/app/core/interfaces/specialty.interface';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ConfirmationDialogService } from 'src/app/core/services/confirmation-dialog.service';
 import { DoctorService } from 'src/app/core/services/doctor.service';
 import { ImageUploadService } from 'src/app/core/services/image-upload.service';
+import { SpecialtiesService } from 'src/app/core/services/specialties.service';
 
 enum FormSubmitState {
   ADD = 'Adauga doctor',
@@ -19,30 +21,8 @@ enum FormSubmitState {
   styleUrls: ['./admin-doctors-form.component.scss'],
 })
 export class AdminDoctorsFormComponent implements OnInit {
-  public readonly specialities = [
-    {
-      id: 1,
-      name: 'Cardiology',
-    },
-    {
-      id: 2,
-      name: 'Dermatology',
-    },
-    {
-      id: 3,
-      name: 'Endocrinology',
-    },
-    {
-      id: 4,
-      name: 'Surgery',
-    },
-    {
-      id: 5,
-      name: 'Oftalmology',
-    },
-  ];
-
   doctorId!: string;
+  specialties!: Specialty[];
   buttonText: string = FormSubmitState.ADD;
   imageUrl!: string;
 
@@ -52,9 +32,11 @@ export class AdminDoctorsFormComponent implements OnInit {
     private router: Router,
     private authService: AuthService,
     private dialogService: ConfirmationDialogService,
-    private formBuilder: FormBuilder,
-    private imageUploadService: ImageUploadService
-  ) {}
+    private imageUploadService: ImageUploadService,
+    private specialtyService: SpecialtiesService
+  ) {
+    this.getSpecialties();
+  }
   doctorForm = new FormGroup({
     firstName: new FormControl('', { nonNullable: true, validators: Validators.required }),
     lastName: new FormControl('', { nonNullable: true, validators: Validators.required }),
@@ -80,28 +62,30 @@ export class AdminDoctorsFormComponent implements OnInit {
   email = this.doctorForm.controls.email;
   ngOnInit(): void {
     this.doctorId = this.route.snapshot.params['id'];
-    this.doctorService
-      .getDoctor(this.doctorId)
-      .pipe(
-        tap(result => {
-          this.buttonText = FormSubmitState.EDIT;
-          const doctor = result['data']() as Doctor;
-          this.imageUrl = doctor.imageUrl;
+    if (this.doctorId) {
+      this.doctorService
+        .getDoctor(this.doctorId)
+        .pipe(
+          tap(result => {
+            this.buttonText = FormSubmitState.EDIT;
+            const doctor = result['data']() as Doctor;
+            this.imageUrl = doctor.imageUrl;
 
-          this.doctorForm.patchValue({
-            firstName: doctor.firstName,
-            lastName: doctor.lastName,
-            phone: doctor.phone,
-            adress: doctor.adress,
-            email: doctor.email,
-            password: doctor.password,
-            specialtyIds: doctor.specialtyIds,
-            description: doctor.description,
-            imageUrl: doctor.imageUrl,
-          });
-        })
-      )
-      .subscribe();
+            this.doctorForm.patchValue({
+              firstName: doctor.firstName,
+              lastName: doctor.lastName,
+              phone: doctor.phone,
+              adress: doctor.adress,
+              email: doctor.email,
+              password: doctor.password,
+              specialtyIds: doctor.specialtyIds,
+              description: doctor.description,
+              imageUrl: doctor.imageUrl,
+            });
+          })
+        )
+        .subscribe();
+    }
   }
 
   onFormSubmit() {
@@ -132,6 +116,17 @@ export class AdminDoctorsFormComponent implements OnInit {
     if (event) {
       this.uploadImage(event);
     }
+  }
+
+  getSpecialties() {
+    return this.specialtyService
+      .getSpecialties()
+      .pipe(
+        tap(data => {
+          this.specialties = data as Specialty[];
+        })
+      )
+      .subscribe();
   }
 
   onCloseForm() {

@@ -52,7 +52,6 @@ export class ServicesService {
       name: editedService.name,
       price: editedService.price,
       description: editedService.description,
-      specialtyIds: editedService.specialtyIds ?? [],
     };
 
     updateDoc(serviceReference, updatedService)
