@@ -59,9 +59,9 @@
               <h4>Descriere</h4>
               {{ element.description }}
               <h4>Doctori</h4>
-              {{ getDoctorNames(element?.doctorIds) }}
+              {{ element?.assignedDoctors.join(', ') }}
               <h4>Specializari</h4>
-              {{ getSpecialtyNames(element?.specialtyIds) }}
+              {{ element?.assignedSpecialties.join(', ') }}
             </div>
             <div class="table__expanded__element__edit-delete">
               <button mat-stroked-button color="primary" [routerLink]="element.id + '/edit'">Editeaza</button>
@@ -94,7 +94,7 @@
     </div>
     <mat-paginator
       #paginator
-      [pageSizeOptions]="[5, 10, 15, 25, 100]"
+      [pageSizeOptions]="[5, 10, 15, 20, 30]"
       [showFirstLastButtons]="showFirstLastButtons"
       aria-label="Select page of clinics"></mat-paginator>
   </div>

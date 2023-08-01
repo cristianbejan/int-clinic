@@ -65,6 +65,7 @@ export class AdminDoctorsComponent implements OnInit {
       .pipe(
         tap(data => {
           this.doctors = data as Doctor[];
+          this.doctors.forEach(doctor => (doctor.assignedSpecialties = this.getSpecialtyNames(doctor.specialtyIds)));
           this.dataSource = new MatTableDataSource(this.doctors);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
@@ -85,12 +86,12 @@ export class AdminDoctorsComponent implements OnInit {
       .subscribe();
   }
 
-  getSpecialtyNames(specialtyIds: string[]): string {
+  getSpecialtyNames(specialtyIds: string[]): string[] {
     const specialtyNames = specialtyIds.map(specialtyId => {
       const specialty = this.specialties.find(spec => spec.id === specialtyId);
       return specialty ? specialty.name : '';
     });
-    return specialtyNames.join(', ');
+    return specialtyNames;
   }
 
   confirmDeleteDialog(id: string, name: string) {

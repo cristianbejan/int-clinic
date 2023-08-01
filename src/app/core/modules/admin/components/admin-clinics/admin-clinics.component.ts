@@ -60,6 +60,8 @@ export class AdminClinicsComponent implements OnInit {
   getClinics() {
     this.clinicService.getClinics().subscribe(clinics => {
       this.clinics = clinics;
+      this.clinics.forEach(clinic => (clinic.assignedSpecialties = this.getSpecialtyNames(clinic.specialtyIds)));
+      this.clinics.forEach(clinic => (clinic.assignedDoctors = this.getDoctorNames(clinic.doctorIds)));
       this.dataSource = new MatTableDataSource(clinics);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
@@ -96,9 +98,9 @@ export class AdminClinicsComponent implements OnInit {
     });
   }
 
-  getDoctorNames(doctorIds: string[] | undefined): string {
+  getDoctorNames(doctorIds: string[] | undefined): string[] {
     if (!doctorIds || doctorIds.length === 0) {
-      return '';
+      return [''];
     }
 
     const doctorNames = doctorIds.map(doctorId => {
@@ -106,12 +108,12 @@ export class AdminClinicsComponent implements OnInit {
       return doctor ? doctor.firstName + ' ' + doctor.lastName : '';
     });
 
-    return doctorNames.join(', ');
+    return doctorNames;
   }
 
-  getSpecialtyNames(specialtyIds: string[] | undefined): string {
+  getSpecialtyNames(specialtyIds: string[] | undefined): string[] {
     if (!specialtyIds || specialtyIds.length === 0) {
-      return '';
+      return [''];
     }
 
     const specialtyNames = specialtyIds.map(specialtyId => {
@@ -119,6 +121,6 @@ export class AdminClinicsComponent implements OnInit {
       return specialty ? specialty.name : '';
     });
 
-    return specialtyNames.join(', ');
+    return specialtyNames;
   }
 }

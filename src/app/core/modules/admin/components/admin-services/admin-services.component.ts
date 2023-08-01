@@ -33,7 +33,7 @@ export class AdminServicesComponent {
   expandedElement!: Services;
 
   pageSize = 5;
-  pageSizeOptions: number[] = [5, 7, 10, 15, 20, 30];
+  pageSizeOptions: number[] = [5, 10, 15, 20, 30];
   sortField = 'lastName';
   sortDirection: 'asc' | 'desc' = 'asc';
   showFirstLastButtons = true;
@@ -51,11 +51,13 @@ export class AdminServicesComponent {
     private dialogService: ConfirmationDialogService,
     private specialtyService: SpecialtiesService
   ) {
+    this.getSpecialties();
     this.dataBase
       .getServices()
       .pipe(
         tap(data => {
           this.services = data as Services[];
+          this.services.forEach(service => (service.assignedSpecialties = this.getSpecialtyNames(service.id)));
           this.dataSource = new MatTableDataSource(this.services);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
@@ -63,7 +65,6 @@ export class AdminServicesComponent {
         })
       )
       .subscribe();
-    this.getSpecialties();
   }
 
   getSpecialties() {
@@ -78,18 +79,14 @@ export class AdminServicesComponent {
   }
 
   getSpecialtyNames(serviceId: string) {
-    const specialtiesNameArr: string[] = [];
-    this.specialties.forEach(specialty => {
-      if (!specialty.serviceIds) {
-        return;
-      }
-      const isSpecialty = specialty.serviceIds.includes(serviceId);
+    const assignedSpecialties: string[] = [];
 
-      if (isSpecialty) {
-        specialtiesNameArr.push(specialty.name);
-      }
+    const filteredSpecialties = this.specialties.filter(specialty => {
+      return specialty.serviceIds.includes(serviceId);
     });
-    return specialtiesNameArr.join(', ');
+    filteredSpecialties.forEach(specialty => assignedSpecialties.push(specialty.name));
+
+    return assignedSpecialties;
   }
 
   confirmDeleteDialog(id: string, name: string) {

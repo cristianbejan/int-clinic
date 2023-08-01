@@ -9,4 +9,5 @@ export interface Doctor {
   imageUrl: string;
   specialtyIds: string[];
   description: string;
+  assignedSpecialties?: string[];
 }

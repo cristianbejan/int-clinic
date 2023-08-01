@@ -33,7 +33,7 @@ export class AdminSpecialtiesComponent {
   expandedElement!: Specialty;
 
   pageSize = 5;
-  pageSizeOptions: number[] = [5, 7, 10, 15, 20, 30];
+  pageSizeOptions: number[] = [5, 10, 15, 20, 30];
   sortField = 'lastName';
   sortDirection: 'asc' | 'desc' = 'asc';
   showFirstLastButtons = true;
