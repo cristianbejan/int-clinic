@@ -27,6 +27,7 @@ export class AdminClinicsFormComponent implements OnInit {
   doctors: Doctor[] = [];
   clinicDoctors: Doctor[] = [];
   specialties!: Specialty[];
+  isSpecialtiesCompleted!: boolean;
 
   constructor(
     private clinicService: ClinicService,
@@ -170,8 +171,10 @@ export class AdminClinicsFormComponent implements OnInit {
   onSpecialtiesSelectionChange(selectedSpecialtyIds: string[]) {
     if (!selectedSpecialtyIds) {
       this.clinicDoctors = this.doctors;
+      this.isSpecialtiesCompleted = false;
     } else {
       this.clinicDoctors = this.doctors.filter(doctor => {
+        this.isSpecialtiesCompleted = true;
         return doctor.specialtyIds?.some(id => selectedSpecialtyIds.includes(id));
       });
     }
