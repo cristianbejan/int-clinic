@@ -41,7 +41,7 @@
               <h4>Descriere:</h4>
               {{ element.description }}
               <h4>Specializari:</h4>
-              {{ getSpecialtyNames(element.id) }}
+              {{ element.assignedSpecialties.join(', ') }}
             </div>
             <div class="table__expanded__element__edit-delete">
               <a mat-stroked-button color="primary" [routerLink]="element['id'] + '/edit'">Editeaza</a>

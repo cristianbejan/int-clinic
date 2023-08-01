@@ -9,4 +9,6 @@ export interface Clinic {
   doctorIds?: string[];
   specialtyIds?: string[];
   patientIds?: string[];
+  assignedSpecialties?: string[];
+  assignedDoctors?: string[];
 }
