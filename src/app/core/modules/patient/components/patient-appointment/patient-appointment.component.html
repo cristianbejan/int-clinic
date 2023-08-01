@@ -1,0 +1,50 @@
+<mat-stepper linear #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Alege Specializarea</ng-template>
+      <app-choose-specialty></app-choose-specialty>
+      <div>
+        <button mat-button matStepperNext>Inainte</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Alege Clinica</ng-template>
+      <app-choose-clinic></app-choose-clinic>
+      <div>
+        <button mat-button matStepperPrevious>Inapoi</button>
+        <button mat-button matStepperNext>Inainte</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Alege Serviciu</ng-template>
+      <app-choose-service></app-choose-service>
+      <div>
+        <button mat-button matStepperPrevious>Inapoi</button>
+        <button mat-button matStepperNext>Inainte</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Alege Doctor</ng-template>
+      <app-choose-doctor></app-choose-doctor>
+      <div>
+        <button mat-button matStepperPrevious>Inapoi</button>
+        <button mat-button matStepperNext>Inainte</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Confirmation</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button>Confirma</button>
+      <button mat-button matStepperPrevious>Inapoi</button>
+      <button mat-button (click)="stepper.reset()">Reseteaza</button>
+    </div>
+  </mat-step>
+</mat-stepper>

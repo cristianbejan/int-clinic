@@ -17,9 +17,10 @@ import { DoctorService } from './core/services/doctor.service';
 import { ConfirmationDialogComponent } from './core/components/confirmation-dialog/confirmation-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { HomePageComponent } from './core/components/home-page/home-page.component';
 
 @NgModule({
-  declarations: [AppComponent, ConfirmationDialogComponent],
+  declarations: [AppComponent, ConfirmationDialogComponent, HomePageComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
