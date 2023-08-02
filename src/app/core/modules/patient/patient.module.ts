@@ -13,6 +13,7 @@ import { ChooseSpecialtyComponent } from './components/patient-appointment/choos
 import { ChooseDoctorComponent } from './components/patient-appointment/choose-doctor/choose-doctor.component';
 import { ChooseServiceComponent } from './components/patient-appointment/choose-service/choose-service.component';
 import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
@@ -35,6 +36,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
     MatStepperModule,
     MatCardModule,
     MatGridListModule,
+    MatIconModule,
   ],
   providers: [],
 })

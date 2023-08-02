@@ -1,1 +1,30 @@
-<p>choose-doctor works!</p>
+<section class="container">
+  <header class="header">
+    <h2>Alege Doctor</h2>
+    <mat-form-field>
+      <input matInput placeholder="Caută..." />
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </header>
+  <main>
+    <div class="specialty-card-container">
+      <mat-card
+        class="specialty-card-container__cards"
+        *ngFor="let doctor of doctors"
+        (click)="selectedDoctor(doctor)"
+        [ngClass]="{ active: isActive(doctor) }">
+        <mat-card-header class="specialty-card-container__cards__header">
+          <mat-card-title>{{ doctor.firstName + ' ' + doctor.lastName }}</mat-card-title>
+          <mat-card-subtitle>{{ getSpecialtyNames(doctor.specialtyIds).join(', ') }}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="{{ doctor.imageUrl }}" alt="Photo of doctor" />
+        <mat-card-content class="specialty-card-container__cards__description">
+          <p id="description-title">Descriere doctor:</p>
+          <p id="description-detail">
+            {{ doctor.description }}
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </main>
+</section>
