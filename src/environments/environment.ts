@@ -7,7 +7,6 @@ export const environment = {
   //   authDomain: 'int-clinic.firebaseapp.com',
   //   messagingSenderId: '981743238567',
   // },
-
   firebase: {
     apiKey: 'AIzaSyDxj2Ck2tJZE_0XPa6ir5Jja5Sxqjlhbb8',
     authDomain: 'int-clinic2.firebaseapp.com',

@@ -19,9 +19,7 @@ import { Observable, from } from 'rxjs';
 export class SpecialtiesService {
   specialities!: DocumentData[];
 
-  constructor(private dataBase: Firestore) {
-    this.getSpecialties();
-  }
+  constructor(private dataBase: Firestore) {}
 
   addSpecialty(newSpecialtyObj: Omit<Specialty, 'id'>) {
     const specialtyCollection = collection(this.dataBase, 'specialties');

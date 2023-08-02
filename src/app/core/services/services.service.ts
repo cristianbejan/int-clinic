@@ -19,9 +19,7 @@ import { Services } from '../interfaces/services.interface';
 export class ServicesService {
   services!: DocumentData[];
 
-  constructor(private dataBase: Firestore) {
-    this.getServices();
-  }
+  constructor(private dataBase: Firestore) {}
 
   addService(newService: Omit<Services, 'id'>) {
     const serviceCollection = collection(this.dataBase, 'services');
