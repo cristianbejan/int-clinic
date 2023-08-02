@@ -1,1 +1,18 @@
-<p>choose-service works!</p>
+<div class="specialty-card-container">
+  <mat-card
+    class="specialty-card-container__cards"
+    *ngFor="let service of services"
+    (click)="pickedService(service)"
+    [ngClass]="{ active: isActive(service) }">
+    <mat-card-header class="specialty-card-container__cards__header">
+      <mat-card-title>{{ service.name }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="specialty-card-container__cards__description">
+      <p id="description-title">Descriere specializare:</p>
+      <p id="description-detail">
+        {{ service.description }}
+      </p>
+      <p id="price">Pret: {{ service.price }}</p>
+    </mat-card-content>
+  </mat-card>
+</div>
