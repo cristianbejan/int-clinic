@@ -31,7 +31,6 @@ export class ChooseClinicComponent implements OnInit {
       .pipe(filter(([data]) => !!data))
       .subscribe(([data]) => {
         this.receivedAppointment = data;
-        console.log(this.receivedAppointment);
 
         this.clinicService.getClinics().subscribe(clinics => {
           this.clinics = clinics.filter(clinic => clinic.specialtyIds?.includes(this.receivedAppointment.specialtyId));
@@ -51,6 +50,6 @@ export class ChooseClinicComponent implements OnInit {
         clinicId: clinic.id,
       };
     }
-    console.log('pickedClinic', this.updatedAppointment);
+    this.dataStoreService.addData(this.updatedAppointment);
   }
 }
