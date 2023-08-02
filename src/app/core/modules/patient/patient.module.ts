@@ -12,6 +12,8 @@ import { ChooseClinicComponent } from './components/patient-appointment/choose-c
 import { ChooseSpecialtyComponent } from './components/patient-appointment/choose-specialty/choose-specialty.component';
 import { ChooseDoctorComponent } from './components/patient-appointment/choose-doctor/choose-doctor.component';
 import { ChooseServiceComponent } from './components/patient-appointment/choose-service/choose-service.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { ChooseServiceComponent } from './components/patient-appointment/choose-
     MatInputModule,
     MatFormFieldModule,
     MatStepperModule,
+    MatCardModule,
+    MatGridListModule,
   ],
   providers: [],
 })

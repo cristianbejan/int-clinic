@@ -2,20 +2,20 @@
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">
       <ng-template matStepLabel>Alege Specializarea</ng-template>
-      <app-choose-specialty></app-choose-specialty>
       <div>
         <button mat-button matStepperNext>Inainte</button>
       </div>
+      <app-choose-specialty></app-choose-specialty>
     </form>
   </mat-step>
   <mat-step [stepControl]="secondFormGroup">
     <form [formGroup]="secondFormGroup">
       <ng-template matStepLabel>Alege Clinica</ng-template>
-      <app-choose-clinic></app-choose-clinic>
       <div>
         <button mat-button matStepperPrevious>Inapoi</button>
         <button mat-button matStepperNext>Inainte</button>
       </div>
+      <app-choose-clinic></app-choose-clinic>
     </form>
   </mat-step>
   <mat-step [stepControl]="secondFormGroup">
