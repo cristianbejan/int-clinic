@@ -44,3 +44,11 @@
     }
   }
 }
+.filter-container {
+  display: flex;
+  justify-content: center;
+
+  #filter {
+    width: 500px;
+  }
+}

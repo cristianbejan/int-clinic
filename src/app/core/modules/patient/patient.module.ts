@@ -15,6 +15,7 @@ import { ChooseServiceComponent } from './components/patient-appointment/choose-
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { FilterByPipe } from '../../services/filter-by.pipe';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
     ChooseSpecialtyComponent,
     ChooseDoctorComponent,
     ChooseServiceComponent,
+    FilterByPipe,
   ],
   imports: [
     CommonModule,

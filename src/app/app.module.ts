@@ -18,6 +18,7 @@ import { ConfirmationDialogComponent } from './core/components/confirmation-dial
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { HomePageComponent } from './core/components/home-page/home-page.component';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [AppComponent, ConfirmationDialogComponent, HomePageComponent],
@@ -35,6 +36,7 @@ import { HomePageComponent } from './core/components/home-page/home-page.compone
     AngularFireAuthModule,
     MatDialogModule,
     MatButtonModule,
+    MatTabsModule,
   ],
   providers: [AuthService, DoctorService, { provide: FIREBASE_OPTIONS, useValue: environment.firebase }],
   bootstrap: [AppComponent],

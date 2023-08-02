@@ -10,8 +10,9 @@ import { SpecialtiesService } from 'src/app/core/services/specialties.service';
   styleUrls: ['./choose-specialty.component.scss'],
 })
 export class ChooseSpecialtyComponent {
-  specialties!: Specialty[];
+  specialties: Specialty[] = [];
   selected!: Specialty;
+  searchedInput = '';
 
   constructor(
     private specialtyService: SpecialtiesService,

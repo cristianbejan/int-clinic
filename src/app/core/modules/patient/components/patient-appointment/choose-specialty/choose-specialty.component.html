@@ -1,7 +1,13 @@
+<div class="filter-container">
+  <mat-form-field id="filter">
+    <input matInput [(ngModel)]="searchedInput" placeholder="Caută..." />
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+</div>
 <div class="specialty-card-container">
   <mat-card
     class="specialty-card-container__cards"
-    *ngFor="let specialty of specialties"
+    *ngFor="let specialty of specialties | filterBy: searchedInput"
     (click)="pickedSpecialty(specialty)"
     [ngClass]="{ active: isActive(specialty) }">
     <mat-card-header class="specialty-card-container__cards__header">
