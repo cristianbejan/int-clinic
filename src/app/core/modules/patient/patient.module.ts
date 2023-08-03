@@ -15,6 +15,10 @@ import { ChooseServiceComponent } from './components/patient-appointment/choose-
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { ChooseExtraComponent } from './components/patient-appointment/choose-extra/choose-extra.component';
+import { ChooseDateComponent } from './components/patient-appointment/choose-date/choose-date.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import { FilterByPipe } from '../../services/filter-by.pipe';
 
 @NgModule({
@@ -25,6 +29,8 @@ import { FilterByPipe } from '../../services/filter-by.pipe';
     ChooseSpecialtyComponent,
     ChooseDoctorComponent,
     ChooseServiceComponent,
+    ChooseExtraComponent,
+    ChooseDateComponent,
     FilterByPipe,
   ],
   imports: [
@@ -39,6 +45,8 @@ import { FilterByPipe } from '../../services/filter-by.pipe';
     MatCardModule,
     MatGridListModule,
     MatIconModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
   ],
   providers: [],
 })

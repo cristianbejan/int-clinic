@@ -34,4 +34,8 @@ export class ChooseSpecialtyComponent {
     const data: Appointment = { clinicId: '', doctorId: '', serviceId: '', specialtyId: this.selected.id };
     this.dataStoreService.addData(data);
   }
+
+  scroll(el: HTMLElement) {
+    el.scrollIntoView();
+  }
 }

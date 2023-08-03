@@ -35,6 +35,23 @@
   </mat-step>
 
   <mat-step>
+    <ng-template matStepLabel>Alege Data si Ora</ng-template>
+    <div>
+      <button mat-button matStepperPrevious>Inapoi</button>
+      <button mat-button matStepperNext>Inainte</button>
+    </div>
+    <app-choose-date></app-choose-date>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Informatii suplimentare</ng-template>
+    <div>
+      <button mat-button matStepperPrevious>Inapoi</button>
+      <button mat-button matStepperNext>Inainte</button>
+    </div>
+    <app-choose-extra></app-choose-extra>
+  </mat-step>
+
+  <mat-step>
     <ng-template matStepLabel>Confirmation</ng-template>
     <p>You are now done.</p>
     <div>
