@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { MatStepper } from '@angular/material/stepper';
 import { Appointment } from 'src/app/core/interfaces/appointment.interface';
 import { DataStoreService } from 'src/app/core/services/data-store.service';
 import { FileUploadService } from 'src/app/core/services/file-upload.service';
@@ -9,14 +10,15 @@ import { FileUploadService } from 'src/app/core/services/file-upload.service';
   templateUrl: './choose-extra.component.html',
   styleUrls: ['./choose-extra.component.scss'],
 })
-export class ChooseExtraComponent implements OnInit {
-  fileUrl!: string;
-  fileName!: string;
+export class ChooseExtraComponent implements OnInit, AfterViewInit {
+  fileUrl = '';
+  fileName = '';
   appointmentData!: Appointment;
 
   constructor(
     private fileUploadService: FileUploadService,
-    private dataStoreService: DataStoreService
+    private dataStoreService: DataStoreService,
+    private matStepper: MatStepper
   ) {}
 
   ngOnInit(): void {
@@ -46,12 +48,14 @@ export class ChooseExtraComponent implements OnInit {
     });
   }
 
-  onSubmit() {
-    const formValue = this.extraDetailsForm.value;
-    const newData = {
-      ...this.appointmentData,
-      extraDetails: { comment: formValue.comment, file: { name: this.fileName, url: this.fileUrl } },
-    };
-    this.dataStoreService.addData(newData);
+  ngAfterViewInit(): void {
+    this.matStepper.selectionChange.subscribe(() => {
+      const formValue = this.extraDetailsForm.value;
+      const newData = {
+        ...this.appointmentData,
+        extraDetails: { comment: formValue.comment, file: { name: this.fileName, url: this.fileUrl } },
+      };
+      this.dataStoreService.addData(newData);
+    });
   }
 }

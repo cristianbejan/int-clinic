@@ -13,19 +13,33 @@
   }
   &__file-input {
     width: 600px;
-    input[type="file"] {
-      display: none;
-  }
-  .custom-file-upload {
+    background-color: #EFF2FE;
+    border-radius: 5px;
+
+    &__content {
+      padding: 10px 20px;
+    }
+
+    .custom-file-upload {
       border: 1px solid #ccc;
+      border-radius: 5px;
       display: inline-block;
       padding: 6px 12px;
       cursor: pointer;
       margin-right: 10px;
-  }
-
-    .example-full-width {
-      width: 600px;
     }
+
+    .custom-file-upload:hover {
+      background-color: #ECECEC;
+    }
+  
+    input[type="file"] {
+      display: none;
+    }
+
+    a{
+      margin-left: 20px;
+    }
+
   }
 }
