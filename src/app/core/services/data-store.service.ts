@@ -11,6 +11,7 @@ export class DataStoreService {
     serviceId: '',
     doctorId: '',
     clinicId: '',
+    extraDetails: { comment: '', file: { name: '', url: '' } },
   });
 
   addData(data: any) {
