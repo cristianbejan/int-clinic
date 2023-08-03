@@ -2,7 +2,7 @@
   <header class="header">
     <h2>Alege Doctor</h2>
     <mat-form-field>
-      <input matInput placeholder="Caută..." />
+      <input matInput [(ngModel)]="searchedInput" placeholder="Caută..." />
       <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
   </header>
@@ -10,7 +10,7 @@
     <div class="specialty-card-container">
       <mat-card
         class="specialty-card-container__cards"
-        *ngFor="let doctor of doctors"
+        *ngFor="let doctor of doctors | filterBy: searchedInput"
         (click)="selectedDoctor(doctor)"
         [ngClass]="{ active: isActive(doctor) }">
         <mat-card-header class="specialty-card-container__cards__header">

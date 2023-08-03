@@ -1,7 +1,14 @@
 <div class="specialty-card-container">
+  <header class="header">
+    <h2>Servicii Disponibile</h2>
+    <mat-form-field>
+      <input matInput [(ngModel)]="searchedInput" placeholder="Caută..." />
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </header>
   <mat-card
     class="specialty-card-container__cards"
-    *ngFor="let service of services"
+    *ngFor="let service of services | filterBy: searchedInput"
     (click)="pickedService(service)"
     [ngClass]="{ active: isActive(service) }">
     <mat-card-header class="specialty-card-container__cards__header">

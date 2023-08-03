@@ -14,6 +14,7 @@ export class ChooseClinicComponent implements OnInit {
   clinics: Clinic[] = [];
   appointmentData!: Appointment;
   selectedClinic!: Clinic;
+  searchedInput = '';
 
   constructor(
     private clinicService: ClinicService,

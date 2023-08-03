@@ -2,7 +2,7 @@
   <header class="header">
     <h2>Clinici Disponibile</h2>
     <mat-form-field>
-      <input matInput placeholder="Caută..." />
+      <input matInput [(ngModel)]="searchedInput" placeholder="Caută..." />
       <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
   </header>
@@ -10,7 +10,7 @@
     <div class="clinic-card-container">
       <mat-card
         class="clinic-card-container__cards"
-        *ngFor="let clinic of clinics"
+        *ngFor="let clinic of clinics | filterBy: searchedInput"
         (click)="pickClinic(clinic)"
         [ngClass]="{ active: isActive(clinic) }">
         <mat-card-header>

@@ -22,6 +22,7 @@ export class ChooseDoctorComponent implements OnInit {
   currentAppointment!: Appointment;
   clinicSelected!: Clinic;
   selected!: Doctor;
+  searchedInput = '';
 
   constructor(
     private doctorService: DoctorService,
@@ -97,6 +98,7 @@ export class ChooseDoctorComponent implements OnInit {
       const data = { ...this.currentAppointment, doctorId: doctor.id };
       this.dataStoreService.addData(data);
     }
+    console.log(this.currentAppointment);
   }
 
   isActive(item: Doctor) {
