@@ -1,0 +1,12 @@
+<header class="header">
+  <nav mat-tab-nav-bar [tabPanel]="tabPanel">
+    <a mat-tab-link routerLink="" routerLinkActive #rla1="routerLinkActive" [active]="rla1.isActive"> Home </a>
+    <a mat-tab-link routerLink="admin" routerLinkActive #rla2="routerLinkActive" [active]="rla2.isActive">
+      Admin Route
+    </a>
+    <a mat-tab-link routerLink="patient" routerLinkActive #rla3="routerLinkActive" [active]="rla3.isActive">
+      Patient Route
+    </a>
+  </nav>
+  <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
+</header>

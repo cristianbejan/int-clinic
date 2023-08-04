@@ -1,11 +1,58 @@
-<nav mat-tab-nav-bar [tabPanel]="tabPanel">
-  <a mat-tab-link routerLink="admin" routerLinkActive #rla1="routerLinkActive" [active]="rla1.isActive">
-    Admin Route
-  </a>
-  <a mat-tab-link routerLink="patient" routerLinkActive #rla2="routerLinkActive" [active]="rla2.isActive">
-    Patient Route
-  </a>
-</nav>
-<mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
+<section>
+  <main>
+    <div class="homePageBody">
+      <h1 class="title">Bine ai venit la IntClinic</h1>
+      <div class="content">
+        <div class="program">
+          <div class="getAppoinment">
+            <h4><p id="description-title">Esti pacient?</p></h4>
+            <button class="getAppBtn" mat-flat-button color="warn" (click)="onClickGetAppoinment()">
+              Fa-ti o programare | +
+            </button>
+          </div>
+          <mat-card class="openingTime__card">
+            <mat-card-content class="openingTime-card-container">
+              <p>Program</p>
+              <div class="openingTime">
+                <p>Luni - Vineri 9:00 am - 6:00 pm</p>
+                <p>Sambata 10:00 am - 5:00 pm</p>
+                <p>Duminica inchis</p>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+        <mat-card class="offered_specs__card">
+          <mat-card-content class="offered_specs-card-container">
+            <h4>Specializari:</h4>
+            <div class="offered-specs">
+              <p>Cardiologie</p>
+              <p>Endocrinologie</p>
+              <p>Ginecologie</p>
+              <p>Obstetrica</p>
+              <p>Pediatrie</p>
+              <p>Si multe altele</p>
+            </div>
+          </mat-card-content>
+          <mat-card-header class="offered_specs__card__header">
+            <mat-card-title><p id="description-title">Esti administratorul?</p></mat-card-title>
+            <mat-card-subtitle
+              ><button mat-flat-button color="warn" (click)="onClickManageSite()">
+                Administreaza
+              </button></mat-card-subtitle
+            >
+          </mat-card-header>
+        </mat-card>
+        <mat-card class="image__card">
+          <mat-card-content class="image-card-container">
+            <img
+              mat-card-image
+              src="https://firebasestorage.googleapis.com/v0/b/int-clinic.appspot.com/o/doctors%2Fwillsmith.jpg?alt=media&token=4c059b9a-cde5-445d-aac6-91c5f42a7a5f"
+              alt="Photo of doctor" />
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </main>
+</section>
 
 <router-outlet></router-outlet>

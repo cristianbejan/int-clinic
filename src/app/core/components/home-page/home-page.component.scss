@@ -1,0 +1,226 @@
+@media screen and (min-width: 1290px) and (max-width: 1920px)  {
+    .homePageBody {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        box-sizing: border-box;
+        background-color:rgb(236, 220, 221);
+        align-items: center;
+        overflow:hidden;
+
+        .title {
+            display:flex;
+            justify-content: center;
+            font-family:"Montserrat";
+            padding-top:100px;
+            margin-block: 0;
+        }
+
+        .content {
+            display:flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+            justify-content:space-between;
+            max-width:1280px;
+            width:100vw;
+            align-items: center;
+        
+            .program {
+                margin-top:50px;
+            
+                .openingTime__card {
+                    width:360px;
+                    height:350px;
+                    line-height: 1%;
+                    margin-top:50px;
+                    justify-content: center;
+                    background-color: rgb(204, 230, 248);
+            
+                    .openingTime {
+                        line-height: 250%;
+                        text-align:left;
+                    }
+                }
+            }
+        
+                .offered_specs__card {
+                    background-color:rgb(236, 220, 221);
+                    box-shadow: none;
+                    height:300px;
+                    padding-top:120px;
+        
+                    .offered_specs-card-container {
+                        height:160px;
+                        line-height: 50%;
+                    }
+        
+                    .offered_specs__card__header {
+                        height:149px;
+                        line-height: 5%;
+                        padding-top:16px;
+                    }
+                }
+        
+                    .image__card {
+                        width:400px;
+                        height:450px;
+                        justify-content: center;
+                        margin-top: 100px;
+                        align-items: center;
+
+                    img {
+                        width:350px;
+                    }
+                }
+            
+        }
+    }
+}
+
+@media screen and (min-width:870px) and (max-width: 1289px)   {
+   .homePageBody {
+        background-color: rgb(236, 220, 221);
+        overflow:hidden;
+        height: 100vh;
+
+        .title {
+            display:flex;
+            justify-content: center;
+            font-family:"Montserrat";
+            padding-top:50px;
+       }
+       .content {
+            display:flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+            margin:150px 1rem;
+
+            .getAppoinment {
+                margin-bottom:1.5rem;
+                .description-title p {
+                    font-family:"Montserrat";
+                }
+            }
+
+            .openingTime__card {
+                display: flex;
+                width:250px;
+                height:200px;
+                background-color: rgb(204, 230, 248);
+
+                .openingTime {
+                    line-height: 100%;
+                }
+            }
+
+            .offered_specs__card {
+                display:flex;
+                background-color:rgb(236, 220, 221);
+                box-shadow: none;
+                width:300px;
+                justify-content: center;
+                margin-top:4rem;
+
+                .offered_specs-card-container {
+                    height:160px;
+                    line-height: 50%;
+                }
+
+                .offered_specs__card__header {
+                    height:149px;
+                    line-height: 5%;
+                }
+            }
+
+            .image__card {
+                height: 350px;
+                width:300px;
+                justify-content: center;
+                margin-bottom: 30px;
+
+                img {
+                    width:270px;
+                }
+            }
+
+       }       
+   }
+}
+@media screen and (max-width: 869px)  {
+
+    .homePageBody {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        box-sizing: border-box;
+        background-color:rgb(236, 220, 221);
+        align-items: center;
+
+        .title {
+            width:150px;
+            display:flex;
+            justify-content: center;
+            font-family:"Montserrat";
+            padding-top:50px;
+            margin-block: 0;
+            text-align: center;
+        }
+
+    }
+
+    .content {
+        display:flex;
+        flex-direction: column;
+        justify-content:center;
+
+        .getAppoinment {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top:10px;
+            justify-content: center;
+
+            .getAppBtn {
+                margin-top:-15px;
+                margin-bottom:25px;
+            }
+        }
+        .openingTime__card {
+            margin-top:50px;
+            display:flex;
+            align-items: center;
+            background-color: rgb(204, 230, 248);
+        }
+
+        .offered_specs__card {
+            margin-top: 70px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            background-color:rgb(236, 220, 221);
+            box-shadow: none;
+
+            .offered_specs-card-container {
+                margin-bottom:20px;
+            }
+
+            .offered-specs{
+                line-height: 20%;
+            }
+
+            .offered_specs__card__header {
+                padding-top:30px;
+            }
+        }
+    }
+
+    .image__card {
+        display:none;
+        width:100vw;
+
+        img {
+            width:100%;
+        }
+    }
+}
