@@ -13,7 +13,7 @@ export class ChooseDateComponent implements OnInit {
   timeSlotsTemplate: string[] = ['9 AM', '10 AM', '11 AM', '12 PM', '2 PM', '3 PM', '4 PM', '5 PM', '6 PM'];
   selected: Date | null = new Date();
   timeSlots: string[] = [];
-  doctorId!: string;
+  doctorId!: any;
   timeSelected!: any;
   dateSelected!: any;
 
@@ -35,7 +35,7 @@ export class ChooseDateComponent implements OnInit {
   ) {
     this.dataStoreService.appointmentDetails.subscribe(data => {
       this.appointment = data;
-      this.doctorId = data.doctorId;
+      this.doctorId = data.doctor.id;
     });
     this.onAddDate();
   }

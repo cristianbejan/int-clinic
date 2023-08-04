@@ -11,7 +11,7 @@ export interface Appointment {
   date: string;
   timeSlot: string;
   extraDetails: {
-    comment: string;
+    comment: any;
     file: {
       name: string;
       url: string;
