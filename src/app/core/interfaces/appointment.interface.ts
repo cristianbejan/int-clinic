@@ -3,6 +3,13 @@ export interface Appointment {
   serviceId: string;
   doctorId: string;
   clinicId: string;
+  extraDetails: {
+    comment: string;
+    file: {
+      name: string;
+      url: string;
+    };
+  };
   // patientID: string
   // date: string
   // timeSlot: string
