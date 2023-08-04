@@ -32,7 +32,6 @@ export class ChooseExtraComponent implements OnInit, AfterViewInit {
   getAppointment() {
     this.dataStoreService.appointmentDetails.subscribe(data => {
       this.appointmentData = data;
-      console.log(this.appointmentData);
     });
   }
 
