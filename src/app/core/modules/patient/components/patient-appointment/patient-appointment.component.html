@@ -1,8 +1,8 @@
-<mat-stepper linear #stepper>
+<mat-stepper labelPosition="bottom" linear #stepper>
   <mat-step>
     <ng-template matStepLabel>Alege Specializarea</ng-template>
     <div>
-      <button mat-button matStepperNext>Inainte</button>
+      <button mat-raised-button color="primary" matStepperNext>Inainte</button>
     </div>
     <app-choose-specialty></app-choose-specialty>
   </mat-step>
@@ -10,8 +10,8 @@
   <mat-step>
     <ng-template matStepLabel>Alege Clinica</ng-template>
     <div>
-      <button mat-button matStepperPrevious>Inapoi</button>
-      <button mat-button matStepperNext>Inainte</button>
+      <button mat-raised-button matStepperPrevious>Inapoi</button>
+      <button mat-raised-button color="primary" matStepperNext>Inainte</button>
     </div>
     <app-choose-clinic></app-choose-clinic>
   </mat-step>
@@ -19,8 +19,8 @@
   <mat-step>
     <ng-template matStepLabel>Alege Serviciu</ng-template>
     <div>
-      <button mat-button matStepperPrevious>Inapoi</button>
-      <button mat-button matStepperNext>Inainte</button>
+      <button mat-raised-button matStepperPrevious>Inapoi</button>
+      <button mat-raised-button color="primary" matStepperNext>Inainte</button>
     </div>
     <app-choose-service></app-choose-service>
   </mat-step>
@@ -28,8 +28,8 @@
   <mat-step>
     <ng-template matStepLabel>Alege Doctor</ng-template>
     <div>
-      <button mat-button matStepperPrevious>Inapoi</button>
-      <button mat-button matStepperNext>Inainte</button>
+      <button mat-raised-button matStepperPrevious>Inapoi</button>
+      <button mat-raised-button color="primary" matStepperNext>Inainte</button>
     </div>
     <app-choose-doctor></app-choose-doctor>
   </mat-step>
@@ -37,27 +37,27 @@
   <mat-step>
     <ng-template matStepLabel>Alege Data si Ora</ng-template>
     <div>
-      <button mat-button matStepperPrevious>Inapoi</button>
-      <button mat-button matStepperNext>Inainte</button>
+      <button mat-raised-button matStepperPrevious>Inapoi</button>
+      <button mat-raised-button color="primary" matStepperNext>Inainte</button>
     </div>
     <app-choose-date></app-choose-date>
   </mat-step>
+
   <mat-step>
     <ng-template matStepLabel>Informatii suplimentare</ng-template>
     <div>
-      <button mat-button matStepperPrevious>Inapoi</button>
-      <button mat-button matStepperNext>Inainte</button>
+      <button mat-raised-button matStepperPrevious>Inapoi</button>
+      <button mat-raised-button color="primary" matStepperNext>Inainte</button>
     </div>
     <app-choose-extra></app-choose-extra>
   </mat-step>
 
   <mat-step>
-    <ng-template matStepLabel>Confirmation</ng-template>
-    <p>You are now done.</p>
+    <ng-template matStepLabel>Confirmare</ng-template>
     <div>
-      <button mat-button>Confirma</button>
-      <button mat-button matStepperPrevious>Inapoi</button>
-      <button mat-button (click)="stepper.reset()">Reseteaza</button>
+      <button mat-raised-button matStepperPrevious>Inapoi</button>
+      <button mat-raised-button color="primary">Confirma</button>
+      <button mat-raised-button color="warn" (click)="stepper.reset()">Reseteaza</button>
     </div>
   </mat-step>
 </mat-stepper>

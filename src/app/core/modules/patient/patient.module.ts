@@ -20,6 +20,7 @@ import { ChooseDateComponent } from './components/patient-appointment/choose-dat
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FilterByPipe } from '../../services/filter-by.pipe';
+import { ScrollButtonComponent } from '../../components/scroll-button/scroll-button.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { FilterByPipe } from '../../services/filter-by.pipe';
     ChooseExtraComponent,
     ChooseDateComponent,
     FilterByPipe,
+    ScrollButtonComponent,
   ],
   imports: [
     CommonModule,

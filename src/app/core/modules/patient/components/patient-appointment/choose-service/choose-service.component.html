@@ -1,21 +1,21 @@
-<div class="specialty-card-container">
-  <header class="header">
-    <h2>Servicii Disponibile</h2>
-    <mat-form-field>
-      <input matInput [(ngModel)]="searchedInput" placeholder="Caută..." />
-      <mat-icon matSuffix>search</mat-icon>
-    </mat-form-field>
-  </header>
+<div class="filter-container">
+  <mat-form-field id="filter">
+    <input matInput [(ngModel)]="searchedInput" placeholder="Caută..." />
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+</div>
+
+<div class="card-container">
   <mat-card
-    class="specialty-card-container__cards"
+    class="card-container__cards"
     *ngFor="let service of services | filterBy: searchedInput"
     (click)="pickedService(service)"
     [ngClass]="{ active: isActive(service) }">
-    <mat-card-header class="specialty-card-container__cards__header">
+    <mat-card-header>
       <mat-card-title>{{ service.name }}</mat-card-title>
     </mat-card-header>
-    <mat-card-content class="specialty-card-container__cards__description">
-      <p id="description-title">Descriere specializare:</p>
+
+    <mat-card-content class="card-container__cards__description">
       <p id="description-detail">
         {{ service.description }}
       </p>
@@ -23,3 +23,5 @@
     </mat-card-content>
   </mat-card>
 </div>
+
+<app-scroll-button></app-scroll-button>

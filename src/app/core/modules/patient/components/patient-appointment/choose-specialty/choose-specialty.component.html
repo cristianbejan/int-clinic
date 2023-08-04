@@ -4,20 +4,23 @@
     <mat-icon matSuffix>search</mat-icon>
   </mat-form-field>
 </div>
-<div class="specialty-card-container">
+
+<div class="card-container">
   <mat-card
-    class="specialty-card-container__cards"
+    class="card-container__cards"
     *ngFor="let specialty of specialties | filterBy: searchedInput"
     (click)="pickedSpecialty(specialty)"
     [ngClass]="{ active: isActive(specialty) }">
-    <mat-card-header class="specialty-card-container__cards__header">
+    <mat-card-header class="card-container__cards__header">
       <mat-card-title>{{ specialty.name }}</mat-card-title>
     </mat-card-header>
-    <mat-card-content class="specialty-card-container__cards__description">
-      <p id="description-title">Descriere specializare:</p>
+
+    <mat-card-content class="card-container__cards__description">
       <p id="description-detail">
         {{ specialty.description }}
       </p>
     </mat-card-content>
   </mat-card>
 </div>
+
+<app-scroll-button></app-scroll-button>

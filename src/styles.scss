@@ -165,3 +165,61 @@ body {
   margin-top: 20px;
   justify-content: center;
 }
+
+//Stepper Component
+.filter-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 15px;
+
+  #filter {
+    width: 400px;
+  }
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 9px;
+
+  &__cards {
+    max-width: 350px;
+    min-width: 200px;
+    min-height: 200px;
+    border-radius: 10px;
+    flex-basis: 100%;
+    margin: 30px 0;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px !important;
+
+    &:hover {
+      transform: translateY(-7px);
+      box-shadow: rgb(63,81,181) 0px 5px 15px !important;
+      cursor: pointer;
+    }
+
+    &.active {
+      outline: 3px solid rgb(63,81,181);
+    }
+
+    &__header {
+      display: flex;
+      align-self: center;
+    }
+
+    &__description {
+      margin-top: 15px;
+      line-height: 25px !important;
+
+      #description-detail {
+        overflow-wrap: break-word;
+      }
+    }
+  }
+
+  mat-card-subtitle{
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+}

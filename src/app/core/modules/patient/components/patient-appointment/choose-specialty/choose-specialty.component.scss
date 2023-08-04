@@ -1,54 +1,11 @@
-.specialty-card-container {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: space-around;
-
-  &__cards {
-    max-width: 400px;
-    min-width: 200px;
-    max-height: auto;
-    min-height: 200px;
-    border-radius: 10px;
-    flex-basis: 30%;
-    margin-bottom: 10px;
-    margin-top: 10px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-
-    &:hover {
-      transform: translateY(-5px);
-      outline: 2px solid rgb(151, 197, 212);
-      cursor: pointer;
+.card-container {
+    &__cards {
+        &__header {
+            text-transform: uppercase;
+        }
     }
-
-    &.active {
-      border: 5px solid green;
-    }
-
-    #description-title {
-      color: rgb(155, 152, 152);
-    }
-
-    &__header {
-      display: flex;
-      align-self: center;
-      border-bottom: 1px solid lightgray;
-    }
-
-    &__description {
-      margin-top: 15px;
-
-      #description-detail {
-        overflow-wrap: break-word;
-      }
-    }
-  }
 }
-.filter-container {
-  display: flex;
-  justify-content: center;
 
-  #filter {
-    width: 500px;
-  }
+.mat-mdc-card-title{
+    letter-spacing: 1.5px;
 }
