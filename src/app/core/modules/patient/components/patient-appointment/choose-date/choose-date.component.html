@@ -13,9 +13,11 @@
   <div class="container__time">
     <h3>Ore disponibile</h3>
     <div *ngIf="selected" class="container__time__buttons">
-      <button>
-        (click)="onAddTime(time)" class="container__time__buttons__btn" *ngFor="let time of timeSlots"
-        mat-stroked-button
+      <button
+        (click)="onAddTime(time)"
+        class="container__time__buttons__btn"
+        *ngFor="let time of timeSlots"
+        mat-stroked-button>
         {{ time }}
       </button>
     </div>
