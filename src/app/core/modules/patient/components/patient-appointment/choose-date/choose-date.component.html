@@ -1,14 +1,21 @@
 <main class="container">
   <div class="container__date">
     <mat-card class="demo-inline-calendar-card">
-      <mat-calendar [(selected)]="selected" (click)="test($event)"></mat-calendar>
+      <mat-calendar
+        [(selected)]="selected"
+        (click)="onAddDate()"
+        [dateFilter]="myFilter"
+        [minDate]="currentDate"
+        [startAt]="currentDate"></mat-calendar>
     </mat-card>
-    <p>Selected date: {{ selected }}</p>
+    <p>Data selectata: {{ dateSelected }}</p>
   </div>
   <div class="container__time">
     <h3>Ore disponibile</h3>
     <div *ngIf="selected" class="container__time__buttons">
-      <button class="container__time__buttons__btn" *ngFor="let time of timeSlots" mat-stroked-button>
+      <button>
+        (click)="onAddTime(time)" class="container__time__buttons__btn" *ngFor="let time of timeSlots"
+        mat-stroked-button
         {{ time }}
       </button>
     </div>

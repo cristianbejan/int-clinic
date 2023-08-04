@@ -10,7 +10,7 @@ import { FileUploadService } from 'src/app/core/services/file-upload.service';
   templateUrl: './choose-extra.component.html',
   styleUrls: ['./choose-extra.component.scss'],
 })
-export class ChooseExtraComponent implements OnInit, AfterViewInit {
+export class ChooseExtraComponent {
   fileUrl = '';
   fileName = '';
   appointmentData!: Appointment;

@@ -26,8 +26,6 @@ export class ChooseClinicComponent implements OnInit {
   }
 
   getClinics() {
-    console.log('get clinics');
-
     combineLatest([this.dataStoreService.appointmentDetails])
       .pipe(filter(([data]) => !!data))
       .subscribe(([data]) => {

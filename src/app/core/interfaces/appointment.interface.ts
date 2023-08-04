@@ -3,6 +3,8 @@ export interface Appointment {
   serviceId: string;
   doctorId: string;
   clinicId: string;
+  date: string;
+  timeSlot: string;
   extraDetails: {
     comment: string;
     file: {

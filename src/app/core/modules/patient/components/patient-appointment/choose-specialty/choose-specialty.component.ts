@@ -40,4 +40,8 @@ export class ChooseSpecialtyComponent {
     const data: Appointment = { ...this.appointmentData, specialtyId: this.selected.id };
     this.dataStoreService.addData(data);
   }
+
+  scroll(el: HTMLElement) {
+    el.scrollIntoView();
+  }
 }

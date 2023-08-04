@@ -19,6 +19,8 @@ export class ChooseServiceComponent {
   searchedInput = '';
   receivedAppointment!: Appointment;
 
+  dataTest!: any;
+
   constructor(
     private servicesService: ServicesService,
     private specialtyService: SpecialtiesService,
@@ -26,6 +28,8 @@ export class ChooseServiceComponent {
   ) {
     this.servicesService.getServices().subscribe(services => (this.services = services as Services[]));
     this.dataStoreService.appointmentDetails.subscribe(data => {
+      this.dataTest = data;
+
       this.receivedAppointment = data;
       if (data.specialtyId === '') {
         return;
@@ -38,7 +42,7 @@ export class ChooseServiceComponent {
   }
 
   pickedService(service: Services) {
-    this.isTrue = !this.isTrue;
+    // this.isTrue = !this.isTrue;
     this.selected = service;
 
     this.sendPickedService();

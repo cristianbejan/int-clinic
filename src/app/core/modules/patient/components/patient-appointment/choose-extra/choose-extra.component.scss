@@ -13,7 +13,7 @@
   }
   &__file-input {
     width: 600px;
-    background-color: #EFF2FE;
+    background-color: #eff2fe;
     border-radius: 5px;
 
     &__content {
@@ -30,16 +30,15 @@
     }
 
     .custom-file-upload:hover {
-      background-color: #ECECEC;
+      background-color: #ececec;
     }
-  
-    input[type="file"] {
+
+    input[type='file'] {
       display: none;
     }
 
-    a{
+    a {
       margin-left: 20px;
     }
-
   }
 }

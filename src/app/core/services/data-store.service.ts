@@ -11,6 +11,8 @@ export class DataStoreService {
     serviceId: '',
     doctorId: '',
     clinicId: '',
+    timeSlot: '',
+    date: '',
     extraDetails: { comment: '', file: { name: '', url: '' } },
   });
 
