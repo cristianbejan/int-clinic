@@ -31,8 +31,8 @@ export class ChooseClinicComponent implements OnInit {
       .subscribe(([data]) => {
         this.appointmentData = data;
 
-        this.clinicService.getClinics().subscribe(clinics => {
-          this.clinics = clinics.filter(clinic => clinic.specialtyIds?.includes(this.appointmentData.specialtyId));
+        this.clinicService.queryClinics(this.appointmentData.specialty.id).subscribe(data => {
+          this.clinics = data as Clinic[];
         });
       });
   }
@@ -43,7 +43,7 @@ export class ChooseClinicComponent implements OnInit {
   }
 
   sendPickedClinic() {
-    const newData = { ...this.appointmentData, clinicId: this.selectedClinic.id };
+    const newData = { ...this.appointmentData, clinic: this.selectedClinic };
     this.dataStoreService.addData(newData);
   }
 

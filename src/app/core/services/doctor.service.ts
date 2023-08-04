@@ -10,6 +10,9 @@ import {
   deleteDoc,
   DocumentData,
   getDoc,
+  query,
+  where,
+  getDocs,
 } from '@angular/fire/firestore';
 
 import { Doctor } from '../interfaces/doctor.interface';
@@ -24,6 +27,13 @@ export class DoctorService {
   addDoctor(doctor: Doctor): Observable<DocumentData> {
     const doctorCollection = collection(this.firestore, 'doctors');
     return from(addDoc(doctorCollection, doctor));
+  }
+
+  queryDoctors(id: string) {
+    const doctorsRef = collection(this.firestore, 'doctors');
+    const queryResponse = query(doctorsRef, where('specialtyIds', 'array-contains', id));
+
+    return collectionData(queryResponse, { idField: 'id' });
   }
 
   getDoctors(): Observable<DocumentData[]> {

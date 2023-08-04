@@ -8,6 +8,9 @@ import {
   doc,
   getDoc,
   updateDoc,
+  where,
+  query,
+  getDocs,
 } from '@angular/fire/firestore';
 import { Specialty } from '../interfaces/specialty.interface';
 import { Injectable } from '@angular/core';

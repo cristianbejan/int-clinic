@@ -8,6 +8,8 @@ import {
   DocumentData,
   getDoc,
   updateDoc,
+  where,
+  query,
 } from '@angular/fire/firestore';
 import { Injectable } from '@angular/core';
 import { Observable, from } from 'rxjs';
@@ -59,6 +61,13 @@ export class ServicesService {
       .catch(err => {
         console.log(err);
       });
+  }
+
+  queryServices(ids: string[]) {
+    const servicesRef = collection(this.dataBase, 'services');
+    const queryResponse = query(servicesRef, where('__name__', 'in', ids));
+
+    return collectionData(queryResponse, { idField: 'id' });
   }
 
   deleteService(id: string) {

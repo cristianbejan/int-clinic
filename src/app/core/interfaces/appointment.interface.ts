@@ -1,8 +1,13 @@
+import { Clinic } from './clinic.interface';
+import { Doctor } from './doctor.interface';
+import { Services } from './services.interface';
+import { Specialty } from './specialty.interface';
+
 export interface Appointment {
-  specialtyId: string;
-  serviceId: string;
-  doctorId: string;
-  clinicId: string;
+  specialty: Specialty;
+  service: Services;
+  doctor: Doctor;
+  clinic: Clinic;
   date: string;
   timeSlot: string;
   extraDetails: {

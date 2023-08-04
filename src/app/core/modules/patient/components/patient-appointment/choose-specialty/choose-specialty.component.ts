@@ -13,18 +13,16 @@ export class ChooseSpecialtyComponent {
   specialties: Specialty[] = [];
   selected!: Specialty;
   searchedInput = '';
-  appointmentData!: Appointment;
+  receivedAppointment!: Appointment;
 
   constructor(
     private specialtyService: SpecialtiesService,
     private dataStoreService: DataStoreService
   ) {
     this.specialtyService.getSpecialties().subscribe(specialties => (this.specialties = specialties as Specialty[]));
-    this.getAppointment();
-  }
-
-  getAppointment() {
-    this.dataStoreService.appointmentDetails.subscribe(data => (this.appointmentData = data));
+    this.dataStoreService.appointmentDetails.subscribe(data => {
+      this.receivedAppointment = data;
+    });
   }
 
   isActive(item: Specialty) {
@@ -37,7 +35,7 @@ export class ChooseSpecialtyComponent {
   }
 
   sendPickedSpecialty() {
-    const data: Appointment = { ...this.appointmentData, specialtyId: this.selected.id };
+    const data: Appointment = { ...this.receivedAppointment, specialty: this.selected };
     this.dataStoreService.addData(data);
   }
 

@@ -7,7 +7,10 @@ import {
   deleteDoc,
   doc,
   getDoc,
+  getDocs,
+  query,
   updateDoc,
+  where,
 } from '@angular/fire/firestore';
 import { FormGroup } from '@angular/forms';
 import { Observable, from, map } from 'rxjs';
@@ -68,6 +71,13 @@ export class ClinicService {
       .catch(err => {
         console.log(err);
       });
+  }
+
+  queryClinics(id: string) {
+    const clinicsRef = collection(this.firestore, 'clinics');
+    const queryResponse = query(clinicsRef, where('specialtyIds', 'array-contains', id));
+
+    return collectionData(queryResponse, { idField: 'id' });
   }
 
   deleteData(id: string) {

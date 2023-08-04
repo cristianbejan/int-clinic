@@ -1,22 +1,14 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { ReplaySubject } from 'rxjs';
 import { Appointment } from '../interfaces/appointment.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataStoreService {
-  appointmentDetails = new BehaviorSubject<Appointment>({
-    specialtyId: '',
-    serviceId: '',
-    doctorId: '',
-    clinicId: '',
-    timeSlot: '',
-    date: '',
-    extraDetails: { comment: '', file: { name: '', url: '' } },
-  });
+  appointmentDetails = new ReplaySubject<Appointment>(1);
 
-  addData(data: any) {
+  addData(data: Appointment) {
     return this.appointmentDetails.next(data);
   }
 }

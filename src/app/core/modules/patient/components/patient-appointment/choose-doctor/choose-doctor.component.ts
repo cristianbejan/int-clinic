@@ -33,7 +33,6 @@ export class ChooseDoctorComponent implements OnInit {
 
   ngOnInit(): void {
     this.getDoctors();
-    this.getSpecialties();
     this.dataStoreService.appointmentDetails.subscribe(data => (this.currentAppointment = data));
   }
   getDoctors() {
@@ -44,32 +43,18 @@ export class ChooseDoctorComponent implements OnInit {
 
         const filteredDoctorsBySpecialtyAndClinic: DocumentData = [];
 
-        this.doctorService
-          .getDoctors()
-          .pipe(
-            tap(doctors => {
-              const filteredDoctorsBySpecialty = doctors.filter(doctor => {
-                return doctor['specialtyIds'].includes(this.currentAppointment.specialtyId);
-              });
-              this.doctors = filteredDoctorsBySpecialty as Doctor[];
-            })
-          )
-          .subscribe();
+        this.doctorService.queryDoctors(this.currentAppointment.specialty.id).subscribe(data => {
+          this.doctors = data as Doctor[];
+        });
 
-        if (this.currentAppointment.clinicId) {
-          this.clinicService.getClinic(this.currentAppointment.clinicId).subscribe(clinic => {
-            this.clinicSelected = clinic['data']() as Clinic;
-
-            this.doctors.forEach(doctor => {
-              if (doctor.id !== undefined) {
-                if (this.clinicSelected.doctorIds?.includes(doctor.id)) {
-                  filteredDoctorsBySpecialtyAndClinic['push'](doctor);
-                }
-              }
-            });
-            this.doctors = filteredDoctorsBySpecialtyAndClinic as Doctor[];
-          });
-        }
+        this.doctors.forEach(doctor => {
+          if (doctor.id !== undefined) {
+            if (this.currentAppointment.clinic.doctorIds?.includes(doctor.id)) {
+              filteredDoctorsBySpecialtyAndClinic['push'](doctor);
+            }
+          }
+        });
+        this.doctors = filteredDoctorsBySpecialtyAndClinic as Doctor[];
       });
   }
 
@@ -95,7 +80,7 @@ export class ChooseDoctorComponent implements OnInit {
   selectedDoctor(doctor: Doctor) {
     this.selected = doctor;
     if (doctor.id) {
-      const data = { ...this.currentAppointment, doctorId: doctor.id };
+      const data = { ...this.currentAppointment, doctor: doctor };
       this.dataStoreService.addData(data);
     }
     console.log(this.currentAppointment);
