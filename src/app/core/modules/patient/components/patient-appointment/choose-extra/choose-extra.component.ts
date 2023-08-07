@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { Appointment } from 'src/app/core/interfaces/appointment.interface';
@@ -14,16 +14,13 @@ export class ChooseExtraComponent {
   fileUrl = '';
   fileName = '';
   appointmentData!: Appointment;
+  @Output() hasSelection = new EventEmitter<boolean>();
 
   constructor(
     private fileUploadService: FileUploadService,
     private dataStoreService: DataStoreService,
     private matStepper: MatStepper
   ) {}
-
-  ngOnInit(): void {
-    this.getAppointment();
-  }
 
   extraDetailsForm = new FormGroup({
     comment: new FormControl(''),
@@ -33,6 +30,7 @@ export class ChooseExtraComponent {
     this.dataStoreService.appointmentDetails.subscribe(data => {
       this.appointmentData = data;
     });
+    this.sendPickedSelection();
   }
 
   uploadFile(event: Event) {
@@ -47,7 +45,8 @@ export class ChooseExtraComponent {
     });
   }
 
-  ngAfterViewInit(): void {
+  sendPickedSelection(): void {
+    this.hasSelection.emit(false);
     this.matStepper.selectionChange.subscribe(() => {
       const formValue = this.extraDetailsForm.value;
       const newData = {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Appointment } from 'src/app/core/interfaces/appointment.interface';
 import { Specialty } from 'src/app/core/interfaces/specialty.interface';
 import { DataStoreService } from 'src/app/core/services/data-store.service';
@@ -14,11 +14,14 @@ export class ChooseSpecialtyComponent {
   selected!: Specialty;
   searchedInput = '';
   receivedAppointment!: Appointment;
+  @Output() hasSelection = new EventEmitter<boolean>();
 
   constructor(
     private specialtyService: SpecialtiesService,
     private dataStoreService: DataStoreService
-  ) {
+  ) {}
+
+  getSpecialties() {
     this.specialtyService.getSpecialties().subscribe(specialties => (this.specialties = specialties as Specialty[]));
     this.dataStoreService.appointmentDetails.subscribe(data => {
       this.receivedAppointment = data;
@@ -31,6 +34,7 @@ export class ChooseSpecialtyComponent {
 
   pickedSpecialty(specialty: Specialty) {
     this.selected = specialty;
+    this.hasSelection.emit(false);
     this.sendPickedSpecialty();
   }
 

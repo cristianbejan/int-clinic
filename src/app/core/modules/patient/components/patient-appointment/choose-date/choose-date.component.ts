@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Appointment } from 'src/app/core/interfaces/appointment.interface';
 import { AppointmentService } from 'src/app/core/services/appointment.service';
 import { DataStoreService } from 'src/app/core/services/data-store.service';
@@ -16,6 +16,7 @@ export class ChooseDateComponent implements OnInit {
   doctorId!: any;
   timeSelected!: any;
   dateSelected!: any;
+  @Output() hasSelection = new EventEmitter<boolean>();
 
   currentDate = new Date();
 
@@ -32,7 +33,9 @@ export class ChooseDateComponent implements OnInit {
     private dataStoreService: DataStoreService,
     private appointmentService: AppointmentService,
     private dateAdapter: DateAdapter<Date>
-  ) {
+  ) {}
+
+  initializeDateComponent() {
     this.dataStoreService.appointmentDetails.subscribe(data => {
       this.appointment = data;
       this.doctorId = data.doctor.id;
@@ -66,6 +69,7 @@ export class ChooseDateComponent implements OnInit {
   }
 
   onAddTime(time: string) {
+    this.hasSelection.emit(false);
     this.timeSelected = time;
     const data = { ...this.appointment, timeSlot: this.timeSelected, date: this.dateSelected };
     this.dataStoreService.addData(data);

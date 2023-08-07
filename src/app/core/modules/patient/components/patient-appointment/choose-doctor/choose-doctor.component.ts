@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { DocumentData } from '@angular/fire/compat/firestore';
 import { tap, combineLatest } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -16,13 +16,14 @@ import { SpecialtiesService } from 'src/app/core/services/specialties.service';
   templateUrl: './choose-doctor.component.html',
   styleUrls: ['./choose-doctor.component.scss'],
 })
-export class ChooseDoctorComponent implements OnInit {
+export class ChooseDoctorComponent {
   doctors: Doctor[] = [];
   specialties: Specialty[] = [];
   currentAppointment!: Appointment;
   clinicSelected!: Clinic;
   selected!: Doctor;
   searchedInput = '';
+  @Output() hasSelection = new EventEmitter<boolean>();
 
   constructor(
     private doctorService: DoctorService,
@@ -31,7 +32,7 @@ export class ChooseDoctorComponent implements OnInit {
     private dataStoreService: DataStoreService
   ) {}
 
-  ngOnInit(): void {
+  initializeDoctorComponent(): void {
     this.getDoctors();
     this.dataStoreService.appointmentDetails.subscribe(data => (this.currentAppointment = data));
   }
@@ -78,12 +79,12 @@ export class ChooseDoctorComponent implements OnInit {
   }
 
   selectedDoctor(doctor: Doctor) {
+    this.hasSelection.emit(false);
     this.selected = doctor;
     if (doctor.id) {
       const data = { ...this.currentAppointment, doctor: doctor };
       this.dataStoreService.addData(data);
     }
-    console.log(this.currentAppointment);
   }
 
   isActive(item: Doctor) {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { combineLatest, filter } from 'rxjs';
 import { Appointment } from 'src/app/core/interfaces/appointment.interface';
 import { Clinic } from 'src/app/core/interfaces/clinic.interface';
@@ -10,20 +10,17 @@ import { DataStoreService } from 'src/app/core/services/data-store.service';
   templateUrl: './choose-clinic.component.html',
   styleUrls: ['./choose-clinic.component.scss'],
 })
-export class ChooseClinicComponent implements OnInit {
+export class ChooseClinicComponent {
   clinics: Clinic[] = [];
   appointmentData!: Appointment;
   selectedClinic!: Clinic;
   searchedInput = '';
+  @Output() hasSelection = new EventEmitter<boolean>();
 
   constructor(
     private clinicService: ClinicService,
     private dataStoreService: DataStoreService
   ) {}
-
-  ngOnInit(): void {
-    this.getClinics();
-  }
 
   getClinics() {
     combineLatest([this.dataStoreService.appointmentDetails])
@@ -39,6 +36,7 @@ export class ChooseClinicComponent implements OnInit {
 
   pickClinic(clinic: Clinic) {
     this.selectedClinic = clinic;
+    this.hasSelection.emit(false);
     this.sendPickedClinic();
   }
 

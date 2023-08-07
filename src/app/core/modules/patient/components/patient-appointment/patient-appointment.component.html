@@ -1,56 +1,90 @@
 <mat-stepper labelPosition="bottom" linear #stepper>
-  <mat-step>
+  <mat-step [completed]="!specialtyMatDisabled">
     <ng-template matStepLabel>Alege Specializarea</ng-template>
     <div>
-      <button mat-raised-button color="primary" matStepperNext>Inainte</button>
+      <button
+        mat-raised-button
+        color="primary"
+        matStepperNext
+        (click)="initializeClinicComponent()"
+        [disabled]="specialtyMatDisabled">
+        Inainte
+      </button>
     </div>
-    <app-choose-specialty></app-choose-specialty>
+    <app-choose-specialty (hasSelection)="specialtyPicked($event)"></app-choose-specialty>
   </mat-step>
 
-  <mat-step>
+  <mat-step [completed]="!clinicMatDisabled">
     <ng-template matStepLabel>Alege Clinica</ng-template>
     <div>
       <button mat-raised-button matStepperPrevious>Inapoi</button>
-      <button mat-raised-button color="primary" matStepperNext>Inainte</button>
+      <button
+        mat-raised-button
+        color="primary"
+        matStepperNext
+        (click)="initializeServiceComponent()"
+        [disabled]="clinicMatDisabled">
+        Inainte
+      </button>
     </div>
-    <app-choose-clinic></app-choose-clinic>
+    <app-choose-clinic (hasSelection)="clinicPicked($event)"></app-choose-clinic>
   </mat-step>
 
-  <mat-step>
+  <mat-step [completed]="!serviceMatDisabled">
     <ng-template matStepLabel>Alege Serviciu</ng-template>
     <div>
       <button mat-raised-button matStepperPrevious>Inapoi</button>
-      <button mat-raised-button color="primary" matStepperNext>Inainte</button>
+      <button
+        mat-raised-button
+        color="primary"
+        matStepperNext
+        (click)="initializeDoctorComponent()"
+        [disabled]="serviceMatDisabled">
+        Inainte
+      </button>
     </div>
-    <app-choose-service></app-choose-service>
+    <app-choose-service (hasSelection)="servicePicked($event)"></app-choose-service>
   </mat-step>
 
-  <mat-step>
+  <mat-step [completed]="!doctorMatDisabled">
     <ng-template matStepLabel>Alege Doctor</ng-template>
     <div>
       <button mat-raised-button matStepperPrevious>Inapoi</button>
-      <button mat-raised-button color="primary" matStepperNext>Inainte</button>
+      <button
+        mat-raised-button
+        color="primary"
+        matStepperNext
+        (click)="initializeDateComponent()"
+        [disabled]="doctorMatDisabled">
+        Inainte
+      </button>
     </div>
-    <app-choose-doctor></app-choose-doctor>
+    <app-choose-doctor (hasSelection)="doctorPicked($event)"></app-choose-doctor>
   </mat-step>
 
-  <mat-step>
-    <ng-template matStepLabel>Confirmation</ng-template>
-    <p>You are now done.</p>
+  <mat-step [completed]="!dateMatDisabled">
+    <ng-template matStepLabel>Alege ora programarii</ng-template>
     <div>
       <button mat-raised-button matStepperPrevious>Inapoi</button>
-      <button mat-raised-button color="primary" matStepperNext>Inainte</button>
+      <button
+        mat-raised-button
+        color="primary"
+        matStepperNext
+        (click)="initializeExtraComponent()"
+        [disabled]="dateMatDisabled">
+        Inainte
+      </button>
     </div>
-    <app-choose-date></app-choose-date>
+    <app-choose-date (hasSelection)="datePicked($event)"></app-choose-date>
   </mat-step>
 
-  <mat-step>
+  <mat-step [completed]="!extraMatDisabled">
     <ng-template matStepLabel>Informatii suplimentare</ng-template>
     <div>
       <button mat-raised-button matStepperPrevious>Inapoi</button>
-      <button mat-raised-button color="primary" matStepperNext>Inainte</button>
+      <button mat-raised-button color="primary" matStepperNext [disabled]="extraMatDisabled">Inainte</button>
     </div>
-    <app-choose-extra></app-choose-extra>
+    <app-choose-extra (hasSelection)="extraPicked($event)"></app-choose-extra>
   </mat-step>
 
   <mat-step>
@@ -58,7 +92,7 @@
     <div>
       <button mat-raised-button matStepperPrevious>Inapoi</button>
       <button mat-raised-button color="primary">Confirma</button>
-      <button mat-raised-button color="warn" (click)="stepper.reset()">Reseteaza</button>
+      <button mat-raised-button color="warn" (click)="stepper.reset(); resetStates()">Reseteaza</button>
     </div>
   </mat-step>
 </mat-stepper>
