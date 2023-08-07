@@ -1,37 +1,42 @@
 <div class="form-container">
   <form class="example-form" [formGroup]="signUpForm">
+    <div class="imageContainer">
+      <img *ngIf="imageUrl" [src]="imageUrl" alt="Imagine Doctor Neincarcata" width="50%" height="50%" />
+      <label for="fileInput" class="fileLabel"> Incarca o imagine </label>
+      <input type="file" accept=".png,.jpg" (change)="uploadImage($event)" formControlName="imageUrl" id="fileInput" />
+    </div>
     <mat-form-field class="example-full-width">
       <mat-label>Nume</mat-label>
-      <input matInput placeholder="Nume" />
+      <input matInput formControlName="nume" placeholder="Nume" />
       <mat-icon matSuffix>person</mat-icon>
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
       <mat-label>Prenume</mat-label>
-      <input matInput placeholder="Prenume" />
+      <input matInput formControlName="prenume" placeholder="Prenume" />
       <mat-icon matSuffix>person</mat-icon>
     </mat-form-field>
 
-    <mat-radio-group>
+    <mat-radio-group formControlName="options">
       <mat-radio-button value="masculin">Masculin</mat-radio-button>
       <mat-radio-button value="feminin">Feminin</mat-radio-button>
     </mat-radio-group>
 
     <mat-form-field class="example-full-width">
       <mat-label>Telefon</mat-label>
-      <input type="tel" matInput placeholder="0712 345 678" />
+      <input type="tel" formControlName="telefon" matInput placeholder="0712 345 678" />
       <mat-icon matSuffix>mode_edit</mat-icon>
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
       <mat-label>Email</mat-label>
-      <input type="email" matInput placeholder="nume@mail.com" required />
+      <input type="email" formControlName="email" #email matInput placeholder="nume@mail.com" required />
       <mat-icon matSuffix>alternate_email</mat-icon>
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
       <mat-label>Parola</mat-label>
-      <input matInput [type]="hide ? 'password' : 'text'" />
+      <input matInput formControlName="password" #password [type]="hide ? 'password' : 'text'" />
       <button
         type="button"
         mat-icon-button
@@ -44,9 +49,8 @@
     </mat-form-field>
 
     <div class="actions">
-      <button mat-raised-button color="primary">Sign-up</button>
+      <button mat-raised-button color="primary" (click)="onSignUp()">Sign-up</button>
     </div>
   </form>
 </div>
-
 <router-outlet></router-outlet>

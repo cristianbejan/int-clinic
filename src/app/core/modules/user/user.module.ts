@@ -10,6 +10,7 @@ import { UserLoginComponent } from './components/user-login/user-login.component
 import { UserSignUpComponent } from './components/user-sign-up/user-sign-up.component';
 import { UserRoutingModule } from './user-routing.module';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [UserComponent, UserLoginComponent, UserSignUpComponent],
@@ -22,6 +23,8 @@ import { MatRadioModule } from '@angular/material/radio';
     MatToolbarModule,
     UserRoutingModule,
     MatRadioModule,
+    MatFormFieldModule,
   ],
+  providers: [],
 })
 export class UserModule {}
