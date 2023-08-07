@@ -6,12 +6,35 @@
   </ul>
 
   <div class="right-menu">
-    <a routerLink="login" routerLinkActive="active"><mat-icon id="login-icon">account_circle </mat-icon></a>
+    <button mat-button [matMenuTriggerFor]="menu1">
+      <mat-icon clasa="login-icon">account_circle </mat-icon>
+    </button>
+
+    <mat-menu #menu1="matMenu">
+      <button mat-menu-item routerLink="login">
+        <mat-icon clasa="login-icon">account_circle </mat-icon>
+        Login
+      </button>
+
+      <button mat-menu-item routerLink="sign-up">
+        <mat-icon class="login-icon">account_circle </mat-icon>
+        SignUp
+      </button>
+    </mat-menu>
 
     <div class="user-profile">
       <!-- <span class="username">{{ username }}</span> -->
       <span class="username">Ana Mere</span>
-      <a routerLink="login" routerLinkActive="active"><mat-icon id="login-icon">account_circle </mat-icon></a>
+      <button mat-button [matMenuTriggerFor]="menu2">
+        <mat-icon class="login-icon">account_circle </mat-icon>
+      </button>
+
+      <mat-menu #menu2="matMenu">
+        <button mat-menu-item routerLink="login">
+          <mat-icon class="login-icon">account_circle </mat-icon>
+          LogOut
+        </button>
+      </mat-menu>
     </div>
   </div>
 </mat-toolbar>

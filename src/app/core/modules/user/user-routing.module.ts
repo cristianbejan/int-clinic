@@ -8,16 +8,24 @@ const ROUTES: Routes = [
   {
     path: '',
     component: UserComponent,
-    children: [
-      {
-        path: 'login',
-        component: UserLoginComponent,
-      },
-      {
-        path: 'sign-up',
-        component: UserSignUpComponent,
-      },
-    ],
+    // children: [
+    //   {
+    //     path: 'login',
+    //     component: UserLoginComponent,
+    //   },
+    //   {
+    //     path: 'sign-up',
+    //     component: UserSignUpComponent,
+    //   },
+    // ],
+  },
+  {
+    path: 'login',
+    component: UserLoginComponent,
+  },
+  {
+    path: 'sign-up',
+    component: UserSignUpComponent,
   },
 ];
 
