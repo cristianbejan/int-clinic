@@ -1,12 +1,17 @@
-<header class="header">
-  <nav mat-tab-nav-bar [tabPanel]="tabPanel">
-    <a mat-tab-link routerLink="" routerLinkActive #rla1="routerLinkActive" [active]="rla1.isActive"> Home </a>
-    <a mat-tab-link routerLink="admin" routerLinkActive #rla2="routerLinkActive" [active]="rla2.isActive">
-      Admin Route
-    </a>
-    <a mat-tab-link routerLink="patient" routerLinkActive #rla3="routerLinkActive" [active]="rla3.isActive">
-      Patient Route
-    </a>
-  </nav>
-  <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
-</header>
+<mat-toolbar>
+  <ul>
+    <li><a routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Acasa</a></li>
+    <li><a routerLink="admin" routerLinkActive="active">Admin</a></li>
+    <li><a routerLink="patient" routerLinkActive="active">Pacient</a></li>
+  </ul>
+
+  <div class="right-menu">
+    <a routerLink="login" routerLinkActive="active"><mat-icon id="login-icon">account_circle </mat-icon></a>
+
+    <div class="user-profile">
+      <!-- <span class="username">{{ username }}</span> -->
+      <span class="username">Ana Mere</span>
+      <a routerLink="login" routerLinkActive="active"><mat-icon id="login-icon">account_circle </mat-icon></a>
+    </div>
+  </div>
+</mat-toolbar>
