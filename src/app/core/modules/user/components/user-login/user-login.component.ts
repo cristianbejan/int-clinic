@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
@@ -8,25 +8,20 @@ import { AuthService } from 'src/app/core/services/auth.service';
   styleUrls: ['./user-login.component.scss'],
 })
 export class UserLoginComponent {
-  emailFormControl!: FormControl;
   hide = true;
 
   email = '';
   password = '';
 
-  loginForn = new FormGroup({
+  loginForm = new FormGroup({
     email: new FormControl(),
     password: new FormControl(),
   });
 
   constructor(private authService: AuthService) {}
 
-  ngOnInit() {
-    this.emailFormControl = new FormControl('', [Validators.required, Validators.email]);
-  }
-
   onLogin() {
-    this.authService.SignIn(this.loginForn.controls.email.value, this.loginForn.controls.password.value);
+    this.authService.SignIn(this.loginForm.controls.email.value, this.loginForm.controls.password.value);
   }
 
   onLoginWithGoogle() {
@@ -34,5 +29,5 @@ export class UserLoginComponent {
   }
 }
 
-// georgescu@mail.com
+// cristibejan@live.com
 // 123456
