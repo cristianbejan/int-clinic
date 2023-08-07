@@ -20,7 +20,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { HomePageComponent } from './core/components/home-page/home-page.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { UserRoutingModule } from './core/modules/user/user-routing.module';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
 import { NavigationBarComponent } from './core/components/navigation-bar/navigation-bar.component';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [AppComponent, ConfirmationDialogComponent, HomePageComponent, NavigationBarComponent],
@@ -40,6 +46,12 @@ import { NavigationBarComponent } from './core/components/navigation-bar/navigat
     MatButtonModule,
     MatTabsModule,
     MatCardModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatListModule,
+    UserRoutingModule,
+    MatMenuModule,
   ],
   providers: [AuthService, DoctorService, { provide: FIREBASE_OPTIONS, useValue: environment.firebase }],
   bootstrap: [AppComponent],

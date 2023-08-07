@@ -21,6 +21,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FilterByPipe } from '../../services/filter-by.pipe';
 import { ScrollButtonComponent } from '../../components/scroll-button/scroll-button.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { ScrollButtonComponent } from '../../components/scroll-button/scroll-but
     MatIconModule,
     MatNativeDateModule,
     MatDatepickerModule,
+    MatToolbarModule,
   ],
   providers: [],
 })
