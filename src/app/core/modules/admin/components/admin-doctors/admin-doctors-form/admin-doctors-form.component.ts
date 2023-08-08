@@ -108,7 +108,7 @@ export class AdminDoctorsFormComponent implements OnInit {
       });
     } else {
       this.doctorService.addDoctor(this.doctorForm.getRawValue());
-      this.authService.SignUp(this.doctorForm.controls.email.value, this.doctorForm.controls.password.value);
+
       this.doctorForm.reset();
       this.router.navigate(['admin/doctors']);
     }

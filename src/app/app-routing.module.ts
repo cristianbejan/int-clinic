@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomePageComponent } from './core/components/home-page/home-page.component';
+import { PatientAuthGuard } from './core/shared/patient-auth.guard';
 
 const routes: Routes = [
   {
@@ -13,6 +14,7 @@ const routes: Routes = [
   },
   {
     path: 'patient',
+    canActivateChild: [PatientAuthGuard],
     loadChildren: () => import('./core/modules/patient/patient.module').then(m => m.PatientModule),
   },
   {

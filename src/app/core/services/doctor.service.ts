@@ -12,7 +12,6 @@ import {
   getDoc,
   query,
   where,
-  getDocs,
 } from '@angular/fire/firestore';
 
 import { Doctor } from '../interfaces/doctor.interface';

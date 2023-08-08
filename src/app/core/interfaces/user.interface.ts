@@ -1,9 +1,11 @@
-export interface User {
-  nume: string;
-  prenume: string;
-  genul: string;
-  telefon: string;
+export interface Patient {
+  uid?: string;
   email: string;
-  parola: string;
   imageUrl: string;
+  lastName?: string;
+  firstName?: string;
+  displayName?: string;
+  gender: string;
+  phone: string;
+  role?: string;
 }

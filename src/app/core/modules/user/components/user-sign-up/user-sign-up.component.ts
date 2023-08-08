@@ -11,7 +11,6 @@ import { ImageUploadService } from 'src/app/core/services/image-upload.service';
 })
 export class UserSignUpComponent {
   imageUrl!: string;
-  isSignedUp = false;
   hide = true;
 
   constructor(
@@ -21,10 +20,10 @@ export class UserSignUpComponent {
   ) {}
 
   signUpForm = new FormGroup({
-    nume: new FormControl('', { nonNullable: true, validators: Validators.required }),
-    prenume: new FormControl('', { nonNullable: true, validators: Validators.required }),
-    options: new FormControl('', { nonNullable: true, validators: Validators.required }),
-    telefon: new FormControl('', {
+    lastName: new FormControl('', { nonNullable: true, validators: Validators.required }),
+    firstName: new FormControl('', { nonNullable: true, validators: Validators.required }),
+    gender: new FormControl('', { nonNullable: true, validators: Validators.required }),
+    phone: new FormControl('', {
       nonNullable: true,
       validators: [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{3}( ?)[0-9]{3}( ?)[0-9]{4}$')],
     }),
@@ -41,10 +40,10 @@ export class UserSignUpComponent {
   });
 
   onSignUp(): void {
-    this.authService.SignUp(this.signUpForm.controls.email.value, this.signUpForm.controls.password.value);
-    this.isSignedUp = true;
+    this.authService.pacientSignUp(this.signUpForm.controls.password.value, this.signUpForm.getRawValue()).then(() => {
+      this.router.navigate(['patient']);
+    });
     this.signUpForm.reset();
-    this.router.navigate(['patient']);
   }
 
   uploadImage(event: Event) {

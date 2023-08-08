@@ -6,32 +6,34 @@
   </ul>
 
   <div class="right-menu">
-    <button mat-button [matMenuTriggerFor]="menu1">
-      <mat-icon clasa="login-icon">account_circle </mat-icon>
-    </button>
-
-    <mat-menu #menu1="matMenu">
-      <button mat-menu-item routerLink="login">
+    <div *ngIf="!loggedUser">
+      <button mat-button [matMenuTriggerFor]="menu1">
         <mat-icon clasa="login-icon">account_circle </mat-icon>
-        Login
       </button>
 
-      <button mat-menu-item routerLink="sign-up">
-        <mat-icon class="login-icon">account_circle </mat-icon>
-        SignUp
-      </button>
-    </mat-menu>
+      <mat-menu #menu1="matMenu">
+        <button mat-menu-item routerLink="login">
+          <mat-icon clasa="login-icon">account_circle </mat-icon>
+          Login
+        </button>
 
-    <div class="user-profile">
-      <!-- <span class="username">{{ username }}</span> -->
-      <!-- <span class="username">Ana Mere</span> -->
+        <button mat-menu-item routerLink="sign-up">
+          <mat-icon class="login-icon">account_circle </mat-icon>
+          SignUp
+        </button>
+      </mat-menu>
+    </div>
+
+    <div class="user-profile" *ngIf="loggedUser">
+      <span class="username"></span>
       <button mat-button [matMenuTriggerFor]="menu2">
-        Ana Mere
+        Bine ai venit,
+        {{ loggedUser.displayName }}
         <mat-icon class="login-icon">account_circle </mat-icon>
       </button>
 
       <mat-menu #menu2="matMenu">
-        <button mat-menu-item routerLink="login">
+        <button mat-menu-item (click)="onLogOut()">
           <mat-icon class="login-icon">account_circle </mat-icon>
           LogOut
         </button>

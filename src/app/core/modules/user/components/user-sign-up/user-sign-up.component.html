@@ -1,5 +1,5 @@
 <div class="form-container">
-  <form class="example-form" [formGroup]="signUpForm">
+  <form class="example-form" [formGroup]="signUpForm" (ngSubmit)="onSignUp()">
     <div class="imageContainer">
       <img *ngIf="imageUrl" [src]="imageUrl" alt="Imagine Doctor Neincarcata" width="50%" height="50%" />
       <label for="fileInput" class="fileLabel"> Incarca o imagine </label>
@@ -7,24 +7,24 @@
     </div>
     <mat-form-field class="example-full-width">
       <mat-label>Nume</mat-label>
-      <input matInput formControlName="nume" placeholder="Nume" />
+      <input matInput formControlName="lastName" placeholder="Nume" />
       <mat-icon matSuffix>person</mat-icon>
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
       <mat-label>Prenume</mat-label>
-      <input matInput formControlName="prenume" placeholder="Prenume" />
+      <input matInput formControlName="firstName" placeholder="Prenume" />
       <mat-icon matSuffix>person</mat-icon>
     </mat-form-field>
 
-    <mat-radio-group formControlName="options">
-      <mat-radio-button value="masculin">Masculin</mat-radio-button>
-      <mat-radio-button value="feminin">Feminin</mat-radio-button>
+    <mat-radio-group formControlName="gender">
+      <mat-radio-button value="male">Masculin</mat-radio-button>
+      <mat-radio-button value="female">Feminin</mat-radio-button>
     </mat-radio-group>
 
     <mat-form-field class="example-full-width">
       <mat-label>Telefon</mat-label>
-      <input type="tel" formControlName="telefon" matInput placeholder="0712 345 678" />
+      <input type="tel" formControlName="phone" matInput placeholder="0712 345 678" />
       <mat-icon matSuffix>mode_edit</mat-icon>
     </mat-form-field>
 
@@ -49,7 +49,7 @@
     </mat-form-field>
 
     <div class="actions">
-      <button mat-raised-button color="primary" (click)="onSignUp()">Sign-up</button>
+      <button mat-raised-button color="primary" type="submit">Sign-up</button>
     </div>
   </form>
 </div>
