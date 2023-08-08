@@ -26,6 +26,9 @@ export class FilterByPipe implements PipeTransform {
 
           return equalizedStringInEntities.toLowerCase().includes(equalizedStringInSearchInput.toLowerCase());
         }
+        if (attributesInEntities === null || attributesInEntities === undefined) {
+          return;
+        }
         return attributesInEntities.includes(searchedInput);
       })
     );
