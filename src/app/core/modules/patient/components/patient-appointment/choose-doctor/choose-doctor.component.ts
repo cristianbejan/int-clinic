@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { DocumentData } from '@angular/fire/compat/firestore';
+import { MatStepper } from '@angular/material/stepper';
 import { tap, combineLatest } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { Appointment } from 'src/app/core/interfaces/appointment.interface';
@@ -29,7 +30,8 @@ export class ChooseDoctorComponent {
     private doctorService: DoctorService,
     private specialtyService: SpecialtiesService,
     private clinicService: ClinicService,
-    private dataStoreService: DataStoreService
+    private dataStoreService: DataStoreService,
+    private matStepper: MatStepper
   ) {}
 
   initializeDoctorComponent(): void {
@@ -84,6 +86,8 @@ export class ChooseDoctorComponent {
     if (doctor.id) {
       const data = { ...this.currentAppointment, doctor: doctor };
       this.dataStoreService.addData(data);
+
+      this.matStepper.next();
     }
   }
 

@@ -11,7 +11,7 @@
         Inainte
       </button>
     </div>
-    <app-choose-specialty (hasSelection)="specialtyPicked($event)"></app-choose-specialty>
+    <app-choose-specialty (hasSelection)="specialtyPicked($event)" />
   </mat-step>
 
   <mat-step [completed]="!clinicMatDisabled">
@@ -27,7 +27,7 @@
         Inainte
       </button>
     </div>
-    <app-choose-clinic (hasSelection)="clinicPicked($event)"></app-choose-clinic>
+    <app-choose-clinic (hasSelection)="clinicPicked($event)" />
   </mat-step>
 
   <mat-step [completed]="!serviceMatDisabled">
@@ -43,7 +43,7 @@
         Inainte
       </button>
     </div>
-    <app-choose-service (hasSelection)="servicePicked($event)"></app-choose-service>
+    <app-choose-service (hasSelection)="servicePicked($event)" />
   </mat-step>
 
   <mat-step [completed]="!doctorMatDisabled">
@@ -59,7 +59,7 @@
         Inainte
       </button>
     </div>
-    <app-choose-doctor (hasSelection)="doctorPicked($event)"></app-choose-doctor>
+    <app-choose-doctor (hasSelection)="doctorPicked($event)" />
   </mat-step>
 
   <mat-step [completed]="!dateMatDisabled">
@@ -75,7 +75,7 @@
         Inainte
       </button>
     </div>
-    <app-choose-date (hasSelection)="datePicked($event)"></app-choose-date>
+    <app-choose-date (hasSelection)="datePicked($event)" />
   </mat-step>
 
   <mat-step [completed]="!extraMatDisabled">
@@ -84,7 +84,7 @@
       <button mat-raised-button matStepperPrevious>Inapoi</button>
       <button mat-raised-button color="primary" matStepperNext [disabled]="extraMatDisabled">Inainte</button>
     </div>
-    <app-choose-extra (hasSelection)="extraPicked($event)"></app-choose-extra>
+    <app-choose-extra (hasSelection)="extraPicked($event)" />
   </mat-step>
 
   <mat-step>
@@ -94,5 +94,10 @@
       <button mat-raised-button color="primary">Confirma</button>
       <button mat-raised-button color="warn" (click)="stepper.reset(); resetStates()">Reseteaza</button>
     </div>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Success</ng-template>
+    <app-successful-appointment />
   </mat-step>
 </mat-stepper>

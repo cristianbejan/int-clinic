@@ -11,14 +11,11 @@ export interface Appointment {
   date: string;
   timeSlot: string;
   extraDetails: {
-    comment: any;
+    comment: string;
     file: {
       name: string;
       url: string;
     };
   };
   // patientID: string
-  // date: string
-  // timeSlot: string
-  // extraMentions: string
 }

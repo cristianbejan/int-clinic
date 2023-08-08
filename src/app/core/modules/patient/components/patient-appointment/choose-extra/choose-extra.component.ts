@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { Appointment } from 'src/app/core/interfaces/appointment.interface';
@@ -51,7 +51,7 @@ export class ChooseExtraComponent {
       const formValue = this.extraDetailsForm.value;
       const newData = {
         ...this.appointmentData,
-        extraDetails: { comment: formValue.comment, file: { name: this.fileName, url: this.fileUrl } },
+        extraDetails: { comment: formValue.comment || '', file: { name: this.fileName, url: this.fileUrl } },
       };
       this.dataStoreService.addData(newData);
     });

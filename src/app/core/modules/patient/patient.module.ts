@@ -21,6 +21,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FilterByPipe } from '../../services/filter-by.pipe';
 import { ScrollButtonComponent } from '../../components/scroll-button/scroll-button.component';
+import { SuccessfulAppointmentComponent } from './components/patient-appointment/successful-appointment/successful-appointment.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
@@ -35,6 +36,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     ChooseDateComponent,
     FilterByPipe,
     ScrollButtonComponent,
+    SuccessfulAppointmentComponent,
   ],
   imports: [
     CommonModule,

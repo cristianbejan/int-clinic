@@ -3,6 +3,7 @@ import { Appointment } from 'src/app/core/interfaces/appointment.interface';
 import { Specialty } from 'src/app/core/interfaces/specialty.interface';
 import { DataStoreService } from 'src/app/core/services/data-store.service';
 import { SpecialtiesService } from 'src/app/core/services/specialties.service';
+import { MatStepper } from '@angular/material/stepper';
 
 @Component({
   selector: 'app-choose-specialty',
@@ -18,7 +19,8 @@ export class ChooseSpecialtyComponent {
 
   constructor(
     private specialtyService: SpecialtiesService,
-    private dataStoreService: DataStoreService
+    private dataStoreService: DataStoreService,
+    private matStepper: MatStepper
   ) {}
 
   getSpecialties() {
@@ -36,6 +38,8 @@ export class ChooseSpecialtyComponent {
     this.selected = specialty;
     this.hasSelection.emit(false);
     this.sendPickedSpecialty();
+
+    this.matStepper.next();
   }
 
   sendPickedSpecialty() {
