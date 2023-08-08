@@ -18,6 +18,7 @@
         (click)="onAddTime(time)"
         class="container__time__buttons__btn"
         *ngFor="let time of timeSlots"
+        [ngClass]="{ active: isActive(time) }"
         mat-stroked-button>
         {{ time }}
       </button>

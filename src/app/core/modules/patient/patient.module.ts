@@ -20,6 +20,7 @@ import { ChooseDateComponent } from './components/patient-appointment/choose-dat
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FilterByPipe } from '../../services/filter-by.pipe';
+import { ConfirmationDetailComponent } from './components/patient-appointment/confirmation-detail/confirmation-details.component';
 import { ScrollButtonComponent } from '../../components/scroll-button/scroll-button.component';
 import { SuccessfulAppointmentComponent } from './components/patient-appointment/successful-appointment/successful-appointment.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -35,6 +36,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     ChooseExtraComponent,
     ChooseDateComponent,
     FilterByPipe,
+    ConfirmationDetailComponent,
     ScrollButtonComponent,
     SuccessfulAppointmentComponent,
   ],

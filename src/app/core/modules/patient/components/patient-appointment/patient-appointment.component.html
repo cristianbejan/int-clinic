@@ -82,18 +82,26 @@
     <ng-template matStepLabel>Informatii suplimentare</ng-template>
     <div>
       <button mat-raised-button matStepperPrevious>Inapoi</button>
-      <button mat-raised-button color="primary" matStepperNext [disabled]="extraMatDisabled">Inainte</button>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="initializeConfirmationComponent()"
+        matStepperNext
+        [disabled]="extraMatDisabled">
+        Inainte
+      </button>
     </div>
     <app-choose-extra (hasSelection)="extraPicked($event)" />
   </mat-step>
 
   <mat-step>
-    <ng-template matStepLabel>Confirmare</ng-template>
+    <ng-template matStepLabel>Detaliile programarii</ng-template>
     <div>
       <button mat-raised-button matStepperPrevious>Inapoi</button>
-      <button mat-raised-button color="primary">Confirma</button>
+      <button mat-raised-button color="primary" (click)="postAppointment(); stepper.reset()">Confirma</button>
       <button mat-raised-button color="warn" (click)="stepper.reset(); resetStates()">Reseteaza</button>
     </div>
+    <app-confirmation-details></app-confirmation-details>
   </mat-step>
 
   <mat-step>
