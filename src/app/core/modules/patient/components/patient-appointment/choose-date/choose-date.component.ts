@@ -54,12 +54,13 @@ export class ChooseDateComponent implements OnInit {
 
   onAddDate() {
     this.timeSelected = '';
+    console.log(this.selected);
     this.dateSelected = this.selected
       ?.toString()
       .slice(4)
       .substring(11, this.timeSelected.length - 1);
 
-    this.appointmentService.queryAppointments(this.doctorId, this.dateSelected).subscribe(data => {
+    this.appointmentService.queryAppointments(this.doctorId, this.selected).subscribe(data => {
       this.timeSlots = JSON.parse(JSON.stringify(this.timeSlotsTemplate));
       data.forEach(appointment => {
         const index = this.timeSlots.indexOf(appointment['timeSlot']);
@@ -71,7 +72,7 @@ export class ChooseDateComponent implements OnInit {
   onAddTime(time: string) {
     this.hasSelection.emit(false);
     this.timeSelected = time;
-    const data = { ...this.appointment, timeSlot: this.timeSelected, date: this.dateSelected };
+    const data = { ...this.appointment, timeSlot: this.timeSelected, date: this.selected };
     this.dataStoreService.addData(data);
   }
 }

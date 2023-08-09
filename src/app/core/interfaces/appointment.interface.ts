@@ -6,17 +6,18 @@ import { Specialty } from './specialty.interface';
 
 export interface Appointment {
   specialty: Specialty;
-  clinic: Clinic;
   service: Services;
   doctor: Doctor;
-  date: string;
+  clinic: Clinic;
+  date: Date | null;
   timeSlot: string;
   patientData: Patient;
   extraDetails: {
-    comment: string;
+    comment: any;
     file: {
       name: string;
       url: string;
     };
   };
+  // cancelled: true
 }

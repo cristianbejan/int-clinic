@@ -12,7 +12,8 @@ import { DataStoreService } from 'src/app/core/services/data-store.service';
 })
 export class ConfirmationDetailComponent {
   appointment: Appointment = {} as Appointment;
-
+  dateSelected!: any;
+  testSelected = '';
   constructor(
     private dataStoreService: DataStoreService,
     private appointmentService: AppointmentService
@@ -23,6 +24,10 @@ export class ConfirmationDetailComponent {
       .pipe(filter(([data]) => !!data))
       .subscribe(([data]) => {
         this.appointment = data;
+        this.dateSelected = data.date
+          ?.toString()
+          .slice(4)
+          .substring(11, this.testSelected.length - 1);
         console.log('confirmation loaded');
       });
   }

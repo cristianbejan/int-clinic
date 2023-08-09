@@ -2,7 +2,7 @@ import { Patient } from './patient.interface';
 
 export interface AppointmentIds {
   clinicId: string;
-  date: string;
+  date: Date | null;
   doctorId: string;
   patient: Patient;
   serviceId: string;

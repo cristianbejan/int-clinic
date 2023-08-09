@@ -24,6 +24,11 @@ import { ConfirmationDetailComponent } from './components/patient-appointment/co
 import { ScrollButtonComponent } from '../../components/scroll-button/scroll-button.component';
 import { SuccessfulAppointmentComponent } from './components/patient-appointment/successful-appointment/successful-appointment.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { PatientDashboardComponent } from './components/patient-dashboard/patient-dashboard.component';
+import { PatientDetailsComponent } from './components/patient-dashboard/patient-details/patient-details.component';
+import { PatientCurrentComponent } from './components/patient-dashboard/patient-current/patient-current.component';
+import { PatientHistoryComponent } from './components/patient-dashboard/patient-history/patient-history.component';
 import { CompleteDetailsComponent } from './components/patient-appointment/complete-details/complete-details.component';
 import { MatRadioModule } from '@angular/material/radio';
 
@@ -41,6 +46,10 @@ import { MatRadioModule } from '@angular/material/radio';
     ConfirmationDetailComponent,
     ScrollButtonComponent,
     SuccessfulAppointmentComponent,
+    PatientDashboardComponent,
+    PatientDetailsComponent,
+    PatientCurrentComponent,
+    PatientHistoryComponent,
     CompleteDetailsComponent,
   ],
   imports: [
@@ -58,6 +67,7 @@ import { MatRadioModule } from '@angular/material/radio';
     MatNativeDateModule,
     MatDatepickerModule,
     MatToolbarModule,
+    MatSidenavModule,
     MatRadioModule,
   ],
   providers: [],

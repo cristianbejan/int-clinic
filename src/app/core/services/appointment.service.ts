@@ -19,10 +19,18 @@ export class AppointmentService {
     return collectionData(appointmentsCollection, { idField: 'id' });
   }
 
-  queryAppointments(doctorID: string, date: string) {
+  queryAppointments(doctorID: string, date: Date | null) {
     const appointmentsRef = collection(this.dataBase, 'appointments');
 
     const q = query(appointmentsRef, where('doctorId', '==', `${doctorID}`), where('date', '==', `${date}`));
+
+    return collectionData(q);
+  }
+
+  dashboardQuery(patientId: string) {
+    const appointmentsRef = collection(this.dataBase, 'appointments');
+
+    const q = query(appointmentsRef, where('patient.uid', '==', `${patientId}`));
 
     return collectionData(q);
   }
