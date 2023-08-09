@@ -4,7 +4,6 @@ import {
   Firestore,
   collectionData,
   collection,
-  addDoc,
   doc,
   updateDoc,
   deleteDoc,
@@ -16,16 +15,21 @@ import {
 
 import { Doctor } from '../interfaces/doctor.interface';
 import { Observable, from } from 'rxjs';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DoctorService {
-  constructor(private firestore: Firestore) {}
+  constructor(
+    private firestore: Firestore,
+    private authServise: AuthService
+  ) {}
 
-  addDoctor(doctor: Doctor): Observable<DocumentData> {
-    const doctorCollection = collection(this.firestore, 'doctors');
-    return from(addDoc(doctorCollection, doctor));
+  addDoctor(pass: string, doctor: Doctor) {
+    // const doctorCollection = collection(this.firestore, 'doctors');
+    // return from(addDoc(doctorCollection, doctor));
+    this.authServise.doctorSignUp(pass, doctor);
   }
 
   queryDoctors(id: string) {
@@ -70,12 +74,6 @@ export class DoctorService {
     const docInstance = doc(this.firestore, 'doctors', id);
     updateDoc(docInstance, {
       imageUrl: imageUrl,
-    })
-      .then(() => {
-        console.log('Image Changed');
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    });
   }
 }

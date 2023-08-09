@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Patient } from '../../interfaces/patient.interface';
 import { Router } from '@angular/router';
+import { Doctor } from '../../interfaces/doctor.interface';
+import { Admin } from '../../interfaces/admin.interface';
 
 @Component({
   selector: 'app-navigation-bar',
@@ -9,7 +11,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./navigation-bar.component.scss'],
 })
 export class NavigationBarComponent implements OnInit {
-  loggedUser!: Patient;
+  loggedUser!: Doctor | Patient | Admin | null;
+  isAdmin!: boolean;
 
   constructor(
     private authService: AuthService,
@@ -17,12 +20,14 @@ export class NavigationBarComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.authService.user$.subscribe(user => (this.loggedUser = user));
+    this.authService.user$.subscribe(user => {
+      this.loggedUser = user;
+      this.isAdmin = this.loggedUser?.role === 'admin' ? true : false;
+    });
   }
 
   onLogOut() {
-    this.authService.SignOut();
+    this.authService.signOut();
     this.router.navigate(['login']);
-    console.log(this.loggedUser);
   }
 }

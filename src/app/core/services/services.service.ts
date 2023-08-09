@@ -26,13 +26,7 @@ export class ServicesService {
   addService(newService: Omit<Services, 'id'>) {
     const serviceCollection = collection(this.dataBase, 'services');
 
-    addDoc(serviceCollection, newService)
-      .then(() => {
-        console.log('Serviciul a fost adaugat cu succes!');
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    addDoc(serviceCollection, newService);
   }
 
   getServices() {

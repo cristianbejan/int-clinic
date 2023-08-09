@@ -48,8 +48,6 @@ export class SpecialtiesService {
   }
 
   updateSpecialty(specialtyObject: Omit<Specialty, 'id'>, id: string) {
-    console.log(specialtyObject);
-
     const specialtyInstance = doc(this.dataBase, 'specialties', id);
     const updatedSpecialty = {
       id: id,

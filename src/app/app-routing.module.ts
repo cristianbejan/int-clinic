@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomePageComponent } from './core/components/home-page/home-page.component';
-import { PatientAuthGuard } from './core/shared/patient-auth.guard';
+import { doctorAuthGuardChild, patientAuthGuardChild, adminAuthGuardChild } from './core/shared/auth.guard';
 
 const routes: Routes = [
   {
@@ -10,11 +10,12 @@ const routes: Routes = [
   },
   {
     path: 'admin',
+    canActivateChild: [adminAuthGuardChild, patientAuthGuardChild],
     loadChildren: () => import('./core/modules/admin/admin.module').then(m => m.AdminModule),
   },
   {
     path: 'patient',
-    canActivateChild: [PatientAuthGuard],
+    canActivateChild: [patientAuthGuardChild],
     loadChildren: () => import('./core/modules/patient/patient.module').then(m => m.PatientModule),
   },
   {

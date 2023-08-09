@@ -107,8 +107,8 @@ export class AdminDoctorsFormComponent implements OnInit {
         this.router.navigate(['admin/doctors']);
       });
     } else {
-      this.doctorService.addDoctor(this.doctorForm.getRawValue());
-
+      this.doctorService.addDoctor(this.doctorForm.controls.password.value, this.doctorForm.getRawValue());
+      // this.authService.doctorSignUp(this.doctorForm.controls.password.value, this.doctorForm.getRawValue());
       this.doctorForm.reset();
       this.router.navigate(['admin/doctors']);
     }

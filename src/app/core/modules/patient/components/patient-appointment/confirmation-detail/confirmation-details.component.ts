@@ -44,7 +44,6 @@ export class ConfirmationDetailComponent {
         extraDetails: this.appointment.extraDetails,
         patient: this.appointment.patientData,
       };
-      console.log('appointmentConfirmed:', appointmentConfirmed);
       this.appointmentService.addAppointment(appointmentConfirmed);
     }
   }

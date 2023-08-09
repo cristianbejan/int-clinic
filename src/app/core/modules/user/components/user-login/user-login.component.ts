@@ -34,9 +34,21 @@ export class UserLoginComponent {
     const password = this.loginForm.controls.password.value as string;
 
     this.authService
-      .SignIn(email, password)
+      .signIn(email, password)
       .then(() => {
-        this.router.navigate(['patient']);
+        return this.authService.getCurrentUserUid().then(data => {
+          this.authService.getUserRole(data).subscribe(role => {
+            if (role === 'patient') {
+              this.router.navigate(['patient']);
+            }
+            if (role === 'doctor') {
+              this.router.navigate(['admin']);
+            }
+            if (role === 'admin') {
+              this.router.navigate(['admin']);
+            }
+          });
+        });
       })
       .catch(error => {
         console.log('Firebase error code:', error.code);

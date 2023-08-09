@@ -2,6 +2,7 @@ export interface Doctor {
   id?: string;
   firstName: string;
   lastName: string;
+  displayName?: string;
   phone: string;
   adress: string;
   email: string;
@@ -10,4 +11,5 @@ export interface Doctor {
   specialtyIds: string[];
   description: string;
   assignedSpecialties?: string[];
+  role?: string;
 }
