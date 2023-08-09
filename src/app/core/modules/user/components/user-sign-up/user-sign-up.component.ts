@@ -50,7 +50,6 @@ export class UserSignUpComponent {
         this.signUpForm.reset();
       })
       .catch(error => {
-        console.log('sign-upError::', error.code);
         if (error.code === 'auth/email-already-in-use') {
           this.error.message =
             'Aceasta adresa de email este deja inregistrata in baza noastra de date. Te rog inceraca cu alta.';

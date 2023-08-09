@@ -10,7 +10,7 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    canActivateChild: [adminAuthGuardChild, patientAuthGuardChild],
+    canActivateChild: [adminAuthGuardChild, patientAuthGuardChild, doctorAuthGuardChild],
     loadChildren: () => import('./core/modules/admin/admin.module').then(m => m.AdminModule),
   },
   {
@@ -20,7 +20,7 @@ const routes: Routes = [
   },
   {
     path: 'doctor',
-    // canActivateChild: [DoctorAuthGuard],
+    canActivateChild: [doctorAuthGuardChild],
     loadChildren: () => import('./core/modules/doctor/doctor.module').then(m => m.DoctorModule),
   },
   {

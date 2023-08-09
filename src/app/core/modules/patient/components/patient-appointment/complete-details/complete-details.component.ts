@@ -35,7 +35,7 @@ export class CompleteDetailsComponent {
   getPatient() {
     this.authService.user$.subscribe(patient => {
       if (patient) {
-        this.patient = patient;
+        this.patient = patient as Patient;
         this.autocompleteForm();
       }
     });

@@ -1,5 +1,6 @@
 export interface Doctor {
   id?: string;
+  uid?: string;
   firstName: string;
   lastName: string;
   displayName?: string;

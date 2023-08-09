@@ -40,6 +40,8 @@ export const doctorAuthGuard: CanActivateFn = (route: ActivatedRouteSnapshot, st
     map(user => {
       if (user && user.role === 'doctor') {
         return true;
+      } else if (user && user.role === 'admin') {
+        return true;
       } else {
         router.navigate(['login']);
         return false;

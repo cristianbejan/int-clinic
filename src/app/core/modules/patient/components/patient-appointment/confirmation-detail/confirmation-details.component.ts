@@ -28,7 +28,6 @@ export class ConfirmationDetailComponent {
           ?.toString()
           .slice(4)
           .substring(11, this.testSelected.length - 1);
-        console.log('confirmation loaded');
       });
   }
 

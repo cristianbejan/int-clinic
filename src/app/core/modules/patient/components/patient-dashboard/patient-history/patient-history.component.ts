@@ -27,43 +27,45 @@ export class PatientHistoryComponent {
     private doctorService: DoctorService
   ) {
     this.authUser.user$.subscribe(data => {
-      appointmentQuery.dashboardQuery(data.uid).subscribe(data => {
-        this.clientAppointments = data as [];
-        this.clientAppointments.forEach(
-          (appointment: {
-            date: any;
-            clinicId: string;
-            specialtyId: string;
-            serviceId: string;
-            doctorId: string;
-            timeSlot: string;
-            extraDetails: object;
-          }) => {
-            if (appointment.date?.toDate() <= this.todayDate) {
-              const data = {
-                clinic: {},
-                date: new Date(),
-                doctor: {},
-                service: {},
-                specialty: {},
-                timeSlot: '',
-                extraDetails: {},
-              };
-              this.clinicService.getClinic(appointment.clinicId).subscribe(res => (data.clinic = res['data']()));
-              this.specialtyService
-                .getSpecialty(appointment.specialtyId)
-                .subscribe(res => (data.specialty = res['data']()));
-              this.serviceService.getService(appointment.serviceId).subscribe(res => (data.service = res['data']()));
-              this.doctorService.getDoctor(appointment.doctorId).subscribe(res => (data.doctor = res['data']()));
-              data.date = appointment.date.toDate().toString().split(' ').slice(0, 4).join(' ') as Date;
-              data.timeSlot = appointment.timeSlot;
-              data.extraDetails = appointment.extraDetails;
+      if (data !== null && data.uid !== undefined) {
+        this.appointmentQuery.dashboardQuery(data.uid).subscribe(data => {
+          this.clientAppointments = data as [];
+          this.clientAppointments.forEach(
+            (appointment: {
+              date: any;
+              clinicId: string;
+              specialtyId: string;
+              serviceId: string;
+              doctorId: string;
+              timeSlot: string;
+              extraDetails: object;
+            }) => {
+              if (appointment.date?.toDate() <= this.todayDate) {
+                const data = {
+                  clinic: {},
+                  date: new Date(),
+                  doctor: {},
+                  service: {},
+                  specialty: {},
+                  timeSlot: '',
+                  extraDetails: {},
+                };
+                this.clinicService.getClinic(appointment.clinicId).subscribe(res => (data.clinic = res['data']()));
+                this.specialtyService
+                  .getSpecialty(appointment.specialtyId)
+                  .subscribe(res => (data.specialty = res['data']()));
+                this.serviceService.getService(appointment.serviceId).subscribe(res => (data.service = res['data']()));
+                this.doctorService.getDoctor(appointment.doctorId).subscribe(res => (data.doctor = res['data']()));
+                data.date = appointment.date.toDate().toString().split(' ').slice(0, 4).join(' ') as Date;
+                data.timeSlot = appointment.timeSlot;
+                data.extraDetails = appointment.extraDetails;
 
-              this.appointmentsText.push(data);
+                this.appointmentsText.push(data);
+              }
             }
-          }
-        );
-      });
+          );
+        });
+      }
     });
   }
 }

@@ -42,7 +42,7 @@ export class UserLoginComponent {
               this.router.navigate(['patient']);
             }
             if (role === 'doctor') {
-              this.router.navigate(['admin']);
+              this.router.navigate(['doctor']);
             }
             if (role === 'admin') {
               this.router.navigate(['admin']);
@@ -51,7 +51,6 @@ export class UserLoginComponent {
         });
       })
       .catch(error => {
-        console.log('Firebase error code:', error.code);
         if (error.code === 'auth/user-not-found') {
           this.error.message = 'User-ul nu a fost gasit.';
         } else if (error.code === 'auth/invalid-email') {

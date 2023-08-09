@@ -125,16 +125,11 @@ export class AuthService {
           merge: true,
         });
       })
-      .catch(err => console.log(err.message));
+      .catch(err => Promise.reject(err));
   }
 
   signIn(email: string, pass: string) {
-    return this.afAuth
-      .signInWithEmailAndPassword(email, pass)
-      .then(result => {
-        console.log(result.user);
-      })
-      .catch(err => Promise.reject(err));
+    return this.afAuth.signInWithEmailAndPassword(email, pass).catch(err => Promise.reject(err));
   }
 
   patientGoogleSignIn() {
@@ -160,7 +155,7 @@ export class AuthService {
           merge: true,
         });
       })
-      .catch(err => console.log(err.message));
+      .catch(err => Promise.reject(err));
   }
 
   signOut() {
