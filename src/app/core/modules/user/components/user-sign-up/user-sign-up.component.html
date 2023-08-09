@@ -5,6 +5,9 @@
       <label for="fileInput" class="fileLabel"> Incarca o imagine </label>
       <input type="file" accept=".png,.jpg" (change)="uploadImage($event)" formControlName="imageUrl" id="fileInput" />
     </div>
+    <div *ngIf="error.message" class="error-message">
+      {{ error.message }}
+    </div>
     <mat-form-field class="example-full-width">
       <mat-label>Nume</mat-label>
       <input matInput formControlName="lastName" placeholder="Nume" />
@@ -26,12 +29,13 @@
       <mat-label>Telefon</mat-label>
       <input type="tel" formControlName="phone" matInput placeholder="0712 345 678" />
       <mat-icon matSuffix>mode_edit</mat-icon>
-      <mat-error *ngIf="signUpForm.get('phone')?.hasError('pattern')">Telefon Invalid</mat-error>
+      <mat-error *ngIf="signUpForm.get('phone')?.hasError('pattern')">Numar de telefon invalid</mat-error>
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
       <mat-label>Email</mat-label>
       <input type="email" formControlName="email" #email matInput placeholder="nume@mail.com" required />
+      <mat-error *ngIf="signUpForm.get('email')?.hasError('pattern')">Adresa de email invalida</mat-error>
       <mat-icon matSuffix>alternate_email</mat-icon>
       <mat-error *ngIf="signUpForm.get('email')?.hasError('pattern')">Email Invalid</mat-error>
     </mat-form-field>
@@ -51,7 +55,7 @@
     </mat-form-field>
 
     <div class="actions">
-      <button mat-raised-button color="primary" type="submit">Sign-up</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!signUpForm.valid">Sign-up</button>
     </div>
   </form>
 </div>

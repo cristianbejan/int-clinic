@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { User } from '@angular/fire/auth';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -10,6 +11,8 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class UserLoginComponent {
   hide = true;
+
+  users: User[] = [];
 
   email = '';
   password = '';

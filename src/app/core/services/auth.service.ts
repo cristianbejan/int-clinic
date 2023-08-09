@@ -64,7 +64,7 @@ export class AuthService {
           merge: true,
         });
       })
-      .catch(err => console.log(err.message));
+      .catch(err => Promise.reject(err));
   }
 
   SignIn(email: string, pass: string) {
