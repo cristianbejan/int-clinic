@@ -26,12 +26,14 @@
       <mat-label>Telefon</mat-label>
       <input type="tel" formControlName="phone" matInput placeholder="0712 345 678" />
       <mat-icon matSuffix>mode_edit</mat-icon>
+      <mat-error *ngIf="signUpForm.get('phone')?.hasError('pattern')">Telefon Invalid</mat-error>
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
       <mat-label>Email</mat-label>
       <input type="email" formControlName="email" #email matInput placeholder="nume@mail.com" required />
       <mat-icon matSuffix>alternate_email</mat-icon>
+      <mat-error *ngIf="signUpForm.get('email')?.hasError('pattern')">Email Invalid</mat-error>
     </mat-form-field>
 
     <mat-form-field class="example-full-width">

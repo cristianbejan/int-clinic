@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 
@@ -14,9 +14,11 @@ export class UserLoginComponent {
   email = '';
   password = '';
 
+  error: { message: string } = { message: '' };
+
   loginForm = new FormGroup({
-    email: new FormControl(),
-    password: new FormControl(),
+    email: new FormControl('', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
+    password: new FormControl('', { validators: Validators.required }),
   });
 
   constructor(
@@ -25,13 +27,31 @@ export class UserLoginComponent {
   ) {}
 
   onLogin() {
+    const email = this.loginForm.controls.email.value as string;
+    const password = this.loginForm.controls.password.value as string;
+
     this.authService
-      .SignIn(this.loginForm.controls.email.value, this.loginForm.controls.password.value)
+      .SignIn(email, password)
       .then(() => {
         this.router.navigate(['patient']);
       })
-      .catch(err => {
-        console.log('eroare login', err.message);
+      .catch(error => {
+        console.log('Firebase error code:', error.code);
+        if (error.code === 'auth/user-not-found') {
+          this.error.message = 'User-ul nu a fost gasit.';
+        } else if (error.code === 'auth/invalid-email') {
+          this.error.message = 'Email obligatoriu';
+        } else if (error.code === 'auth/invalid-password') {
+          this.error.message = 'Parola obligatorie';
+        } else if (error.code === 'auth/wrong-password' || error.code === 'auth/invalid-email') {
+          this.error.message = 'Email sau parola incorecte. Te rog sa incerci din nou';
+        } else if (error.code === 'auth/missing-password') {
+          this.error.message = 'Parola obligatorie';
+        } else if (error.code === 'auth/too-many-requests') {
+          this.error.message = 'Cont blocat, numărul de cereri depășite';
+        } else {
+          this.error.message = 'Eroare interna, te rog sa incerci mai tarziu';
+        }
       });
   }
 
@@ -40,7 +60,8 @@ export class UserLoginComponent {
       this.router.navigate(['patient']);
     });
   }
-}
 
-// cristibejan@live.com
-// 123456
+  onRouterSignUp() {
+    this.router.navigate(['sign-up']);
+  }
+}

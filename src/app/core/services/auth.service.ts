@@ -5,6 +5,7 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat
 import { Patient } from '../interfaces/user.interface';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,8 @@ export class AuthService {
 
   constructor(
     private afAuth: AngularFireAuth,
-    private afs: AngularFirestore
+    private afs: AngularFirestore,
+    public router: Router
   ) {
     this.user$ = this.afAuth.authState.pipe(
       switchMap(user => {
@@ -71,7 +73,7 @@ export class AuthService {
       .then(result => {
         console.log(result.user);
       })
-      .catch(err => console.log(err.message));
+      .catch(err => Promise.reject(err));
   }
 
   patientGoogleSignIn() {
@@ -121,5 +123,16 @@ export class AuthService {
     return userRef.set(userData, {
       merge: true,
     });
+  }
+
+  sendPasswordResetEmail(email: string) {
+    return this.afAuth
+      .sendPasswordResetEmail(email)
+      .then(() => {
+        this.router.navigate(['verify-email']);
+      })
+      .catch(error => {
+        console.error('Error sending password reset email:', error);
+      });
   }
 }

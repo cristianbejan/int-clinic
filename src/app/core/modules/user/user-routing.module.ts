@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { UserComponent } from './components/user.component';
 import { UserLoginComponent } from './components/user-login/user-login.component';
 import { UserSignUpComponent } from './components/user-sign-up/user-sign-up.component';
+import { UserForgotPasswordComponent } from './components/user-forgot-password/user-forgot-password.component';
+import { UserVerifyEmailComponent } from './components/user-verify-email/user-verify-email.component';
 
 const ROUTES: Routes = [
   {
@@ -16,6 +18,14 @@ const ROUTES: Routes = [
   {
     path: 'sign-up',
     component: UserSignUpComponent,
+  },
+  {
+    path: 'forgot-password',
+    component: UserForgotPasswordComponent,
+  },
+  {
+    path: 'verify-email',
+    component: UserVerifyEmailComponent,
   },
 ];
 

@@ -1,9 +1,12 @@
 <div class="form-container">
   <form class="example-form" [formGroup]="loginForm">
+    <p id="error">{{ error.message }}</p>
+
     <mat-form-field class="example-full-width">
       <mat-label>Email</mat-label>
       <input type="email" matInput placeholder="nume@mail.com" required formControlName="email" />
       <mat-icon matSuffix>alternate_email</mat-icon>
+      <mat-error *ngIf="loginForm.get('email')?.hasError('pattern')">Email Invalid</mat-error>
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
@@ -22,8 +25,12 @@
 
     <div class="actions">
       <button mat-raised-button color="primary" (click)="onLogin()">Login</button>
-      <button mat-raised-button>Signup</button>
+      <button mat-raised-button (click)="onRouterSignUp()">Signup</button>
       <button mat-raised-button color="warn" (click)="onLoginWithGoogle()">Google Login</button>
+    </div>
+
+    <div class="forgotPassword">
+      <a routerLink="/forgot-password">Ai uitat parola?</a>
     </div>
   </form>
 </div>
