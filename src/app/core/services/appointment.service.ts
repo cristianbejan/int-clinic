@@ -14,6 +14,11 @@ export class AppointmentService {
     return from(addDoc(appointmentCollection, appointment));
   }
 
+  getAppointments(): Observable<DocumentData[]> {
+    const appointmentsCollection = collection(this.dataBase, 'appointments');
+    return collectionData(appointmentsCollection, { idField: 'id' });
+  }
+
   queryAppointments(doctorID: string, date: string) {
     const appointmentsRef = collection(this.dataBase, 'appointments');
 

@@ -1,0 +1,28 @@
+<div class="main">
+  <div class="main__filter">
+    <mat-form-field class="example-form-field">
+      <mat-label>Cauta...</mat-label>
+      <input matInput id="searchInput" type="text" [(ngModel)]="searchInput" />
+      <button *ngIf="searchInput" matSuffix mat-icon-button aria-label="Clear" (click)="searchInput = ''">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <div class="card-container">
+    <mat-card class="card-container__cards" *ngFor="let appointment of appointments">
+      <mat-card-header class="card-container__cards__header">
+        <mat-card-title>Titlul: </mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content class="card-container__cards__description">
+        <p id="description-detail">Detalii:</p>
+      </mat-card-content>
+      <mat-card-content class="card-container__cards__description">
+        <p id="description-detail">Clinica:</p>
+      </mat-card-content>
+      <mat-card-content class="card-container__cards__description">
+        <p id="description-detail">Data: {{ appointment.date }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

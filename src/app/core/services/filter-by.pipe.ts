@@ -15,8 +15,7 @@ export class FilterByPipe implements PipeTransform {
           const searchedInputToNumber = Number(searchedInput);
 
           return searchedInputToNumber === attributesInEntities;
-        }
-        if (typeof attributesInEntities !== 'object') {
+        } else if (typeof attributesInEntities !== 'object') {
           const equalizedStringInEntities = attributesInEntities
             .normalize('NFD')
             .replace(/([\u0300-\u036f]|[^0-9a-zA-Z])/g, '');
@@ -25,8 +24,7 @@ export class FilterByPipe implements PipeTransform {
             .replace(/([\u0300-\u036f]|[^0-9a-zA-Z])/g, '');
 
           return equalizedStringInEntities.toLowerCase().includes(equalizedStringInSearchInput.toLowerCase());
-        }
-        if (attributesInEntities === null || attributesInEntities === undefined) {
+        } else if (attributesInEntities === null || attributesInEntities === undefined) {
           return;
         }
         return attributesInEntities.includes(searchedInput);

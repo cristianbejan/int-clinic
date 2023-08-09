@@ -18,6 +18,11 @@ const routes: Routes = [
     loadChildren: () => import('./core/modules/patient/patient.module').then(m => m.PatientModule),
   },
   {
+    path: 'doctor',
+    // canActivateChild: [DoctorAuthGuard],
+    loadChildren: () => import('./core/modules/doctor/doctor.module').then(m => m.DoctorModule),
+  },
+  {
     path: 'user',
     loadChildren: () => import('./core/modules/user/user.module').then(m => m.UserModule),
   },
