@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { GoogleAuthProvider } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
-import { Patient } from '../interfaces/user.interface';
+import { Patient } from '../interfaces/patient.interface';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { Router } from '@angular/router';

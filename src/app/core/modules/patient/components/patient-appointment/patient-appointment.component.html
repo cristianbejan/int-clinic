@@ -70,12 +70,29 @@
         mat-raised-button
         color="primary"
         matStepperNext
-        (click)="initializeExtraComponent()"
+        (click)="initializeCompleteDetailsComponent()"
         [disabled]="dateMatDisabled">
         Inainte
       </button>
     </div>
     <app-choose-date (hasSelection)="datePicked($event)" />
+  </mat-step>
+
+  <mat-step [completed]="!patientMatDisabled">
+    <ng-template matStepLabel>Detalii Personale</ng-template>
+    <div>
+      <button mat-raised-button matStepperPrevious>Inapoi</button>
+      <button
+        type="submit"
+        mat-raised-button
+        color="primary"
+        (click)="initializeExtraComponent(); submitDetailsForm()"
+        matStepperNext
+        [disabled]="patientMatDisabled">
+        Inainte
+      </button>
+    </div>
+    <app-complete-details (hasSelection)="patientDetailsPicked($event)" />
   </mat-step>
 
   <mat-step [completed]="!extraMatDisabled">
@@ -98,7 +115,7 @@
     <ng-template matStepLabel>Detaliile programarii</ng-template>
     <div>
       <button mat-raised-button matStepperPrevious>Inapoi</button>
-      <button mat-raised-button color="primary" (click)="postAppointment(); stepper.reset()">Confirma</button>
+      <button mat-raised-button color="primary" (click)="postAppointment(); stepper.next()">Confirma</button>
       <button mat-raised-button color="warn" (click)="stepper.reset(); resetStates()">Reseteaza</button>
     </div>
     <app-confirmation-details></app-confirmation-details>

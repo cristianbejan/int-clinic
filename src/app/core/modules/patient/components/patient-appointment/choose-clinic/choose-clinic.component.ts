@@ -4,7 +4,6 @@ import { Appointment } from 'src/app/core/interfaces/appointment.interface';
 import { Clinic } from 'src/app/core/interfaces/clinic.interface';
 import { ClinicService } from 'src/app/core/services/clinic.service';
 import { DataStoreService } from 'src/app/core/services/data-store.service';
-import { MatStepper } from '@angular/material/stepper';
 
 @Component({
   selector: 'app-choose-clinic',
@@ -20,8 +19,7 @@ export class ChooseClinicComponent {
 
   constructor(
     private clinicService: ClinicService,
-    private dataStoreService: DataStoreService,
-    private matStepper: MatStepper
+    private dataStoreService: DataStoreService
   ) {}
 
   getClinics() {
@@ -40,7 +38,6 @@ export class ChooseClinicComponent {
     this.selectedClinic = clinic;
     this.hasSelection.emit(false);
     this.sendPickedClinic();
-    this.matStepper.next();
   }
 
   sendPickedClinic() {

@@ -3,7 +3,6 @@ import { Appointment } from 'src/app/core/interfaces/appointment.interface';
 import { AppointmentService } from 'src/app/core/services/appointment.service';
 import { DataStoreService } from 'src/app/core/services/data-store.service';
 import { DateAdapter } from '@angular/material/core';
-import { MatStepper } from '@angular/material/stepper';
 
 @Component({
   selector: 'app-choose-date',
@@ -33,8 +32,7 @@ export class ChooseDateComponent implements OnInit {
   constructor(
     private dataStoreService: DataStoreService,
     private appointmentService: AppointmentService,
-    private dateAdapter: DateAdapter<Date>,
-    private matStepper: MatStepper
+    private dateAdapter: DateAdapter<Date>
   ) {}
 
   initializeDateComponent() {
@@ -75,7 +73,5 @@ export class ChooseDateComponent implements OnInit {
     this.timeSelected = time;
     const data = { ...this.appointment, timeSlot: this.timeSelected, date: this.dateSelected };
     this.dataStoreService.addData(data);
-
-    this.matStepper.next();
   }
 }

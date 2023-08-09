@@ -24,6 +24,8 @@ import { ConfirmationDetailComponent } from './components/patient-appointment/co
 import { ScrollButtonComponent } from '../../components/scroll-button/scroll-button.component';
 import { SuccessfulAppointmentComponent } from './components/patient-appointment/successful-appointment/successful-appointment.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { CompleteDetailsComponent } from './components/patient-appointment/complete-details/complete-details.component';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     ConfirmationDetailComponent,
     ScrollButtonComponent,
     SuccessfulAppointmentComponent,
+    CompleteDetailsComponent,
   ],
   imports: [
     CommonModule,
@@ -55,6 +58,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatNativeDateModule,
     MatDatepickerModule,
     MatToolbarModule,
+    MatRadioModule,
   ],
   providers: [],
 })

@@ -37,7 +37,7 @@ export class ConfirmationDetailComponent {
         date: this.appointment.date,
         timeSlot: this.appointment.timeSlot,
         extraDetails: this.appointment.extraDetails,
-        patientId: '1',
+        patient: this.appointment.patientData,
       };
       console.log('appointmentConfirmed:', appointmentConfirmed);
       this.appointmentService.addAppointment(appointmentConfirmed);

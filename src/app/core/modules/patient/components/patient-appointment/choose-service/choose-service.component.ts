@@ -4,7 +4,6 @@ import { Services } from 'src/app/core/interfaces/services.interface';
 import { DataStoreService } from 'src/app/core/services/data-store.service';
 import { ServicesService } from 'src/app/core/services/services.service';
 import { SpecialtiesService } from 'src/app/core/services/specialties.service';
-import { MatStepper } from '@angular/material/stepper';
 
 @Component({
   selector: 'app-choose-service',
@@ -21,8 +20,7 @@ export class ChooseServiceComponent {
   constructor(
     private servicesService: ServicesService,
     private specialtyService: SpecialtiesService,
-    private dataStoreService: DataStoreService,
-    private matStepper: MatStepper
+    private dataStoreService: DataStoreService
   ) {}
 
   getServices() {
@@ -38,8 +36,6 @@ export class ChooseServiceComponent {
     this.selected = service;
     this.hasSelection.emit(false);
     this.sendPickedService();
-
-    this.matStepper.next();
   }
 
   sendPickedService() {

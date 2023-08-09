@@ -1,7 +1,7 @@
 export interface Patient {
   uid?: string;
   email: string;
-  imageUrl: string;
+  imageUrl?: string;
   lastName?: string;
   firstName?: string;
   displayName?: string;

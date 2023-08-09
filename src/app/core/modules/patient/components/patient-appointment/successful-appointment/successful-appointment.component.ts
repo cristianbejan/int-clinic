@@ -4,6 +4,7 @@ import { Appointment } from 'src/app/core/interfaces/appointment.interface';
 import { DataStoreService } from 'src/app/core/services/data-store.service';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+import { PatientAppointmentComponent } from '../patient-appointment.component';
 
 (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 
@@ -17,7 +18,8 @@ export class SuccessfulAppointmentComponent implements OnInit {
 
   constructor(
     private matStepper: MatStepper,
-    private dataStoreService: DataStoreService
+    private dataStoreService: DataStoreService,
+    private patientAppointmentComponent: PatientAppointmentComponent
   ) {}
 
   ngOnInit(): void {
@@ -36,13 +38,13 @@ export class SuccessfulAppointmentComponent implements OnInit {
     const documentDefinition = {
       content: [
         {
-          text: 'Detaliile Programarii Dumneavoastra:',
+          text: 'Detalii Programare:',
           style: 'header',
         },
         {
           text:
-            `Stimate *INSERT PATIENT NAME*,\n\n` +
-            `Vă confirmăm programarea dumneavoastră pentru o consultație medicală în data de ${appointmentDetails.date},` +
+            `Stimate ${appointmentDetails.patientData.displayName},\n\n` +
+            `Îți confirmăm programarea realizată în vederea unei consultații medicale în data de ${appointmentDetails.date},` +
             ` la ora ${appointmentDetails.timeSlot}, cu medicul ${appointmentDetails.doctor.firstName} ${appointmentDetails.doctor.lastName}.\n` +
             ` Serviciul medical ales este '${appointmentDetails.service.name}' si aparține secției de '${appointmentDetails.specialty.name}'.\n` +
             ` Consultația va avea loc la ${appointmentDetails.clinic.name}, situată în ${appointmentDetails.clinic.address}.\n` +
@@ -57,7 +59,7 @@ export class SuccessfulAppointmentComponent implements OnInit {
           style: 'hyperlink',
         },
         {
-          text: `\n\nVă mulțumim pentru încrederea acordată și vă așteptăm cu drag!`,
+          text: `\n\nÎți mulțumim pentru încrederea acordată și te așteptăm cu drag!`,
           style: 'paragraph',
         },
       ],
@@ -90,5 +92,6 @@ export class SuccessfulAppointmentComponent implements OnInit {
 
   resetStepper() {
     this.matStepper.reset();
+    this.patientAppointmentComponent.resetStates();
   }
 }

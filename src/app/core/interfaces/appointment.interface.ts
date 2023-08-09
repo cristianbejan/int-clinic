@@ -1,15 +1,17 @@
 import { Clinic } from './clinic.interface';
 import { Doctor } from './doctor.interface';
+import { Patient } from './patient.interface';
 import { Services } from './services.interface';
 import { Specialty } from './specialty.interface';
 
 export interface Appointment {
   specialty: Specialty;
+  clinic: Clinic;
   service: Services;
   doctor: Doctor;
-  clinic: Clinic;
   date: string;
   timeSlot: string;
+  patientData: Patient;
   extraDetails: {
     comment: string;
     file: {
@@ -17,5 +19,4 @@ export interface Appointment {
       url: string;
     };
   };
-  // patientID: string
 }

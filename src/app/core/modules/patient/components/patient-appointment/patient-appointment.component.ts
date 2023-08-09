@@ -6,6 +6,7 @@ import { ChooseServiceComponent } from './choose-service/choose-service.componen
 import { ChooseExtraComponent } from './choose-extra/choose-extra.component';
 import { ChooseDateComponent } from './choose-date/choose-date.component';
 import { ConfirmationDetailComponent } from './confirmation-detail/confirmation-details.component';
+import { CompleteDetailsComponent } from './complete-details/complete-details.component';
 
 @Component({
   selector: 'app-patient-appointment',
@@ -20,6 +21,7 @@ export class PatientAppointmentComponent implements AfterViewInit {
   @ViewChild(ChooseExtraComponent) extraComponent!: ChooseExtraComponent;
   @ViewChild(ChooseDateComponent) dateComponent!: ChooseDateComponent;
   @ViewChild(ConfirmationDetailComponent) confirmationComponent!: ConfirmationDetailComponent;
+  @ViewChild(CompleteDetailsComponent) completeDetailsComponent!: CompleteDetailsComponent;
 
   specialtyMatDisabled = true;
   extraMatDisabled = true;
@@ -27,6 +29,7 @@ export class PatientAppointmentComponent implements AfterViewInit {
   clinicMatDisabled = true;
   serviceMatDisabled = true;
   dateMatDisabled = true;
+  patientMatDisabled = true;
 
   initializeDateComponent() {
     this.dateComponent.initializeDateComponent();
@@ -49,6 +52,10 @@ export class PatientAppointmentComponent implements AfterViewInit {
 
   initializeConfirmationComponent() {
     this.confirmationComponent.initializeConfirmationComponent();
+  }
+
+  initializeCompleteDetailsComponent() {
+    this.completeDetailsComponent.initializeComponent();
   }
 
   specialtyPicked(state: boolean) {
@@ -74,9 +81,16 @@ export class PatientAppointmentComponent implements AfterViewInit {
     this.extraMatDisabled = state;
   }
 
+  patientDetailsPicked(state: boolean) {
+    this.patientMatDisabled = state;
+  }
+
   postAppointment() {
     this.confirmationComponent.onPostAppointment();
-    this.resetStates();
+  }
+
+  submitDetailsForm() {
+    this.completeDetailsComponent.onSubmit();
   }
 
   resetStates() {

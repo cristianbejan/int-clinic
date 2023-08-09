@@ -6,22 +6,23 @@
         <mat-card class="details-card">
           <h4>{{ appointment.clinic.name }}</h4>
           <p class="light-text">{{ appointment.clinic.address }}</p>
+          <p class="light-text">{{ appointment.clinic.phone }}</p>
         </mat-card>
       </article>
-      <article class="article-information">
+      <article *ngIf="appointment.patientData" class="article-information">
         <h3>Informatii pacient:</h3>
         <mat-card class="details-card">
           <div class="details">
-            <h4>Nume si prenume:</h4>
-            <p class="light-text">Andrei Ciobanu</p>
+            <h4>Nume:</h4>
+            <p class="light-text">{{ appointment.patientData.displayName }}</p>
           </div>
           <div class="details">
             <h4>Telefon:</h4>
-            <p class="light-text">0725674673</p>
+            <p class="light-text">{{ appointment.patientData.phone }}</p>
           </div>
           <div class="details">
             <h4>Email:</h4>
-            <p class="light-text">ciobanu@test.com</p>
+            <p class="light-text">{{ appointment.patientData.email }}</p>
           </div>
           <div *ngIf="appointment.extraDetails" class="details extra-details">
             <div>
@@ -30,7 +31,9 @@
             </div>
             <div>
               <h4>Fisiere incarcate:</h4>
-              <p class="light-text">{{ appointment.extraDetails.file.name }}</p>
+              <p class="light-text">
+                <a [href]="appointment.extraDetails.file.url">{{ appointment.extraDetails.file.name }}</a>
+              </p>
             </div>
           </div>
         </mat-card>
@@ -59,7 +62,7 @@
           <h4>Servicii:</h4>
           <div class="details">
             <h4 class="light-text">{{ appointment.service.name }}</h4>
-            <p class="light-text">{{ appointment.service.price }}</p>
+            <p class="light-text">{{ appointment.service.price }} RON</p>
           </div>
         </mat-card>
       </mat-card>
