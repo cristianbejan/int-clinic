@@ -15,9 +15,10 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTabsModule } from '@angular/material/tabs';
 import { DoctorFilterComponent } from './components/doctor-filter/doctor-filter.component';
+import { DoctorScheduleVacationComponent } from './components/doctor-schedule-vacation/doctor-schedule-vacation.component';
 
 @NgModule({
-  declarations: [DoctorComponent, DoctorAppointmentsComponent, DoctorFilterComponent],
+  declarations: [DoctorComponent, DoctorAppointmentsComponent, DoctorFilterComponent, DoctorScheduleVacationComponent],
   imports: [
     CommonModule,
     DoctorRoutingModule,
