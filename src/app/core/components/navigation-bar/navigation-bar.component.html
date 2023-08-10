@@ -2,8 +2,8 @@
   <ul>
     <li><a routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Acasa</a></li>
     <li *ngIf="isAdmin"><a routerLink="admin" routerLinkActive="active">Admin</a></li>
-    <li><a routerLink="patient" routerLinkActive="active">Pacient</a></li>
-    <li><a routerLink="doctor" routerLinkActive="active">Doctor</a></li>
+    <li *ngIf="!loggedUser || isPatient"><a routerLink="patient" routerLinkActive="active">Pacient</a></li>
+    <li *ngIf="!loggedUser || isDoctor"><a routerLink="doctor" routerLinkActive="active">Doctor</a></li>
   </ul>
 
   <div class="right-menu">
@@ -34,7 +34,9 @@
       </button>
 
       <mat-menu #menu2="matMenu">
-        <a routerLink="patient/dashboard/current" mat-menu-item>
+        <a
+          [routerLink]="isPatient ? 'patient/dashboard/current' : isDoctor ? 'doctor/appointments' : 'admin'"
+          mat-menu-item>
           <mat-icon class="login-icon">account_circle </mat-icon>
           Contul meu
         </a>

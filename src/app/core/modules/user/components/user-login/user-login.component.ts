@@ -39,7 +39,7 @@ export class UserLoginComponent {
         return this.authService.getCurrentUserUid().then(data => {
           this.authService.getUserRole(data).subscribe(role => {
             if (role === 'patient') {
-              this.router.navigate(['patient']);
+              this.router.navigate(['patient/dashboard/current']);
             }
             if (role === 'doctor') {
               this.router.navigate(['doctor']);
@@ -71,7 +71,7 @@ export class UserLoginComponent {
 
   onLoginWithGoogle() {
     this.authService.patientGoogleSignIn().then(() => {
-      this.router.navigate(['patient']);
+      this.router.navigate(['patient/dashboard/current']);
     });
   }
 

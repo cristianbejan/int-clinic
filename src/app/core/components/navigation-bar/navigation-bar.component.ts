@@ -13,6 +13,8 @@ import { Admin } from '../../interfaces/admin.interface';
 export class NavigationBarComponent implements OnInit {
   loggedUser!: Doctor | Patient | Admin | null;
   isAdmin!: boolean;
+  isPatient!: boolean;
+  isDoctor!: boolean;
 
   constructor(
     private authService: AuthService,
@@ -23,6 +25,8 @@ export class NavigationBarComponent implements OnInit {
     this.authService.user$.subscribe(user => {
       this.loggedUser = user;
       this.isAdmin = this.loggedUser?.role === 'admin' ? true : false;
+      this.isPatient = this.loggedUser?.role === 'patient' ? true : false;
+      this.isDoctor = this.loggedUser?.role === 'doctor' ? true : false;
     });
   }
 

@@ -35,7 +35,12 @@
       & a {
         background-color: white;
         width: 230px;
+        
+        &.active {
+          color: rgb(63,81,181);
+        }
       }
+
     }
   }
 
