@@ -13,7 +13,7 @@ export interface Appointment {
   timeSlot: string;
   patientData: Patient;
   extraDetails: {
-    comment: any;
+    comment: string;
     file: {
       name: string;
       url: string;

@@ -1,52 +1,10 @@
-<section class="dashboard">
-  <div class="dashboard__header">
-    <div class="dashboard__header__container">
-      <mat-accordion class="settings">
-        <mat-expansion-panel hideToggle>
-          <mat-expansion-panel-header>
-            <mat-icon>manage_accounts</mat-icon>
-            <div class="date">Setari cont</div>
-          </mat-expansion-panel-header>
-          <div class="account-settings">
-            <mat-form-field>
-              <mat-label>Prenume</mat-label>
-              <input matInput placeholder="doctor.firstName" />
-              <mat-icon matSuffix>person</mat-icon>
-            </mat-form-field>
-            <mat-form-field>
-              <mat-label>Nume</mat-label>
-              <input matInput placeholder="doctor.lastName" />
-              <mat-icon matSuffix>person</mat-icon>
-            </mat-form-field>
-            <mat-form-field>
-              <mat-label>Numar de telefon</mat-label>
-              <input matInput type="number" placeholder="doctor.phone" />
-              <mat-icon matSuffix>phone</mat-icon>
-            </mat-form-field>
-          </div>
-        </mat-expansion-panel>
-      </mat-accordion>
-      <mat-accordion class="calendar">
-        <mat-expansion-panel hideToggle>
-          <mat-expansion-panel-header>
-            <mat-icon>calendar_month</mat-icon>
-            <div class="date">{{ currentDate.toLocaleDateString('en-GB') }}</div>
-          </mat-expansion-panel-header>
-          <mat-calendar></mat-calendar>
-        </mat-expansion-panel>
-      </mat-accordion>
-      <div class="profile">
-        <div class="profile-image">
-          <div class="profile-name">Doctor Name</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="dashboard__body">
-    <mat-tab-group>
-      <mat-tab label="Istoric programari"></mat-tab>
-      <mat-tab label="Programarile de azi"></mat-tab>
-      <mat-tab label="Concediu"></mat-tab>
-    </mat-tab-group>
-  </div>
-</section>
+<mat-drawer-container class="dashboard">
+  <mat-drawer mode="side" opened
+    ><ul>
+      <li><button mat-stroked-button>Contul Meu</button></li>
+      <li><a mat-stroked-button routerLink="appointments">Programari</a></li>
+      <li><a mat-stroked-button routerLink="schedule-vacation">Concediu</a></li>
+    </ul></mat-drawer
+  >
+  <mat-drawer-content><router-outlet></router-outlet></mat-drawer-content>
+</mat-drawer-container>

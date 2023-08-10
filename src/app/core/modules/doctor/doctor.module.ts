@@ -16,6 +16,9 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTabsModule } from '@angular/material/tabs';
 import { DoctorFilterComponent } from './components/doctor-filter/doctor-filter.component';
 import { DoctorScheduleVacationComponent } from './components/doctor-schedule-vacation/doctor-schedule-vacation.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [DoctorComponent, DoctorAppointmentsComponent, DoctorFilterComponent, DoctorScheduleVacationComponent],
@@ -34,6 +37,9 @@ import { DoctorScheduleVacationComponent } from './components/doctor-schedule-va
     MatExpansionModule,
     MatTableModule,
     MatTabsModule,
+    MatSidenavModule,
+    MatProgressSpinnerModule,
+    MatPaginatorModule,
   ],
 })
 export class DoctorModule {}
