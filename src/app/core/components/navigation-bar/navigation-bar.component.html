@@ -34,6 +34,10 @@
       </button>
 
       <mat-menu #menu2="matMenu">
+        <a routerLink="patient/dashboard/current" mat-menu-item>
+          <mat-icon class="login-icon">account_circle </mat-icon>
+          Contul meu
+        </a>
         <button mat-menu-item (click)="onLogOut()">
           <mat-icon class="login-icon">account_circle </mat-icon>
           LogOut
