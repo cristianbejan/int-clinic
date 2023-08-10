@@ -62,23 +62,12 @@ export class CompleteDetailsComponent {
     }
   }
 
-  updatePatient() {
-    if (this.patient.gender == null && this.patient.phone == null) {
-      this.patientService.updatePatient(this.patient.uid, {
-        gender: this.patientForm.controls.gender.value,
-        phone: this.patientForm.controls.phone.value,
-      });
-    }
-  }
-
   onSubmit() {
     if (this.patientForm.valid) {
       this.hasSelection.emit(false);
       const patientData = this.patientForm.value as Patient;
       patientData.uid = this.patient.uid;
       this.dataStoreService.addData({ ...this.appointmentData, patientData });
-
-      this.updatePatient();
     }
   }
 }

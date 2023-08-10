@@ -44,7 +44,10 @@ export class SuccessfulAppointmentComponent implements OnInit {
         {
           text:
             `Stimate ${appointmentDetails.patientData.displayName},\n\n` +
-            `Îți confirmăm programarea realizată în vederea unei consultații medicale în data de ${appointmentDetails.date},` +
+            `Îți confirmăm programarea realizată în vederea unei consultații medicale în data de ${appointmentDetails.date?.toLocaleDateString(
+              'ro-Ro',
+              { day: 'numeric', month: 'numeric', year: 'numeric' }
+            )},` +
             ` la ora ${appointmentDetails.timeSlot}, cu medicul ${appointmentDetails.doctor.firstName} ${appointmentDetails.doctor.lastName}.\n` +
             ` Serviciul medical ales este '${appointmentDetails.service.name}' si aparține secției de '${appointmentDetails.specialty.name}'.\n` +
             ` Consultația va avea loc la ${appointmentDetails.clinic.name}, situată în ${appointmentDetails.clinic.address}.\n` +
