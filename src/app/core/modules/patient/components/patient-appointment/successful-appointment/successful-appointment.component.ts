@@ -90,7 +90,7 @@ export class SuccessfulAppointmentComponent implements OnInit {
   generateAndDownloadPDF() {
     const documentDefinition = this.generatePDF();
 
-    pdfMake.createPdf(documentDefinition).download('programare-clinica.pdf');
+    pdfMake.createPdf(documentDefinition).download('programare-clinică.pdf');
   }
 
   resetStepper() {

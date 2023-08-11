@@ -2,7 +2,7 @@
   <main class="article-container">
     <div class="left-article">
       <article *ngIf="appointment.clinic" class="article-information">
-        <h3>Informatii clinica:</h3>
+        <h3>Informații clinică:</h3>
         <mat-card class="details-card">
           <h4>{{ appointment.clinic.name }}</h4>
           <p class="light-text">{{ appointment.clinic.address }}</p>
@@ -10,7 +10,7 @@
         </mat-card>
       </article>
       <article *ngIf="appointment.patientData" class="article-information">
-        <h3>Informatii pacient:</h3>
+        <h3>Informații pacient:</h3>
         <mat-card class="details-card">
           <div class="details">
             <h4>Nume:</h4>
@@ -26,11 +26,11 @@
           </div>
           <div *ngIf="appointment.extraDetails" class="details extra-details">
             <div>
-              <h4>Informatii suplimentare:</h4>
+              <h4>Informații suplimentare:</h4>
               <p class="light-text">{{ appointment.extraDetails.comment }}</p>
             </div>
             <div>
-              <h4>Fisiere incarcate:</h4>
+              <h4>Fisiere încărcate:</h4>
               <p class="light-text">
                 <a [href]="appointment.extraDetails.file.url">{{ appointment.extraDetails.file.name }}</a>
               </p>
@@ -40,7 +40,7 @@
       </article>
     </div>
     <article class="article-information">
-      <h3>Informatii programare:</h3>
+      <h3>Informații programare:</h3>
       <mat-card class="details-card right-article">
         <div *ngIf="appointment.doctor" class="details">
           <h4>Doctor:</h4>

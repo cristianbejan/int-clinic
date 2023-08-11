@@ -26,8 +26,8 @@
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
-      <mat-label>Adresa</mat-label>
-      <input matInput formControlName="adress" placeholder="Ex. 100 Main St" />
+      <mat-label>Adresă</mat-label>
+      <input matInput formControlName="adress" placeholder="Ex. Str. Verde Nr. 11 " />
       <mat-icon matSuffix>roofing</mat-icon>
     </mat-form-field>
 
@@ -39,7 +39,7 @@
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
-      <mat-label>Parola</mat-label>
+      <mat-label>Parolă</mat-label>
       <input matInput type="password" formControlName="password" minlength="6" />
       <mat-icon matSuffix>lock</mat-icon>
     </mat-form-field>
@@ -62,8 +62,8 @@
     </mat-form-field>
 
     <div class="actions">
-      <button mat-stroked-button color="warn" type="button" (click)="confirmCancelDialog()">Inchide</button>
-      <button mat-stroked-button color="basic" type="button" (click)="confirmResetDialog()">Reseteaza</button>
+      <button mat-stroked-button color="warn" type="button" (click)="confirmCancelDialog()">Închide</button>
+      <button mat-stroked-button color="basic" type="button" (click)="confirmResetDialog()">Resetează</button>
       <button mat-stroked-button color="primary" type="submit" [disabled]="!doctorForm.valid">
         {{ buttonText }}
       </button>

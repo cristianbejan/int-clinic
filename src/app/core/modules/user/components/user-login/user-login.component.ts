@@ -52,19 +52,19 @@ export class UserLoginComponent {
       })
       .catch(error => {
         if (error.code === 'auth/user-not-found') {
-          this.error.message = 'User-ul nu a fost gasit.';
+          this.error.message = 'User-ul nu a fost găsit.';
         } else if (error.code === 'auth/invalid-email') {
           this.error.message = 'Email obligatoriu';
         } else if (error.code === 'auth/invalid-password') {
-          this.error.message = 'Parola obligatorie';
+          this.error.message = 'Parolă obligatorie';
         } else if (error.code === 'auth/wrong-password' || error.code === 'auth/invalid-email') {
-          this.error.message = 'Email sau parola incorecte. Te rog sa incerci din nou';
+          this.error.message = 'Email sau parolă incorecte. Te rog să încerci din nou';
         } else if (error.code === 'auth/missing-password') {
-          this.error.message = 'Parola obligatorie';
+          this.error.message = 'Parolă obligatorie';
         } else if (error.code === 'auth/too-many-requests') {
           this.error.message = 'Cont blocat, numărul de cereri depășite';
         } else {
-          this.error.message = 'Eroare interna, te rog sa incerci mai tarziu';
+          this.error.message = 'Eroare internă, te rog să încerci mai târziu';
         }
       });
   }

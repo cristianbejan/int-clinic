@@ -23,25 +23,26 @@
     <mat-radio-group formControlName="gender">
       <mat-radio-button value="male">Masculin</mat-radio-button>
       <mat-radio-button value="female">Feminin</mat-radio-button>
+      <mat-radio-button value="female">Altul</mat-radio-button>
     </mat-radio-group>
 
     <mat-form-field class="example-full-width">
       <mat-label>Telefon</mat-label>
       <input type="tel" formControlName="phone" matInput placeholder="0712 345 678" />
       <mat-icon matSuffix>mode_edit</mat-icon>
-      <mat-error *ngIf="signUpForm.get('phone')?.hasError('pattern')">Numar de telefon invalid</mat-error>
+      <mat-error *ngIf="signUpForm.get('phone')?.hasError('pattern')">Număr de telefon invalid</mat-error>
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
       <mat-label>Email</mat-label>
       <input type="email" formControlName="email" #email matInput placeholder="nume@mail.com" required />
-      <mat-error *ngIf="signUpForm.get('email')?.hasError('pattern')">Adresa de email invalida</mat-error>
+      <mat-error *ngIf="signUpForm.get('email')?.hasError('pattern')">Adresă de email invalidă</mat-error>
       <mat-icon matSuffix>alternate_email</mat-icon>
-      <mat-error *ngIf="signUpForm.get('email')?.hasError('pattern')">Email Invalid</mat-error>
+      <mat-error *ngIf="signUpForm.get('email')?.hasError('pattern')">Email invalid</mat-error>
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
-      <mat-label>Parola</mat-label>
+      <mat-label>Parolă</mat-label>
       <input matInput formControlName="password" #password [type]="hide ? 'password' : 'text'" />
       <button
         type="button"
@@ -55,7 +56,9 @@
     </mat-form-field>
 
     <div class="actions">
-      <button mat-raised-button color="primary" type="submit" [disabled]="!signUpForm.valid">Sign-up</button>
+      <button id="signUpBtn" mat-raised-button color="primary" type="submit" [disabled]="!signUpForm.valid">
+        Sign-up
+      </button>
     </div>
   </form>
 </div>
