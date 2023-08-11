@@ -10,7 +10,7 @@ import { ImageUploadService } from 'src/app/core/services/image-upload.service';
   styleUrls: ['./user-sign-up.component.scss'],
 })
 export class UserSignUpComponent {
-  imageUrl!: string;
+  patientImage = '';
 
   hide = true;
 
@@ -39,12 +39,15 @@ export class UserSignUpComponent {
       ],
     }),
     password: new FormControl('', { nonNullable: true, validators: Validators.required }),
-    imageUrl: new FormControl(`${this.imageUrl}`, { nonNullable: true }),
+    imageUrl: new FormControl('', { nonNullable: true }),
   });
 
   onSignUp() {
     this.authService
-      .pacientSignUp(this.signUpForm.controls.password.value, this.signUpForm.getRawValue())
+      .pacientSignUp(this.signUpForm.controls.password.value, {
+        ...this.signUpForm.getRawValue(),
+        imageUrl: this.patientImage,
+      })
       .then(() => {
         this.router.navigate(['patient']);
         this.signUpForm.reset();
@@ -76,8 +79,7 @@ export class UserSignUpComponent {
     }
 
     this.imageUploadService.uploadImage(file, 'doctors').subscribe(downloadURL => {
-      this.imageUrl = downloadURL;
-      this.signUpForm.get('imageUrl')?.setValue(downloadURL);
+      this.patientImage = downloadURL;
     });
   }
 }

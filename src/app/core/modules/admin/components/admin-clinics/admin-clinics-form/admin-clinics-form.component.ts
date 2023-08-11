@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { tap } from 'rxjs';
+import { Clinic } from 'src/app/core/interfaces/clinic.interface';
 import { Doctor } from 'src/app/core/interfaces/doctor.interface';
 import { Specialty } from 'src/app/core/interfaces/specialty.interface';
 import { ClinicService } from 'src/app/core/services/clinic.service';
@@ -23,11 +24,11 @@ export class AdminClinicsFormComponent implements OnInit {
   clinicId!: string;
   buttonText: string = FormSubmitState.ADD;
   defaultFormValues!: object;
-  imageUrl!: string;
   doctors: Doctor[] = [];
   clinicDoctors: Doctor[] = [];
   specialties!: Specialty[];
   isSpecialtiesCompleted!: boolean;
+  clinicImage!: string;
 
   constructor(
     private clinicService: ClinicService,
@@ -40,20 +41,17 @@ export class AdminClinicsFormComponent implements OnInit {
   ) {}
 
   clinicForm = new FormGroup({
-    name: new FormControl(null, Validators.required),
-    phone: new FormControl(null, [
+    name: new FormControl('', Validators.required),
+    phone: new FormControl('', [
       Validators.required,
       Validators.pattern('^((\\+91-?)|0)?[0-9]{3}( ?)[0-9]{3}( ?)[0-9]{4}$'),
     ]),
-    email: new FormControl(null, [
-      Validators.required,
-      Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
-    ]),
+    email: new FormControl('', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
     specialtyIds: new FormControl([''], Validators.required),
     doctorIds: new FormControl([''], Validators.required),
-    address: new FormControl(null, Validators.required),
-    description: new FormControl(null, Validators.required),
-    imageUrl: new FormControl(`${this.imageUrl}`),
+    address: new FormControl('', Validators.required),
+    description: new FormControl('', Validators.required),
+    imageUrl: new FormControl(''),
   });
 
   ngOnInit(): void {
@@ -77,11 +75,11 @@ export class AdminClinicsFormComponent implements OnInit {
           return;
         }
         this.clinicService.updateData(this.clinicId, this.clinicForm);
-        this.clinicService.updateImage(this.clinicId, this.imageUrl);
+        this.clinicService.updateImage(this.clinicId, this.clinicImage);
         this.router.navigate(['admin/clinics']);
       });
     } else {
-      this.clinicService.addData(this.clinicForm);
+      this.clinicService.addData({ ...(this.clinicForm.value as unknown as Clinic), imageUrl: this.clinicImage });
       this.clinicForm.reset();
       this.router.navigate(['admin/clinics']);
     }
@@ -99,7 +97,7 @@ export class AdminClinicsFormComponent implements OnInit {
           tap(result => {
             this.buttonText = FormSubmitState.EDIT;
             const clinic = result['data']();
-            this.imageUrl = clinic.imageUrl;
+            this.clinicImage = clinic.imageUrl;
 
             this.clinicForm.patchValue({
               name: clinic.name,
@@ -109,7 +107,6 @@ export class AdminClinicsFormComponent implements OnInit {
               doctorIds: clinic.doctorIds,
               address: clinic.address,
               description: clinic.description,
-              imageUrl: clinic.imageUrl,
             });
 
             this.defaultFormValues = JSON.parse(JSON.stringify(this.clinicForm.value));
@@ -163,8 +160,10 @@ export class AdminClinicsFormComponent implements OnInit {
     }
 
     this.imageUploadService.uploadImage(file, 'clinics').subscribe(downloadURL => {
-      this.imageUrl = downloadURL;
-      this.clinicForm.get('imageUrl')?.setValue(downloadURL);
+      console.log(downloadURL);
+
+      this.clinicImage = downloadURL;
+      // this.clinicForm.get('imageUrl')?.setValue(downloadURL);
     });
   }
 

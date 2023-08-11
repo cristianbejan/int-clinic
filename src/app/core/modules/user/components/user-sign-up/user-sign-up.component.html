@@ -1,7 +1,7 @@
 <div class="form-container">
   <form class="example-form" [formGroup]="signUpForm" (ngSubmit)="onSignUp()">
     <div class="imageContainer">
-      <img *ngIf="imageUrl" [src]="imageUrl" alt="Imagine Doctor Neincarcata" width="50%" height="50%" />
+      <img *ngIf="patientImage" [src]="patientImage" alt="Imagine Doctor Neincarcata" width="50%" height="50%" />
       <label for="fileInput" class="fileLabel"> Incarca o imagine </label>
       <input type="file" accept=".png,.jpg" (change)="uploadImage($event)" formControlName="imageUrl" id="fileInput" />
     </div>

@@ -16,14 +16,15 @@ export const patientAuthGuard: CanActivateFn = (route: ActivatedRouteSnapshot, s
   return authService.user$.pipe(
     take(1),
     map(user => {
-      if (user && user.role === 'patient') {
-        return true;
-      } else if (user && user.role === 'admin') {
-        return true;
-      } else {
+      if (!user) {
         router.navigate(['login']);
-        return false;
       }
+
+      if (user?.role === 'doctor') {
+        router.navigate(['homepage']);
+      }
+
+      return user?.role === 'patient' || user?.role === 'admin';
     })
   );
 };

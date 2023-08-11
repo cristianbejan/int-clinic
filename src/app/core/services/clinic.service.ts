@@ -21,9 +21,9 @@ import { Clinic } from '../interfaces/clinic.interface';
 export class ClinicService {
   constructor(private firestore: Firestore) {}
 
-  addData(formData: FormGroup) {
+  addData(formData: Clinic) {
     const clinicsCollection = collection(this.firestore, 'clinics');
-    addDoc(clinicsCollection, formData.value)
+    addDoc(clinicsCollection, formData)
       .then(() => {
         console.log('Data saved');
       })

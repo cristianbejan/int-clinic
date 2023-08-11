@@ -23,13 +23,13 @@ import { AuthService } from './auth.service';
 export class DoctorService {
   constructor(
     private firestore: Firestore,
-    private authServise: AuthService
+    private authService: AuthService
   ) {}
 
   addDoctor(pass: string, doctor: Doctor) {
     // const doctorCollection = collection(this.firestore, 'doctors');
     // return from(addDoc(doctorCollection, doctor));
-    this.authServise.doctorSignUp(pass, doctor);
+    this.authService.doctorSignUp(pass, doctor);
   }
 
   queryDoctors(id: string) {

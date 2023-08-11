@@ -24,7 +24,7 @@ export class AdminDoctorsFormComponent implements OnInit {
   doctorId!: string;
   specialties!: Specialty[];
   buttonText: string = FormSubmitState.ADD;
-  imageUrl!: string;
+  doctorImage = '';
 
   constructor(
     private doctorService: DoctorService,
@@ -56,7 +56,7 @@ export class AdminDoctorsFormComponent implements OnInit {
     password: new FormControl('', { nonNullable: true, validators: Validators.required }),
     specialtyIds: new FormControl([''], { nonNullable: true, validators: Validators.required }),
     description: new FormControl('', { nonNullable: true, validators: Validators.required }),
-    imageUrl: new FormControl(`${this.imageUrl}`, { nonNullable: true }),
+    imageUrl: new FormControl('', { nonNullable: true }),
   });
 
   email = this.doctorForm.controls.email;
@@ -69,7 +69,7 @@ export class AdminDoctorsFormComponent implements OnInit {
           tap(result => {
             this.buttonText = FormSubmitState.EDIT;
             const doctor = result['data']() as Doctor;
-            this.imageUrl = doctor.imageUrl;
+            this.doctorImage = doctor.imageUrl;
 
             this.doctorForm.patchValue({
               firstName: doctor.firstName,
@@ -80,7 +80,6 @@ export class AdminDoctorsFormComponent implements OnInit {
               password: doctor.password,
               specialtyIds: doctor.specialtyIds,
               description: doctor.description,
-              imageUrl: doctor.imageUrl,
             });
           })
         )
@@ -103,12 +102,14 @@ export class AdminDoctorsFormComponent implements OnInit {
           return;
         }
         this.doctorService.updateDoctor(this.doctorId, this.doctorForm.value);
-        this.doctorService.updateImage(this.doctorId, this.imageUrl);
+        this.doctorService.updateImage(this.doctorId, this.doctorImage);
         this.router.navigate(['admin/doctors']);
       });
     } else {
-      this.doctorService.addDoctor(this.doctorForm.controls.password.value, this.doctorForm.getRawValue());
-      // this.authService.doctorSignUp(this.doctorForm.controls.password.value, this.doctorForm.getRawValue());
+      this.doctorService.addDoctor(this.doctorForm.controls.password.value, {
+        ...this.doctorForm.getRawValue(),
+        imageUrl: this.doctorImage,
+      });
       this.doctorForm.reset();
       this.router.navigate(['admin/doctors']);
     }
@@ -144,8 +145,7 @@ export class AdminDoctorsFormComponent implements OnInit {
     }
 
     this.imageUploadService.uploadImage(file, 'doctors').subscribe(downloadURL => {
-      this.imageUrl = downloadURL;
-      this.doctorForm.get('imageUrl')?.setValue(downloadURL);
+      this.doctorImage = downloadURL;
     });
   }
 

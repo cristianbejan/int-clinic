@@ -27,7 +27,7 @@ export class FilterByPipe implements PipeTransform {
         } else if (attributesInEntities === null || attributesInEntities === undefined) {
           return;
         }
-        return attributesInEntities.includes(searchedInput);
+        return Array.isArray(attributesInEntities) && attributesInEntities.includes(searchedInput);
       })
     );
 
