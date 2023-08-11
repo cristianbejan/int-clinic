@@ -1,23 +1,31 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DoctorComponent } from './components/doctor.component';
-import { DoctorAppointmentsComponent } from './components/doctor-appointments/doctor-appointments.component';
-import { DoctorScheduleVacationComponent } from './components/doctor-schedule-vacation/doctor-schedule-vacation.component';
+import { DoctorDashboardComponent } from './components/doctor-dashboard/doctor-dashboard.component';
+import { DoctorDetailsComponent } from './components/doctor-dashboard/doctor-details/doctor-details.component';
+import { DoctorCurrentComponent } from './components/doctor-dashboard/doctor-current/doctor-current.component';
+import { DoctorHistoryComponent } from './components/doctor-dashboard/doctor-history/doctor-history.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: DoctorComponent,
+    redirectTo: 'dashboard',
+    pathMatch: 'full',
+  },
+  {
+    path: 'dashboard',
+    component: DoctorDashboardComponent,
     children: [
       {
-        path: 'appointments',
-        component: DoctorAppointmentsComponent,
-        children: [],
+        path: 'details',
+        component: DoctorDetailsComponent,
       },
       {
-        path: 'schedule-vacation',
-        component: DoctorScheduleVacationComponent,
-        children: [],
+        path: 'current',
+        component: DoctorCurrentComponent,
+      },
+      {
+        path: 'history',
+        component: DoctorHistoryComponent,
       },
     ],
   },

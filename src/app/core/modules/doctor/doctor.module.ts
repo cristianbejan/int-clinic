@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DoctorRoutingModule } from './doctor-routing.module';
 import { DoctorComponent } from './components/doctor.component';
-import { DoctorAppointmentsComponent } from './components/doctor-appointments/doctor-appointments.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -14,14 +13,24 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTabsModule } from '@angular/material/tabs';
-import { DoctorFilterComponent } from './components/doctor-filter/doctor-filter.component';
 import { DoctorScheduleVacationComponent } from './components/doctor-schedule-vacation/doctor-schedule-vacation.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { DoctorDashboardComponent } from './components/doctor-dashboard/doctor-dashboard.component';
+import { DoctorDetailsComponent } from './components/doctor-dashboard/doctor-details/doctor-details.component';
+import { DoctorHistoryComponent } from './components/doctor-dashboard/doctor-history/doctor-history.component';
+import { DoctorCurrentComponent } from './components/doctor-dashboard/doctor-current/doctor-current.component';
 
 @NgModule({
-  declarations: [DoctorComponent, DoctorAppointmentsComponent, DoctorFilterComponent, DoctorScheduleVacationComponent],
+  declarations: [
+    DoctorComponent,
+    DoctorScheduleVacationComponent,
+    DoctorDashboardComponent,
+    DoctorDetailsComponent,
+    DoctorHistoryComponent,
+    DoctorCurrentComponent,
+  ],
   imports: [
     CommonModule,
     DoctorRoutingModule,
