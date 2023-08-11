@@ -54,7 +54,7 @@
         (click)="expandedElement = expandedElement === element ? null : element"></tr>
       <tr mat-row *matRowDef="let row; columns: ['table__expanded']" class="table__detail-row"></tr>
       <tr *matNoDataRow>
-        <td id="no-data" colspan="3">Niciun rezultat gasit</td>
+        <td id="no-data" colspan="3">Niciun rezultat găsit</td>
       </tr>
     </table>
     <div class="spinner-container" *ngIf="loading">

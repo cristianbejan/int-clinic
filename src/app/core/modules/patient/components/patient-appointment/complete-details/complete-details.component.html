@@ -14,7 +14,7 @@
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
-      <mat-label>Introduceti Emailul</mat-label>
+      <mat-label>Introduceți Emailul</mat-label>
       <input type="email" matInput placeholder="nume@mail.com" required formControlName="email" />
       <mat-icon matSuffix>alternate_email</mat-icon>
       <mat-error *ngIf="patientForm.get('email')?.hasError('pattern')">Email Invalid</mat-error>
@@ -24,10 +24,11 @@
       <mat-error *ngIf="patientForm.get('gender')?.hasError('required')">*</mat-error>
       <mat-radio-button value="male">Masculin</mat-radio-button>
       <mat-radio-button value="female">Feminin</mat-radio-button>
+      <mat-radio-button value="female">Altul</mat-radio-button>
     </mat-radio-group>
 
     <div class="submit">
-      <button mat-stroked-button color="primary" type="submit">Confirm</button>
+      <button mat-stroked-button color="primary" type="submit">Confirmă</button>
     </div>
   </form>
 </div>

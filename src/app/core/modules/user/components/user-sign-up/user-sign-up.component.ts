@@ -51,20 +51,19 @@ export class UserSignUpComponent {
       })
       .catch(error => {
         if (error.code === 'auth/email-already-in-use') {
-          this.error.message =
-            'Aceasta adresa de email este deja inregistrata in baza noastra de date. Te rog inceraca cu alta.';
+          this.error.message = 'Adresă de email deja înregistrată în baza noastra de date. Te rog încearcă cu alta.';
         } else if (error.code === 'auth/invalid-email') {
-          this.error.message = 'Adresa de email invalida.';
+          this.error.message = 'Adresă de email invalidă.';
         } else if (error.code === 'auth/weak-password') {
-          this.error.message = 'Parola prea scurta. Parola trebuie sa aiba minim 6 caractere.';
+          this.error.message = 'Parolă prea scurtă. Parola trebuie să aibă minim 6 caractere.';
         } else if (error.code === 'auth/invalid-photo-url') {
-          this.error.message = 'URL-ul pozei este invalid. Incearca cu alta te rog.';
+          this.error.message = 'URL-ul pozei este invalid. Încearcă alta te rog.';
         } else if (error.code === 'auth/invalid-phone-number') {
           this.error.message = 'Numarul de telefon intrudus este invalid. Formatul trebuie sa fie 07xx xxx xxx';
         } else if (error.code === 'auth/phone-number-already-exists') {
-          this.error.message = 'Numarul de telefon este deja inregistrat. Te rog incearca cu altul.';
+          this.error.message = 'Numărul de telefon este deja înregistrat. Te rog încearcă cu altul.';
         } else {
-          this.error.message = 'Eroare interna, te rog sa incerci mai tarziu';
+          this.error.message = 'Eroare internă, te rog sa încerci mai târziu';
         }
       });
   }

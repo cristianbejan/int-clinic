@@ -11,8 +11,8 @@ import { ImageUploadService } from 'src/app/core/services/image-upload.service';
 import { SpecialtiesService } from 'src/app/core/services/specialties.service';
 
 enum FormSubmitState {
-  ADD = 'Adauga Clinica',
-  EDIT = 'Actualizeaza Clinica',
+  ADD = 'Adauga Clinică',
+  EDIT = 'Actualizează Clinică',
 }
 @Component({
   selector: 'app-admin-clinics-form',
@@ -65,8 +65,8 @@ export class AdminClinicsFormComponent implements OnInit {
   onSubmit() {
     if (this.clinicId) {
       const options = {
-        title: 'Salveaza Modificarile',
-        message: `Doriti sa modificati informatiile acestei clinici ?`,
+        title: 'Salvează Modificările',
+        message: `Doriți să modificați informațiile acestei clinici?`,
         cancelText: 'Nu',
         confirmText: 'Da',
       };
@@ -121,8 +121,8 @@ export class AdminClinicsFormComponent implements OnInit {
 
   confirmCancelDialog() {
     const options = {
-      title: 'Inchidere Formular',
-      message: `Esti sigur ca vrei sa inchizi formularul?`,
+      title: 'Închidere Formular',
+      message: `Ești sigur că vrei să închizi formularul?`,
       cancelText: 'Nu',
       confirmText: 'Da',
     };
@@ -139,7 +139,7 @@ export class AdminClinicsFormComponent implements OnInit {
   confirmResetDialog() {
     const options = {
       title: 'Resetare Formular',
-      message: `Esti sigur ca vrei sa resetezi formularul?`,
+      message: `Ești sigur ca vrei sș resetezi formularul?`,
       cancelText: 'Nu',
       confirmText: 'Da',
     };

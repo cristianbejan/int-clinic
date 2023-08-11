@@ -91,8 +91,8 @@ export class AdminDoctorsFormComponent implements OnInit {
   onFormSubmit() {
     if (this.doctorId) {
       const options = {
-        title: 'Salveaza modificarile',
-        message: `Doriti sa modificati informatiile acestui doctor?`,
+        title: 'Salvează modificările',
+        message: `Doriți să modificați informațiile acestui doctor?`,
         cancelText: 'Nu',
         confirmText: 'Da',
       };
@@ -108,7 +108,6 @@ export class AdminDoctorsFormComponent implements OnInit {
       });
     } else {
       this.doctorService.addDoctor(this.doctorForm.controls.password.value, this.doctorForm.getRawValue());
-      // this.authService.doctorSignUp(this.doctorForm.controls.password.value, this.doctorForm.getRawValue());
       this.doctorForm.reset();
       this.router.navigate(['admin/doctors']);
     }
@@ -151,8 +150,8 @@ export class AdminDoctorsFormComponent implements OnInit {
 
   confirmCancelDialog() {
     const options = {
-      title: 'Inchidere Formular',
-      message: `Esti sigur ca vrei sa inchizi formularul?`,
+      title: 'închidere Formular',
+      message: `Ești sigur că vrei să închizi formularul?`,
       cancelText: 'Nu',
       confirmText: 'Da',
     };
@@ -169,7 +168,7 @@ export class AdminDoctorsFormComponent implements OnInit {
   confirmResetDialog() {
     const options = {
       title: 'Resetare Formular',
-      message: `Esti sigur ca vrei sa resetezi formularul?`,
+      message: `Ești sigur că vrei să resetezi formularul?`,
       cancelText: 'Nu',
       confirmText: 'Da',
     };

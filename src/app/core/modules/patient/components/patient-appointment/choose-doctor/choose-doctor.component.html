@@ -13,7 +13,6 @@
     [ngClass]="{ active: isActive(doctor) }">
     <mat-card-header>
       <mat-card-title>{{ doctor.firstName + ' ' + doctor.lastName }}</mat-card-title>
-      <!-- <mat-card-subtitle>{{ getSpecialtyNames(doctor.specialtyIds).join(', ') }}</mat-card-subtitle> -->
     </mat-card-header>
 
     <img mat-card-image src="{{ doctor.imageUrl }}" alt="Photo of doctor" />

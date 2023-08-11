@@ -59,19 +59,19 @@
                 height="100%" />
             </div>
             <div class="table__expanded__element__description">
-              <h4>Adresa</h4>
+              <h4>Adresă</h4>
               {{ doctor?.adress }},
               <h4>Descriere</h4>
               {{ doctor?.description }}
             </div>
             <div class="table__expanded__element__edit-delete">
-              <button mat-stroked-button color="primary" [routerLink]="doctor?.id + '/edit'">Editeaza</button>
+              <button mat-stroked-button color="primary" [routerLink]="doctor?.id + '/edit'">Editează</button>
               <button
                 mat-stroked-button
                 color="warn"
                 id="delete-button"
                 (click)="confirmDeleteDialog(doctor?.id, doctor.lastName + ' ' + doctor.firstName)">
-                Sterge
+                Șterge
               </button>
             </div>
           </div>
@@ -87,7 +87,7 @@
         (click)="expandedElement = expandedElement === element ? null : element"></tr>
       <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="table__detail-row"></tr>
       <tr *matNoDataRow>
-        <td id="no-data" colspan="5">Niciun rezultat gasit</td>
+        <td id="no-data" colspan="5">Niciun rezultat găsit</td>
       </tr>
     </table>
   </div>

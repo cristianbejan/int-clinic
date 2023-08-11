@@ -91,8 +91,8 @@ export class AdminServicesComponent {
 
   confirmDeleteDialog(id: string, name: string) {
     const options = {
-      title: 'Stergere serviciu',
-      message: `Esti sigur ca vrei sa stergi serviciul ${name}?`,
+      title: 'Ștergere serviciu',
+      message: `Ești sigur că vrei să ștergi serviciul ${name}?`,
       cancelText: 'Nu',
       confirmText: 'Da',
     };
