@@ -21,6 +21,10 @@ import { DoctorDashboardComponent } from './components/doctor-dashboard/doctor-d
 import { DoctorDetailsComponent } from './components/doctor-dashboard/doctor-details/doctor-details.component';
 import { DoctorHistoryComponent } from './components/doctor-dashboard/doctor-history/doctor-history.component';
 import { DoctorCurrentComponent } from './components/doctor-dashboard/doctor-current/doctor-current.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DoctorEditInfoDialogComponent } from './components/doctor-dashboard/doctor-details/doctor-edit-info-dialog/doctor-edit-info-dialog.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -30,6 +34,7 @@ import { DoctorCurrentComponent } from './components/doctor-dashboard/doctor-cur
     DoctorDetailsComponent,
     DoctorHistoryComponent,
     DoctorCurrentComponent,
+    DoctorEditInfoDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -49,6 +54,9 @@ import { DoctorCurrentComponent } from './components/doctor-dashboard/doctor-cur
     MatSidenavModule,
     MatProgressSpinnerModule,
     MatPaginatorModule,
+    MatDialogModule,
+    ReactiveFormsModule,
+    MatRadioModule,
   ],
 })
 export class DoctorModule {}

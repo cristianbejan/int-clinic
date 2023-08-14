@@ -7,6 +7,7 @@ export interface Doctor {
   phone: string;
   adress: string;
   email: string;
+  gender?: string;
   password: string;
   invalidDates?: string[];
   imageUrl: string;

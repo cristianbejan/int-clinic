@@ -53,6 +53,7 @@ export class AdminDoctorsFormComponent implements OnInit {
         Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
       ],
     }),
+    gender: new FormControl('', { nonNullable: true, validators: Validators.required }),
     password: new FormControl('', { nonNullable: true, validators: Validators.required }),
     specialtyIds: new FormControl([''], { nonNullable: true, validators: Validators.required }),
     description: new FormControl('', { nonNullable: true, validators: Validators.required }),
@@ -78,6 +79,7 @@ export class AdminDoctorsFormComponent implements OnInit {
               adress: doctor.adress,
               email: doctor.email,
               password: doctor.password,
+              gender: doctor.gender,
               specialtyIds: doctor.specialtyIds,
               description: doctor.description,
             });

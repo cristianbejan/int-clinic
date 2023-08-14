@@ -3,7 +3,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    height: 40vh;
+    height: 45vh;
   
     &__text {
       height: 100%;
@@ -23,8 +23,8 @@
   
     &__img {
       & img {
-        height: 280px;
-        width: 280px;
+        height: 40vh;
+        width: 240px;
       }
     }
   }

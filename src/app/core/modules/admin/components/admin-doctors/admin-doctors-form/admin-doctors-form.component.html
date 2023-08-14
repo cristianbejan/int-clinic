@@ -38,6 +38,12 @@
       <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error>
     </mat-form-field>
 
+    <mat-radio-group formControlName="gender">
+      <mat-radio-button value="male">Masculin</mat-radio-button>
+      <mat-radio-button value="female">Feminin</mat-radio-button>
+      <mat-radio-button value="another">Altul</mat-radio-button>
+    </mat-radio-group>
+
     <mat-form-field class="example-full-width">
       <mat-label>Parolă</mat-label>
       <input matInput type="password" formControlName="password" minlength="6" />
