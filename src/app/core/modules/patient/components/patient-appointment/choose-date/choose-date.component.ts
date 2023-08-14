@@ -10,7 +10,7 @@ import { DateAdapter } from '@angular/material/core';
   styleUrls: ['./choose-date.component.scss'],
 })
 export class ChooseDateComponent implements OnInit {
-  timeSlotsTemplate: string[] = ['9 AM', '10 AM', '11 AM', '12 PM', '2 PM', '3 PM', '4 PM', '5 PM', '6 PM'];
+  timeSlotsTemplate: string[] = ['9:00', '10:00', '11:00', '12:00', '14:00', '15:00', '16:00', '17:00', '18:00'];
   selected: Date | null = new Date();
   timeSlots: string[] = [];
   doctorId!: any;

@@ -5,7 +5,16 @@
       <mat-card-title>Serviciul: {{ appointment.service.name }} </mat-card-title>
       <mat-card-subtitle>Data: {{ appointment.date }}, {{ appointment.timeSlot }}</mat-card-subtitle>
     </mat-card-header>
-    <mat-card-content>
+    <mat-card-content class="card-container">
+      <mat-card class="card-container__clinic">
+        <p>test</p>
+      </mat-card>
+      <mat-card class="card-container__doctor">
+        <p>test</p>
+      </mat-card>
+      <mat-card class="card-container__specialty">
+        <p>test</p>
+      </mat-card>
       <p><b> Doctor:</b> {{ appointment.doctor.firstName }} {{ appointment.doctor.lastName }}</p>
       <p>
         <b> {{ appointment.clinic.name }} </b> - {{ appointment.clinic.address }}

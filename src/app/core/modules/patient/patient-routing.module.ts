@@ -5,6 +5,7 @@ import { PatientDashboardComponent } from './components/patient-dashboard/patien
 import { PatientDetailsComponent } from './components/patient-dashboard/patient-details/patient-details.component';
 import { PatientCurrentComponent } from './components/patient-dashboard/patient-current/patient-current.component';
 import { PatientHistoryComponent } from './components/patient-dashboard/patient-history/patient-history.component';
+import { PatientDetailsFormComponent } from './components/patient-dashboard/patient-details/patient-details-form/patient-details-form.component';
 
 const ROUTES: Routes = [
   {
@@ -27,6 +28,10 @@ const ROUTES: Routes = [
       {
         path: 'history',
         component: PatientHistoryComponent,
+      },
+      {
+        path: 'edit',
+        component: PatientDetailsFormComponent,
       },
     ],
   },

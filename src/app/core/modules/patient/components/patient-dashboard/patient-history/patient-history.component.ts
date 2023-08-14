@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { AppointmentIds } from 'src/app/core/interfaces/appointment-ids.interface';
-import { Appointment } from 'src/app/core/interfaces/appointment.interface';
 import { AppointmentService } from 'src/app/core/services/appointment.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ClinicService } from 'src/app/core/services/clinic.service';
@@ -30,6 +28,11 @@ export class PatientHistoryComponent {
       if (data !== null && data.uid !== undefined) {
         this.appointmentQuery.dashboardQuery(data.uid).subscribe(data => {
           this.clientAppointments = data as [];
+          this.clientAppointments.sort((a: any, b: any) => {
+            const timeA = a.timeSlot.split(':')[0];
+            const timeB = b.timeSlot.split(':')[0];
+            return b.date - a.date || timeA - timeB;
+          });
           this.clientAppointments.forEach(
             (appointment: {
               date: any;

@@ -31,6 +31,7 @@ import { PatientCurrentComponent } from './components/patient-dashboard/patient-
 import { PatientHistoryComponent } from './components/patient-dashboard/patient-history/patient-history.component';
 import { CompleteDetailsComponent } from './components/patient-appointment/complete-details/complete-details.component';
 import { MatRadioModule } from '@angular/material/radio';
+import { PatientDetailsFormComponent } from './components/patient-dashboard/patient-details/patient-details-form/patient-details-form.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { MatRadioModule } from '@angular/material/radio';
     PatientCurrentComponent,
     PatientHistoryComponent,
     CompleteDetailsComponent,
+    PatientDetailsFormComponent,
   ],
   imports: [
     CommonModule,
@@ -69,6 +71,9 @@ import { MatRadioModule } from '@angular/material/radio';
     MatToolbarModule,
     MatSidenavModule,
     MatRadioModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatCardModule,
   ],
   providers: [],
 })

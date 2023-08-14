@@ -25,6 +25,15 @@
     & img {
       height: 280px;
       width: 280px;
+      object-fit: cover;
     }
+  }
+}
+
+.information {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 }

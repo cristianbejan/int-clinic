@@ -2,8 +2,12 @@
   <ul>
     <li><a routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Acasă</a></li>
     <li *ngIf="isAdmin"><a routerLink="admin" routerLinkActive="active">Admin</a></li>
-    <li *ngIf="!loggedUser || isPatient"><a routerLink="patient" routerLinkActive="active">Pacient</a></li>
-    <li *ngIf="!loggedUser || isDoctor"><a routerLink="doctor" routerLinkActive="active">Doctor</a></li>
+    <li *ngIf="!loggedUser || isPatient">
+      <a routerLink="patient/dashboard/current" routerLinkActive="active">Pacient</a>
+    </li>
+    <li *ngIf="!loggedUser || isDoctor">
+      <a routerLink="doctor/dashboard/current" routerLinkActive="active">Doctor</a>
+    </li>
   </ul>
 
   <div class="right-menu">

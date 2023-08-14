@@ -1,7 +1,18 @@
-import { DocumentData, Firestore, addDoc, collection, collectionData, query, where } from '@angular/fire/firestore';
+import {
+  DocumentData,
+  Firestore,
+  addDoc,
+  collection,
+  collectionData,
+  doc,
+  query,
+  updateDoc,
+  where,
+} from '@angular/fire/firestore';
 import { Injectable } from '@angular/core';
 import { Observable, from } from 'rxjs';
 import { AppointmentIds } from '../interfaces/appointment-ids.interface';
+import { Patient } from '../interfaces/patient.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +34,6 @@ export class AppointmentService {
     const appointmentsRef = collection(this.dataBase, 'appointments');
 
     const q = query(appointmentsRef, where('doctorId', '==', `${doctorID}`), where('date', '==', `${date}`));
-
     return collectionData(q);
   }
 
@@ -31,7 +41,19 @@ export class AppointmentService {
     const appointmentsRef = collection(this.dataBase, 'appointments');
 
     const q = query(appointmentsRef, where('patient.uid', '==', `${patientId}`));
-
     return collectionData(q);
+  }
+
+  updatePatient(patientObject: any, id: string) {
+    const patientInstance = doc(this.dataBase, 'patients', id);
+
+    updateDoc(patientInstance, patientObject)
+      .then(() => {
+        console.log('Specialty changed');
+      })
+
+      .catch(err => {
+        console.log(err);
+      });
   }
 }
