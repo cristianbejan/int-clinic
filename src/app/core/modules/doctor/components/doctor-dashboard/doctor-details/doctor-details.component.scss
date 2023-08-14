@@ -23,8 +23,10 @@
   
     &__img {
       & img {
-        height: 40vh;
-        width: 240px;
+        padding-top: 30px;
+        height: 280px;
+        width: 280px;
+        object-fit: cover;
       }
     }
   }
