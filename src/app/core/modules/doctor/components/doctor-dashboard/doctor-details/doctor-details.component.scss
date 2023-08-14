@@ -3,7 +3,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    height: 45vh;
+    height: 55vh;
   
     &__text {
       height: 100%;
@@ -23,11 +23,14 @@
   
     &__img {
       & img {
-        padding-top: 30px;
+        padding-top: 5px;
         height: 280px;
         width: 280px;
         object-fit: cover;
       }
+    }
+    #closeDialog {
+      margin-left:15px;
     }
   }
   

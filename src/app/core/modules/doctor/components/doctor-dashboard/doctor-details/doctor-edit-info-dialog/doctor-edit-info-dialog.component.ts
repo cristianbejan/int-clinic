@@ -89,4 +89,8 @@ export class DoctorEditInfoDialogComponent {
       this.doctorImage = downloadURL;
     });
   }
+
+  closeDialog() {
+    this.dialogRef.close();
+  }
 }
