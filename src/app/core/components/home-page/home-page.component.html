@@ -4,7 +4,7 @@
       <h1 class="title">Bine ai venit la IntClinic</h1>
       <div class="content">
         <div class="program">
-          <div *ngIf="!loggedUser || isPatient" class="getAppoinment">
+          <div *ngIf="!loggedUser || isPatient || isAdmin" class="getAppoinment">
             <h4><p id="description-title">Ești pacient?</p></h4>
             <button class="getAppBtn" mat-flat-button color="warn" (click)="onClickGetAppoinment()">
               Fă-ți o programare | +
@@ -33,7 +33,7 @@
               <p>Și multe altele</p>
             </div>
           </mat-card-content>
-          <mat-card-header *ngIf="!loggedUser || isDoctor" class="offered_specs__card__header">
+          <mat-card-header *ngIf="!loggedUser || isDoctor || isAdmin" class="offered_specs__card__header">
             <mat-card-title><p id="description-title">Ești doctor?</p></mat-card-title>
             <mat-card-subtitle
               ><button mat-flat-button color="warn" (click)="onClickManageSite()">
