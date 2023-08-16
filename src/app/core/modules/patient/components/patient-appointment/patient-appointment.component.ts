@@ -7,6 +7,7 @@ import { ChooseExtraComponent } from './choose-extra/choose-extra.component';
 import { ChooseDateComponent } from './choose-date/choose-date.component';
 import { ConfirmationDetailComponent } from './confirmation-detail/confirmation-details.component';
 import { CompleteDetailsComponent } from './complete-details/complete-details.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-patient-appointment',
@@ -30,6 +31,8 @@ export class PatientAppointmentComponent implements AfterViewInit {
   serviceMatDisabled = true;
   dateMatDisabled = true;
   patientMatDisabled = true;
+
+  constructor(private router: Router) {}
 
   initializeDateComponent() {
     this.dateComponent.initializeDateComponent();
@@ -101,7 +104,7 @@ export class PatientAppointmentComponent implements AfterViewInit {
     this.serviceMatDisabled = true;
     this.dateMatDisabled = true;
 
-    location.reload();
+    this.router.navigate(['patient/dashboard/current']);
   }
 
   ngAfterViewInit() {

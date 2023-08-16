@@ -115,6 +115,7 @@ export class AuthService {
         const doctorData = {
           uid: result.user.uid,
           email: doctor.email,
+          password: doctor.password,
           imageUrl: doctor.imageUrl,
           lastName: doctor.lastName,
           firstName: doctor.firstName,
