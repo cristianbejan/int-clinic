@@ -49,7 +49,7 @@ export class UserSignUpComponent {
         imageUrl: this.patientImage,
       })
       .then(() => {
-        this.router.navigate(['patient']);
+        this.router.navigate(['patient/dashboard/details']);
         this.signUpForm.reset();
       })
       .catch(error => {

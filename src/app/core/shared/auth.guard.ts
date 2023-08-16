@@ -39,14 +39,15 @@ export const doctorAuthGuard: CanActivateFn = () => {
   return authService.user$.pipe(
     take(1),
     map(user => {
-      if (user && user.role === 'doctor') {
-        return true;
-      } else if (user && user.role === 'admin') {
-        return true;
-      } else {
+      if (!user) {
         router.navigate(['login']);
-        return false;
       }
+
+      if (user?.role === 'patient') {
+        router.navigate(['homepage']);
+      }
+
+      return user?.role === 'doctor' || user?.role === 'admin';
     })
   );
 };
@@ -61,12 +62,15 @@ export const adminAuthGuard: CanActivateFn = () => {
   return authService.user$.pipe(
     take(1),
     map(user => {
-      if (user && user.role === 'admin') {
-        return true;
-      } else {
+      if (!user) {
         router.navigate(['login']);
-        return false;
       }
+
+      if (user?.role === 'doctor' || user?.role === 'patient') {
+        router.navigate(['homepage']);
+      }
+
+      return user?.role === 'admin';
     })
   );
 };

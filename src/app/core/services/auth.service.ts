@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { GoogleAuthProvider } from '@angular/fire/auth';
+import { GoogleAuthProvider, getAuth, createUserWithEmailAndPassword } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument, DocumentData } from '@angular/fire/compat/firestore';
 import { Observable, combineLatest, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
@@ -8,12 +8,17 @@ import { Doctor } from '../interfaces/doctor.interface';
 import { Admin } from '../interfaces/admin.interface';
 import { Patient } from '../interfaces/patient.interface';
 import { Router } from '@angular/router';
+import { initializeApp, deleteApp } from '@angular/fire/app';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   user$: Observable<Patient | Doctor | Admin | null>;
+
+  secondaryApp = initializeApp(environment.firebase, 'SecondaryApp');
+  secondaryAppAuth = getAuth(this.secondaryApp);
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -100,8 +105,7 @@ export class AuthService {
   }
 
   doctorSignUp(pass: string, doctor: Doctor) {
-    return this.afAuth
-      .createUserWithEmailAndPassword(doctor.email, pass)
+    return createUserWithEmailAndPassword(this.secondaryAppAuth, doctor.email, pass)
       .then(result => {
         if (!result.user) {
           return;
@@ -111,10 +115,11 @@ export class AuthService {
         const doctorData = {
           uid: result.user.uid,
           email: doctor.email,
+          password: doctor.password,
           imageUrl: doctor.imageUrl,
           lastName: doctor.lastName,
           firstName: doctor.firstName,
-          displayName: doctor.lastName + ' ' + doctor.firstName,
+          displayName: doctor.firstName + ' ' + doctor.lastName,
           phone: doctor.phone,
           adress: doctor.adress,
           gender: doctor.gender,
@@ -127,7 +132,10 @@ export class AuthService {
           merge: true,
         });
       })
-      .catch(err => Promise.reject(err));
+      .catch(err => Promise.reject(err))
+      .finally(() => {
+        this.secondaryAppAuth.signOut().then(() => deleteApp(this.secondaryApp));
+      });
   }
 
   signIn(email: string, pass: string) {
