@@ -42,7 +42,7 @@ export class UserLoginComponent {
               this.router.navigate(['patient/dashboard/current']);
             }
             if (role === 'doctor') {
-              this.router.navigate(['doctor']);
+              this.router.navigate(['doctor/dashboard/current']);
             }
             if (role === 'admin') {
               this.router.navigate(['admin']);

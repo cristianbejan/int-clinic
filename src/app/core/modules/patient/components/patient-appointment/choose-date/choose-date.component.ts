@@ -60,7 +60,13 @@ export class ChooseDateComponent implements OnInit {
       .slice(4)
       .substring(11, this.timeSelected.length - 1);
 
-    this.appointmentService.queryAppointments(this.doctorId, this.selected).subscribe(data => {
+    const localDate = this.selected?.toLocaleDateString('ro-Ro', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+    });
+
+    this.appointmentService.queryAppointments(this.doctorId, localDate).subscribe(data => {
       this.timeSlots = JSON.parse(JSON.stringify(this.timeSlotsTemplate));
       data.forEach(appointment => {
         const index = this.timeSlots.indexOf(appointment['timeSlot']);

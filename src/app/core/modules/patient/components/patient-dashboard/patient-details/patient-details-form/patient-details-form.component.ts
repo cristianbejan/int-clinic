@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Patient } from 'src/app/core/interfaces/patient.interface';
 import { AppointmentService } from 'src/app/core/services/appointment.service';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -21,7 +21,6 @@ export class PatientDetailsFormComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private route: ActivatedRoute,
     private dialogService: ConfirmationDialogService,
     private imageUploadService: ImageUploadService,
     private appointmentService: AppointmentService
@@ -38,7 +37,7 @@ export class PatientDetailsFormComponent implements OnInit {
   });
 
   ngOnInit() {
-    this.autocompleteClinic();
+    this.autocompleteForm();
   }
 
   onSubmit() {
@@ -53,12 +52,11 @@ export class PatientDetailsFormComponent implements OnInit {
     this.patientData.phone = patient.phone as string;
     this.patientData.imageUrl = this.imageUrl;
 
-    console;
     this.appointmentService.updatePatient(this.patientData, id);
     this.router.navigate(['/patient/dashboard/details']);
   }
 
-  autocompleteClinic() {
+  autocompleteForm() {
     this.authService.user$.subscribe(data => {
       this.patientData = data as Patient;
       console.log(data);
@@ -105,7 +103,7 @@ export class PatientDetailsFormComponent implements OnInit {
 
     this.dialogService.confirmed().subscribe(confirmed => {
       if (confirmed) {
-        this.autocompleteClinic();
+        this.autocompleteForm();
         this.patientForm.reset();
       }
     });

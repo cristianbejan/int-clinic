@@ -42,6 +42,11 @@ export class ConfirmationDetailComponent {
         timeSlot: this.appointment.timeSlot,
         extraDetails: this.appointment.extraDetails,
         patient: this.appointment.patientData,
+        localDate: this.appointment.date?.toLocaleDateString('ro-Ro', {
+          day: 'numeric',
+          month: 'short',
+          year: 'numeric',
+        }),
       };
       this.appointmentService.addAppointment(appointmentConfirmed);
     }

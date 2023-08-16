@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MatStepper } from '@angular/material/stepper';
 import { Appointment } from 'src/app/core/interfaces/appointment.interface';
 import { DataStoreService } from 'src/app/core/services/data-store.service';
 import * as pdfMake from 'pdfmake/build/pdfmake';
@@ -17,7 +16,6 @@ export class SuccessfulAppointmentComponent implements OnInit {
   appointmentData!: Appointment;
 
   constructor(
-    private matStepper: MatStepper,
     private dataStoreService: DataStoreService,
     private patientAppointmentComponent: PatientAppointmentComponent
   ) {}
@@ -46,7 +44,7 @@ export class SuccessfulAppointmentComponent implements OnInit {
             `Stimate ${appointmentDetails.patientData.displayName},\n\n` +
             `Îți confirmăm programarea realizată în vederea unei consultații medicale în data de ${appointmentDetails.date?.toLocaleDateString(
               'ro-Ro',
-              { day: 'numeric', month: 'numeric', year: 'numeric' }
+              { day: 'numeric', month: 'short', year: 'numeric' }
             )},` +
             ` la ora ${appointmentDetails.timeSlot}, cu medicul ${appointmentDetails.doctor.firstName} ${appointmentDetails.doctor.lastName}.\n` +
             ` Serviciul medical ales este '${appointmentDetails.service.name}' si aparține secției de '${appointmentDetails.specialty.name}'.\n` +
@@ -94,7 +92,6 @@ export class SuccessfulAppointmentComponent implements OnInit {
   }
 
   resetStepper() {
-    this.matStepper.reset();
     this.patientAppointmentComponent.resetStates();
   }
 }

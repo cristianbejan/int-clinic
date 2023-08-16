@@ -116,7 +116,7 @@
     <div>
       <button mat-raised-button matStepperPrevious>Înapoi</button>
       <button mat-raised-button color="primary" (click)="postAppointment(); stepper.next()">Confirmă</button>
-      <button mat-raised-button color="warn" (click)="stepper.reset(); resetStates()">Resetează</button>
+      <button mat-raised-button color="warn" (click)="resetStates()">Resetează</button>
     </div>
     <app-confirmation-details></app-confirmation-details>
   </mat-step>

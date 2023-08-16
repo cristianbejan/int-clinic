@@ -100,6 +100,8 @@ export class PatientAppointmentComponent implements AfterViewInit {
     this.clinicMatDisabled = true;
     this.serviceMatDisabled = true;
     this.dateMatDisabled = true;
+
+    location.reload();
   }
 
   ngAfterViewInit() {

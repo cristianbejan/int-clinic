@@ -10,7 +10,7 @@ export class HomePageComponent {
   constructor(private router: Router) {}
 
   onClickGetAppoinment(): void {
-    this.router.navigate(['patient']);
+    this.router.navigate(['patient/appointment']);
   }
 
   onClickManageSite(): void {

@@ -12,7 +12,6 @@ import {
 import { Injectable } from '@angular/core';
 import { Observable, from } from 'rxjs';
 import { AppointmentIds } from '../interfaces/appointment-ids.interface';
-import { Patient } from '../interfaces/patient.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -30,10 +29,11 @@ export class AppointmentService {
     return collectionData(appointmentsCollection, { idField: 'id' });
   }
 
-  queryAppointments(doctorID: string, date: Date | null) {
+  queryAppointments(doctorID: string, localDate: string | undefined) {
     const appointmentsRef = collection(this.dataBase, 'appointments');
 
-    const q = query(appointmentsRef, where('doctorId', '==', `${doctorID}`), where('date', '==', `${date}`));
+    const q = query(appointmentsRef, where('doctorId', '==', `${doctorID}`), where('localDate', '==', `${localDate}`));
+
     return collectionData(q);
   }
 

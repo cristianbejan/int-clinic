@@ -9,7 +9,7 @@ import {
 import { take, map } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
 
-export const patientAuthGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+export const patientAuthGuard: CanActivateFn = () => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
@@ -21,7 +21,7 @@ export const patientAuthGuard: CanActivateFn = (route: ActivatedRouteSnapshot, s
       }
 
       if (user?.role === 'doctor') {
-        router.navigate(['homepage']);
+        router.navigate(['']);
       }
 
       return user?.role === 'patient' || user?.role === 'admin';
@@ -32,7 +32,7 @@ export const patientAuthGuard: CanActivateFn = (route: ActivatedRouteSnapshot, s
 export const patientAuthGuardChild: CanActivateChildFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) =>
   patientAuthGuard(route, state);
 
-export const doctorAuthGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+export const doctorAuthGuard: CanActivateFn = () => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
@@ -54,7 +54,7 @@ export const doctorAuthGuard: CanActivateFn = (route: ActivatedRouteSnapshot, st
 export const doctorAuthGuardChild: CanActivateChildFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) =>
   doctorAuthGuard(route, state);
 
-export const adminAuthGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+export const adminAuthGuard: CanActivateFn = () => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
