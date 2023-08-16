@@ -1,1 +1,23 @@
-<p>doctor-history works!</p>
+<div class="cards">
+  <h3>Programările anterioare</h3>
+
+  <ng-container *ngIf="appointmentsText.length > 0; else noAppointments">
+    <mat-card *ngFor="let appointment of appointmentsText" class="example-card">
+      <mat-card-header>
+        <mat-card-title>Pacientul: {{ appointment.patient.displayName }} </mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p><b> Genul:</b> {{ appointment.patient.gender }}</p>
+        <p><b> Email:</b> {{ appointment.patient.email }}</p>
+        <p><b> Telefon:</b> {{ appointment.patient.phone }}</p>
+        <p><b> Data programarii:</b> {{ appointment.formattedDate | date: 'longDate' }}</p>
+        <p><b> Ora programarii:</b> {{ appointment.timeSlot }}</p>
+      </mat-card-content>
+    </mat-card>
+  </ng-container>
+
+  <ng-template #noAppointments>
+    <p>Nu au existat programari</p>
+  </ng-template>
+</div>

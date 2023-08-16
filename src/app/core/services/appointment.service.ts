@@ -12,12 +12,16 @@ import {
 import { Injectable } from '@angular/core';
 import { Observable, from } from 'rxjs';
 import { AppointmentIds } from '../interfaces/appointment-ids.interface';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AppointmentService {
-  constructor(private dataBase: Firestore) {}
+  constructor(
+    private dataBase: Firestore,
+    private afs: AngularFirestore
+  ) {}
 
   addAppointment(appointment: AppointmentIds): Observable<DocumentData> {
     const appointmentCollection = collection(this.dataBase, 'appointments');
@@ -55,5 +59,22 @@ export class AppointmentService {
       .catch(err => {
         console.log(err);
       });
+  }
+
+  getUserData(uid: string): Observable<any> {
+    const userDoc = this.afs.doc(`patients/${uid}`);
+    return userDoc.valueChanges();
+  }
+
+  queryAppointmentsDoctor(doctorID: string): Observable<DocumentData[]> {
+    const appointmentsRef = collection(this.dataBase, 'appointments');
+
+    let queryRef: any = appointmentsRef;
+
+    if (doctorID) {
+      queryRef = query(appointmentsRef, where('doctorId', '==', `${doctorID}`));
+    }
+
+    return collectionData(queryRef);
   }
 }
