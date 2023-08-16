@@ -58,8 +58,10 @@ export class PatientDetailsFormComponent implements OnInit {
 
   autocompleteForm() {
     this.authService.user$.subscribe(data => {
+      if (data === null) {
+        return;
+      }
       this.patientData = data as Patient;
-      console.log(data);
       if (this.patientData.imageUrl) {
         this.imageUrl = this.patientData?.imageUrl;
       }

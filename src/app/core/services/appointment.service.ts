@@ -51,14 +51,9 @@ export class AppointmentService {
   updatePatient(patientObject: any, id: string) {
     const patientInstance = doc(this.dataBase, 'patients', id);
 
-    updateDoc(patientInstance, patientObject)
-      .then(() => {
-        console.log('Specialty changed');
-      })
-
-      .catch(err => {
-        console.log(err);
-      });
+    updateDoc(patientInstance, patientObject).catch(err => {
+      console.log(err);
+    });
   }
 
   getUserData(uid: string): Observable<any> {

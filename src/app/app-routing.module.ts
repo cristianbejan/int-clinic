@@ -5,7 +5,7 @@ import { doctorAuthGuardChild, patientAuthGuardChild, adminAuthGuardChild } from
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'homepage',
     component: HomePageComponent,
   },
   {
@@ -26,6 +26,10 @@ const routes: Routes = [
   {
     path: 'user',
     loadChildren: () => import('./core/modules/user/user.module').then(m => m.UserModule),
+  },
+  {
+    path: '',
+    component: HomePageComponent,
   },
 ];
 

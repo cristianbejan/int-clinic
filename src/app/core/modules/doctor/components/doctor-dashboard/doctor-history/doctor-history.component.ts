@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AppointmentService } from 'src/app/core/services/appointment.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 
@@ -7,7 +7,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
   templateUrl: './doctor-history.component.html',
   styleUrls: ['./doctor-history.component.scss'],
 })
-export class DoctorHistoryComponent {
+export class DoctorHistoryComponent implements OnInit {
   appointmentsText: any[] = [];
   todayDate: Date = new Date();
   doctorUid: string | undefined;
@@ -21,7 +21,6 @@ export class DoctorHistoryComponent {
     this.authService.user$.subscribe(user => {
       if (user?.role === 'doctor') {
         this.doctorUid = user.uid;
-        console.log('Doctor UID:', this.doctorUid);
 
         this.fetchDoctorAppointments();
       }
@@ -31,7 +30,6 @@ export class DoctorHistoryComponent {
   fetchDoctorAppointments(): void {
     if (this.doctorUid) {
       this.appointmentService.queryAppointmentsDoctor(this.doctorUid).subscribe(appointments => {
-        console.log('Fetched appointments:', appointments);
         this.appointmentsText = appointments.map((appointment: any) => {
           return {
             ...appointment,

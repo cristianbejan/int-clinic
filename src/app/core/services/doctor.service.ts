@@ -27,8 +27,6 @@ export class DoctorService {
   ) {}
 
   addDoctor(pass: string, doctor: Doctor) {
-    // const doctorCollection = collection(this.firestore, 'doctors');
-    // return from(addDoc(doctorCollection, doctor));
     this.authService.doctorSignUp(pass, doctor);
   }
 
