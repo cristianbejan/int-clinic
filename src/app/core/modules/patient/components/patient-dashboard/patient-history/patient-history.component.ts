@@ -26,13 +26,14 @@ export class PatientHistoryComponent {
   ) {
     this.authUser.user$.subscribe(data => {
       if (data !== null && data.uid !== undefined) {
-        this.appointmentQuery.dashboardQuery(data.uid).subscribe(data => {
+        this.appointmentQuery.dashboardQueryPatient(data.uid).subscribe(data => {
           this.clientAppointments = data as [];
           this.clientAppointments.sort((a: any, b: any) => {
             const timeA = a.timeSlot.split(':')[0];
             const timeB = b.timeSlot.split(':')[0];
             return b.date - a.date || timeA - timeB;
           });
+          this.todayDate.setHours(0, 0, 0, 0);
           this.clientAppointments.forEach(
             (appointment: {
               date: any;
@@ -43,7 +44,8 @@ export class PatientHistoryComponent {
               timeSlot: string;
               extraDetails: object;
             }) => {
-              if (appointment.date?.toDate() <= this.todayDate) {
+              const appointmentDate = appointment.date.toDate();
+              if (appointmentDate < this.todayDate) {
                 const data = {
                   clinic: {},
                   date: new Date(),

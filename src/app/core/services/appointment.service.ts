@@ -41,10 +41,17 @@ export class AppointmentService {
     return collectionData(q);
   }
 
-  dashboardQuery(patientId: string) {
+  dashboardQueryPatient(patientId: string) {
     const appointmentsRef = collection(this.dataBase, 'appointments');
 
     const q = query(appointmentsRef, where('patient.uid', '==', `${patientId}`));
+    return collectionData(q);
+  }
+
+  dashboardQueryDoctor(doctorId: string) {
+    const appointmentsRef = collection(this.dataBase, 'appointments');
+
+    const q = query(appointmentsRef, where('doctorId', '==', `${doctorId}`));
     return collectionData(q);
   }
 
@@ -59,11 +66,6 @@ export class AppointmentService {
       .catch(err => {
         console.log(err);
       });
-  }
-
-  getUserData(uid: string): Observable<any> {
-    const userDoc = this.afs.doc(`patients/${uid}`);
-    return userDoc.valueChanges();
   }
 
   queryAppointmentsDoctor(doctorID: string): Observable<DocumentData[]> {

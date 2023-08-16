@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component } from '@angular/core';
 import { AppointmentService } from 'src/app/core/services/appointment.service';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -27,13 +26,14 @@ export class PatientCurrentComponent {
   ) {
     this.authUser.user$.subscribe(data => {
       if (data !== null && data.uid !== undefined) {
-        this.appointmentQuery.dashboardQuery(data.uid).subscribe(data => {
+        this.appointmentQuery.dashboardQueryPatient(data.uid).subscribe(data => {
           this.clientAppointments = data as [];
           this.clientAppointments.sort((a: any, b: any) => {
             const timeA = a.timeSlot.split(':')[0];
             const timeB = b.timeSlot.split(':')[0];
             return a.date - b.date || timeA - timeB;
           });
+          this.todayDate.setHours(0, 0, 0, 0);
           this.clientAppointments.forEach(
             (appointment: {
               date: any;
@@ -44,7 +44,8 @@ export class PatientCurrentComponent {
               timeSlot: string;
               extraDetails: object;
             }) => {
-              if (appointment.date?.toDate() >= this.todayDate) {
+              const appointmentDate = appointment.date.toDate();
+              if (appointmentDate >= this.todayDate) {
                 const data = {
                   clinic: {},
                   date: new Date(),

@@ -1,58 +1,31 @@
-<section>
-  <main>
-    <div class="homePageBody">
-      <h1 class="title">Bine ai venit la IntClinic</h1>
-      <div class="content">
-        <div class="program">
-          <div class="getAppoinment">
-            <h4><p id="description-title">Ești pacient?</p></h4>
-            <button class="getAppBtn" mat-flat-button color="warn" (click)="onClickGetAppoinment()">
-              Fă-ți o programare | +
-            </button>
-          </div>
-          <mat-card class="openingTime__card">
-            <mat-card-content class="openingTime-card-container">
-              <p>Program</p>
-              <div class="openingTime">
-                <p>Luni - Vineri 9:00 am - 6:00 pm</p>
-                <p>Sâmbătă 10:00 am - 5:00 pm</p>
-                <p>Duminică închis</p>
-              </div>
-            </mat-card-content>
-          </mat-card>
-        </div>
-        <mat-card class="offered_specs__card">
-          <mat-card-content class="offered_specs-card-container">
-            <h4>Specializări:</h4>
-            <div class="offered-specs">
-              <p>Cardiologie</p>
-              <p>Endocrinologie</p>
-              <p>Ginecologie</p>
-              <p>Obstetrică</p>
-              <p>Pediatrie</p>
-              <p>Și multe altele</p>
-            </div>
-          </mat-card-content>
-          <mat-card-header class="offered_specs__card__header">
-            <mat-card-title><p id="description-title">Ești doctor?</p></mat-card-title>
-            <mat-card-subtitle
-              ><button mat-flat-button color="warn" (click)="onClickManageSite()">
-                Intră in cont
-              </button></mat-card-subtitle
-            >
-          </mat-card-header>
-        </mat-card>
-        <mat-card class="image__card">
-          <mat-card-content class="image-card-container">
-            <img
-              mat-card-image
-              src="https://firebasestorage.googleapis.com/v0/b/int-clinic.appspot.com/o/doctors%2Fwillsmith.jpg?alt=media&token=4c059b9a-cde5-445d-aac6-91c5f42a7a5f"
-              alt="Photo of doctor" />
-          </mat-card-content>
-        </mat-card>
+<div class="sections-container">
+  <section class="first-section">
+    <h1 class="title-homepage">
+      Îndrumăm spre sănătate, <br />
+      Îndrumăm spre viață
+    </h1>
+    <p class="lorem-homepage">
+      Înființate cu grijă și dedicare, clinicile noastre se angajează să va ofere îngrijire medicală de calitate
+      superioară într-un mediu prietenos și modern. Profesioniști medicali cu experiență combină cunoștințele avansate
+      cu compasiunea pentru a asigura sănătatea și binele pacienților lor.
+    </p>
+
+    <div class="btns">
+      <div>
+        <h4>Esti pacient?</h4>
+        <button id="firstBtn" mat-flat-button color="primary" (click)="onClickGetAppoinment()">
+          Fă-ți o programare | +
+        </button>
+      </div>
+
+      <div>
+        <h4>Esti doctor?</h4>
+        <button id="secondBtn" mat-flat-button color="warn" (click)="onClickManageSite()">Intră in cont</button>
       </div>
     </div>
-  </main>
-</section>
+  </section>
 
-<router-outlet></router-outlet>
+  <section class="second-section">
+    <img src="../../../../assets/Doctors-bro.png" alt="" width="500px" height="500px" />
+  </section>
+</div>
