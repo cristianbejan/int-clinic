@@ -47,6 +47,14 @@ export class DoctorCurrentComponent implements OnInit {
     });
   }
 
+  sortAppointmentsByTime(appointments: any[]): any[] {
+    return appointments.slice().sort((a, b) => {
+      const timeA = a.timeSlot;
+      const timeB = b.timeSlot;
+      return timeA.localeCompare(timeB);
+    });
+  }
+
   ngOnInit(): void {
     this.dateAdapter.setLocale('ro-RO');
     this.dateAdapter.getFirstDayOfWeek = () => 1;
@@ -98,8 +106,8 @@ export class DoctorCurrentComponent implements OnInit {
         })
       )
       .subscribe(appointmentDetails => {
-        this.appointmentsText = appointmentDetails;
-        if (appointmentDetails.length === 0) {
+        this.appointmentsText = this.sortAppointmentsByTime(appointmentDetails);
+        if (this.appointmentsText.length === 0) {
           this.appointments = [];
         }
       });

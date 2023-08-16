@@ -1,7 +1,7 @@
 .cards {
     display: flex;
     flex-direction: column;
-    width: 90%;
+    width: auto;
   }
   
   .example-card {
@@ -18,7 +18,6 @@
   &__date {
     display: flex;
     justify-content: center;
-    // align-items: center;
     .demo-inline-calendar-card {
       width: 300px;
     }
