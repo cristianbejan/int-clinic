@@ -23,14 +23,10 @@
   
     &__img {
       & img {
-        padding-top: 5px;
         height: 280px;
         width: 280px;
         object-fit: cover;
       }
-    }
-    #closeDialog {
-      margin-left:15px;
     }
   }
   
