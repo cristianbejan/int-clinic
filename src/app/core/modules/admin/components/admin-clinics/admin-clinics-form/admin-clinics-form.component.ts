@@ -136,7 +136,7 @@ export class AdminClinicsFormComponent implements OnInit {
   confirmResetDialog() {
     const options = {
       title: 'Resetare Formular',
-      message: `Ești sigur ca vrei sș resetezi formularul?`,
+      message: `Ești sigur ca vrei să resetezi formularul?`,
       cancelText: 'Nu',
       confirmText: 'Da',
     };
@@ -160,10 +160,7 @@ export class AdminClinicsFormComponent implements OnInit {
     }
 
     this.imageUploadService.uploadImage(file, 'clinics').subscribe(downloadURL => {
-      console.log(downloadURL);
-
       this.clinicImage = downloadURL;
-      // this.clinicForm.get('imageUrl')?.setValue(downloadURL);
     });
   }
 
