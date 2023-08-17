@@ -134,7 +134,7 @@ export class AuthService {
       })
       .catch(err => Promise.reject(err))
       .finally(() => {
-        this.secondaryAppAuth.signOut().then(() => deleteApp(this.secondaryApp));
+        this.secondaryAppAuth.signOut();
       });
   }
 

@@ -45,13 +45,9 @@ export class ClinicService {
   updateData(id: string, formData: FormGroup) {
     const docInstance = doc(this.firestore, 'clinics', id);
 
-    updateDoc(docInstance, formData.value)
-      .then(() => {
-        console.log('Data Changed');
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    updateDoc(docInstance, formData.value).catch(err => {
+      console.log(err);
+    });
   }
 
   updateImage(id: string, imageUrl: string) {
@@ -63,13 +59,9 @@ export class ClinicService {
     const docInstance = doc(this.firestore, 'clinics', id);
     updateDoc(docInstance, {
       imageUrl: imageUrl,
-    })
-      .then(() => {
-        console.log('Image Changed');
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    }).catch(err => {
+      console.log(err);
+    });
   }
 
   queryClinics(id: string) {
