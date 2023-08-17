@@ -22,9 +22,9 @@
 
     <mat-radio-group formControlName="gender">
       <mat-error *ngIf="patientForm.get('gender')?.hasError('required')">*</mat-error>
-      <mat-radio-button value="male">Masculin</mat-radio-button>
-      <mat-radio-button value="female">Feminin</mat-radio-button>
-      <mat-radio-button value="female">Altul</mat-radio-button>
+      <mat-radio-button value="Masculin">Masculin</mat-radio-button>
+      <mat-radio-button value="Feminin">Feminin</mat-radio-button>
+      <mat-radio-button value="Altul">Altul</mat-radio-button>
     </mat-radio-group>
 
     <div class="submit">
