@@ -48,10 +48,10 @@ export class DoctorCurrentComponent implements OnInit {
   }
 
   sortAppointmentsByTime(appointments: any[]): any[] {
-    return appointments.slice().sort((a, b) => {
-      const timeA = a.timeSlot;
-      const timeB = b.timeSlot;
-      return timeA.localeCompare(timeB);
+    return appointments.sort((a, b) => {
+      const timeA = a.timeSlot.split(':')[0];
+      const timeB = b.timeSlot.split(':')[0];
+      return a.date - b.date || timeA - timeB;
     });
   }
 

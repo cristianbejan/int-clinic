@@ -37,6 +37,7 @@ export class PatientHistoryComponent {
           this.clientAppointments.forEach(
             (appointment: {
               date: any;
+              localDate: string;
               clinicId: string;
               specialtyId: string;
               serviceId: string;
@@ -49,6 +50,7 @@ export class PatientHistoryComponent {
                 const data = {
                   clinic: {},
                   date: new Date(),
+                  localDate: '',
                   doctor: {},
                   service: {},
                   specialty: {},
@@ -64,6 +66,7 @@ export class PatientHistoryComponent {
                 data.date = appointment.date.toDate().toString().split(' ').slice(0, 4).join(' ') as Date;
                 data.timeSlot = appointment.timeSlot;
                 data.extraDetails = appointment.extraDetails;
+                data.localDate = appointment.localDate;
 
                 this.appointmentsText.push(data);
               }
